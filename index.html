@@ -59,14 +59,21 @@ footer{background:#171717;color:white;text-align:center;padding:35px;font-size:1
 /* SHOPPING BAG */
 .cart-overlay{position:fixed;inset:0;background:#0008;z-index:40;display:none}
 .cart-overlay.open{display:block}
-.cart{position:absolute;right:0;top:0;height:100%;width:min(420px,100%);background:white;padding:28px;overflow-y:auto}
-.cart-top{display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid #eee}
+.cart{position:absolute;right:0;top:0;height:100%;width:min(440px,100%);background:white;padding:28px;overflow-y:auto}
+.cart-top{display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid #eee;padding-bottom:15px}
 .cart-top h2{font-size:18px;letter-spacing:2px}
 .close-button{border:0;background:none;font-size:25px;cursor:pointer}
-.cart-item{display:flex;justify-content:space-between;gap:12px;padding:18px 0;border-bottom:1px solid #eee;font-size:13px}
+.cart-item{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:18px 0;border-bottom:1px solid #eee;font-size:13px}
+.cart-product-info{flex:1}
+.cart-product-info strong{font-size:13px}
+.cart-product-info p{margin:8px 0;font-size:13px}
+.quantity-controls{display:flex;align-items:center;gap:12px;margin-top:10px}
+.quantity-controls button{width:28px;height:28px;border:1px solid #ddd;background:white;cursor:pointer;font-size:16px}
+.quantity-controls span{font-size:13px;min-width:15px;text-align:center}
 .remove-button{border:0;background:none;text-decoration:underline;cursor:pointer;color:#777;font-size:11px}
-.cart-total{display:flex;justify-content:space-between;font-weight:bold;padding:22px 0}
+.cart-total{display:flex;justify-content:space-between;font-weight:bold;padding:22px 0;border-top:1px solid #eee;margin-top:15px}
 .cart-note{font-size:11px;color:#888;line-height:1.6}
+.checkout-button{width:100%;padding:16px;background:#171717;color:white;border:0;letter-spacing:2px;margin-top:15px;opacity:.55;cursor:not-allowed}
 
 @media(max-width:850px){
 .products{grid-template-columns:repeat(2,1fr)}
@@ -116,13 +123,11 @@ nav a{font-size:10px}
 <p>CURATED FOR YOU</p>
 <h2>THE COLLECTION</h2>
 </div>
-
 <div class="filters">
 <button class="filter active" onclick="filterProducts('All',this)">ALL PRODUCTS</button>
 <button class="filter" onclick="filterProducts('Clothing',this)">CLOTHING</button>
 <button class="filter" onclick="filterProducts('Lifestyle',this)">LIFESTYLE</button>
 </div>
-
 <div class="products" id="products"></div>
 </section>
 
@@ -133,7 +138,6 @@ nav a{font-size:10px}
 
 <footer>VELORA | EVERYDAY, ELEVATED.</footer>
 
-<!-- PRODUCT DETAILS -->
 <div class="details-overlay" id="details-overlay" onclick="detailsOverlayClick(event)">
 <div class="details">
 <button class="detail-close" onclick="closeDetails()">×</button>
@@ -149,7 +153,6 @@ nav a{font-size:10px}
 </div>
 </div>
 
-<!-- SHOPPING BAG -->
 <div class="cart-overlay" id="cart-overlay" onclick="overlayClick(event)">
 <div class="cart">
 <div class="cart-top">
@@ -158,10 +161,12 @@ nav a{font-size:10px}
 </div>
 <div id="cart-items"></div>
 <div class="cart-total">
-<span>TOTAL</span>
+<span>SUBTOTAL</span>
 <span id="cart-total">$0.00</span>
 </div>
-<p class="cart-note">This is a demo shopping bag. Online checkout and payments are not connected.</p>
+<p class="cart-note">Shipping and taxes are calculated at checkout.</p>
+<button class="checkout-button" disabled>CHECKOUT COMING SOON</button>
+<p class="cart-note">Online payments are not connected yet.</p>
 </div>
 </div>
 
@@ -259,7 +264,7 @@ image.onerror=()=>{image.src="https://placehold.co/600x400?text=VELORA"};
 document.getElementById("detail-name").textContent=p.name;
 document.getElementById("detail-category").textContent=p.category;
 document.getElementById("detail-price").textContent="$"+p.price.toFixed(2);
-document.getElementById("detail-description").textContent=p.description||"Discover this everyday essential from the Velora collection. Simple style, thoughtfully selected.";
+document.getElementById("detail-description").textContent=p.description||"Discover this everyday essential from the Velora collection.";
 
 document.getElementById("detail-add").onclick=()=>{
 add(selectedProduct);
@@ -279,34 +284,83 @@ if(event.target.id==="details-overlay")closeDetails();
 }
 
 function add(i){
-cart.push(items[i]);
+const product=items[i];
+const existing=cart.find(item=>item.product===product);
+
+if(existing){
+existing.quantity++;
+}else{
+cart.push({product:product,quantity:1});
+}
+
 updateBag();
 }
 
 function updateBag(){
-document.getElementById("bag-count").textContent=cart.length;
+const count=cart.reduce((sum,item)=>sum+item.quantity,0);
+document.getElementById("bag-count").textContent=count;
+
 const container=document.getElementById("cart-items");
 container.innerHTML="";
 let total=0;
 
-cart.forEach((p,i)=>{
-total+=p.price;
-const item=document.createElement("div");
-item.className="cart-item";
+if(cart.length===0){
+container.innerHTML='<p class="cart-note">Your bag is currently empty.</p>';
+}
 
-const info=document.createElement("span");
-info.textContent=p.name+" — $"+p.price.toFixed(2);
+cart.forEach((item,i)=>{
+const p=item.product;
+const subtotal=p.price*item.quantity;
+total+=subtotal;
+
+const row=document.createElement("div");
+row.className="cart-item";
+
+const info=document.createElement("div");
+info.className="cart-product-info";
+
+const name=document.createElement("strong");
+name.textContent=p.name;
+
+const price=document.createElement("p");
+price.textContent="$"+subtotal.toFixed(2);
+
+const controls=document.createElement("div");
+controls.className="quantity-controls";
+
+const minus=document.createElement("button");
+minus.textContent="−";
+minus.setAttribute("aria-label","Decrease quantity");
+minus.onclick=()=>changeQuantity(i,-1);
+
+const quantity=document.createElement("span");
+quantity.textContent=item.quantity;
+
+const plus=document.createElement("button");
+plus.textContent="+";
+plus.setAttribute("aria-label","Increase quantity");
+plus.onclick=()=>changeQuantity(i,1);
 
 const remove=document.createElement("button");
 remove.className="remove-button";
 remove.textContent="REMOVE";
 remove.onclick=()=>removeItem(i);
 
-item.append(info,remove);
-container.appendChild(item);
+controls.append(minus,quantity,plus);
+info.append(name,price,controls);
+row.append(info,remove);
+container.appendChild(row);
 });
 
 document.getElementById("cart-total").textContent="$"+total.toFixed(2);
+}
+
+function changeQuantity(i,amount){
+cart[i].quantity+=amount;
+if(cart[i].quantity<=0){
+cart.splice(i,1);
+}
+updateBag();
 }
 
 function removeItem(i){
