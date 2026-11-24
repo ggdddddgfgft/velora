@@ -228,40 +228,32 @@ function renderProducts(){
 const container=document.getElementById("products");
 container.innerHTML="";
 const filtered=items.filter(p=>currentFilter==="All"||p.category===currentFilter);
-
 if(!filtered.length){
 container.innerHTML='<p class="empty-products">No products in this category yet.</p>';
 return;
 }
-
 filtered.forEach(p=>{
 const index=items.indexOf(p);
 const card=document.createElement("div");
 card.className="product";
-
 const img=document.createElement("img");
 img.src=p.image||"https://placehold.co/600x400?text=VELORA";
 img.alt=p.name;
 img.onerror=()=>{img.src="https://placehold.co/600x400?text=VELORA"};
 img.onclick=()=>openDetails(index);
-
 const name=document.createElement("h3");
 name.textContent=p.name;
 name.onclick=()=>openDetails(index);
-
 const category=document.createElement("div");
 category.className="category";
 category.textContent=p.category;
-
 const price=document.createElement("div");
 price.className="price";
 price.textContent="$"+p.price.toFixed(2);
-
 const button=document.createElement("button");
 button.className="add-button";
 button.textContent="ADD TO BAG";
 button.onclick=()=>add(index);
-
 card.append(img,name,category,price,button);
 container.appendChild(card);
 });
@@ -281,12 +273,10 @@ const image=document.getElementById("detail-image");
 image.src=p.image||"https://placehold.co/600x400?text=VELORA";
 image.alt=p.name;
 image.onerror=()=>{image.src="https://placehold.co/600x400?text=VELORA"};
-
 document.getElementById("detail-name").textContent=p.name;
 document.getElementById("detail-category").textContent=p.category;
 document.getElementById("detail-price").textContent="$"+p.price.toFixed(2);
 document.getElementById("detail-description").textContent=p.description||"Discover this everyday essential from the Velora collection.";
-
 document.getElementById("detail-add").onclick=()=>{
 add(selectedProduct);
 closeDetails();
@@ -317,59 +307,45 @@ updateBag();
 function updateBag(){
 const count=cart.reduce((sum,item)=>sum+item.quantity,0);
 document.getElementById("bag-count").textContent=count;
-
 const container=document.getElementById("cart-items");
 container.innerHTML="";
 let total=0;
-
 if(cart.length===0){
 container.innerHTML='<p class="cart-note">Your bag is currently empty.</p>';
 }
-
 cart.forEach((item,i)=>{
 const p=item.product;
 const subtotal=p.price*item.quantity;
 total+=subtotal;
-
 const row=document.createElement("div");
 row.className="cart-item";
-
 const info=document.createElement("div");
 info.className="cart-product-info";
-
 const name=document.createElement("strong");
 name.textContent=p.name;
-
 const price=document.createElement("p");
 price.textContent="$"+subtotal.toFixed(2);
-
 const controls=document.createElement("div");
 controls.className="quantity-controls";
-
 const minus=document.createElement("button");
 minus.textContent="−";
 minus.setAttribute("aria-label","Decrease quantity");
 minus.onclick=()=>changeQuantity(i,-1);
-
 const quantity=document.createElement("span");
 quantity.textContent=item.quantity;
-
 const plus=document.createElement("button");
 plus.textContent="+";
 plus.setAttribute("aria-label","Increase quantity");
 plus.onclick=()=>changeQuantity(i,1);
-
 const remove=document.createElement("button");
 remove.className="remove-button";
 remove.textContent="REMOVE";
 remove.onclick=()=>removeItem(i);
-
 controls.append(minus,quantity,plus);
 info.append(name,price,controls);
 row.append(info,remove);
 container.appendChild(row);
 });
-
 document.getElementById("cart-total").textContent="$"+total.toFixed(2);
 document.getElementById("checkout-button").disabled=cart.length===0;
 }
@@ -399,19 +375,14 @@ if(event.target.id==="cart-overlay")closeCart();
 
 function checkout(){
 if(cart.length===0)return;
-
 const total=cart.reduce(
 (sum,item)=>sum+item.product.price*item.quantity,0
 );
-
 const orderNumber="VEL-"+Date.now().toString().slice(-6);
-
 document.getElementById("order-number").textContent="Order #"+orderNumber;
 document.getElementById("order-total").textContent="Order total: $"+total.toFixed(2);
-
 closeCart();
 document.getElementById("confirmation").classList.add("open");
-
 cart=[];
 updateBag();
 }
@@ -425,3 +396,4 @@ updateBag();
 </script>
 </body>
 </html>
+
