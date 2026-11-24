@@ -23,9 +23,12 @@ nav a{color:#171717;text-decoration:none;font-size:12px;letter-spacing:1px}
 .hero-shape{position:absolute;right:10%;width:330px;height:390px;background:#dedbd5;border-radius:170px 170px 10px 10px}
 .hero-shape:after{content:"V";position:absolute;font-size:220px;font-weight:800;color:#c9c5bd;top:75px;left:80px}
 .section{padding:75px 7%}
-.section-heading{text-align:center;margin-bottom:40px}
+.section-heading{text-align:center;margin-bottom:35px}
 .section-heading p{font-size:11px;letter-spacing:3px;color:#888}
 .section-heading h2{font-size:32px;letter-spacing:2px;margin:12px 0}
+.filters{display:flex;justify-content:center;gap:12px;margin-bottom:30px;flex-wrap:wrap}
+.filter{padding:12px 20px;border:1px solid #171717;background:white;color:#171717;cursor:pointer;font-size:11px;letter-spacing:1px}
+.filter.active,.filter:hover{background:#171717;color:white}
 .products{display:grid;grid-template-columns:repeat(4,1fr);gap:25px}
 .product{min-width:0}
 .product img{width:100%;height:290px;object-fit:cover;background:#f3f3f3}
@@ -56,53 +59,60 @@ footer{background:#171717;color:#fff;text-align:center;padding:35px;font-size:11
 <body>
 
 <header>
-  <div class="logo">VELORA</div>
-  <nav>
-    <a href="#home">HOME</a>
-    <a href="#shop">SHOP</a>
-    <a href="#about">ABOUT</a>
-  </nav>
-  <button class="bag-button" onclick="showCart()">BAG (<span id="bag-count">0</span>)</button>
+<div class="logo">VELORA</div>
+<nav>
+<a href="#home">HOME</a>
+<a href="#shop">SHOP</a>
+<a href="#about">ABOUT</a>
+</nav>
+<button class="bag-button" onclick="showCart()">BAG (<span id="bag-count">0</span>)</button>
 </header>
 
 <section class="hero" id="home">
-  <div class="hero-content">
-    <div class="eyebrow">THE VELORA COLLECTION</div>
-    <h1>EVERYDAY,<br>ELEVATED.</h1>
-    <p>Discover everyday essentials designed with simplicity, comfort, and confidence in mind.</p>
-    <a class="shop-button" href="#shop">EXPLORE COLLECTION</a>
-  </div>
-  <div class="hero-shape"></div>
+<div class="hero-content">
+<div class="eyebrow">THE VELORA COLLECTION</div>
+<h1>EVERYDAY,<br>ELEVATED.</h1>
+<p>Discover everyday essentials designed with simplicity, comfort, and confidence in mind.</p>
+<a class="shop-button" href="#shop">EXPLORE COLLECTION</a>
+</div>
+<div class="hero-shape"></div>
 </section>
 
 <section class="section" id="shop">
-  <div class="section-heading">
-    <p>CURATED FOR YOU</p>
-    <h2>THE COLLECTION</h2>
-  </div>
-  <div class="products" id="products"></div>
+<div class="section-heading">
+<p>CURATED FOR YOU</p>
+<h2>THE COLLECTION</h2>
+</div>
+
+<div class="filters">
+<button class="filter active" onclick="filterProducts('All',this)">ALL PRODUCTS</button>
+<button class="filter" onclick="filterProducts('Clothing',this)">CLOTHING</button>
+<button class="filter" onclick="filterProducts('Lifestyle',this)">LIFESTYLE</button>
+</div>
+
+<div class="products" id="products"></div>
 </section>
 
 <section class="about" id="about">
-  <h2>ABOUT VELORA</h2>
-  <p>We believe everyday essentials should feel anything but ordinary. Velora is about timeless style, thoughtful simplicity, and making every day a little more elevated.</p>
+<h2>ABOUT VELORA</h2>
+<p>We believe everyday essentials should feel anything but ordinary. Velora is about timeless style, thoughtful simplicity, and making every day a little more elevated.</p>
 </section>
 
-<footer>VELORA &nbsp; | &nbsp; EVERYDAY, ELEVATED.</footer>
+<footer>VELORA | EVERYDAY, ELEVATED.</footer>
 
 <div class="cart-overlay" id="cart-overlay" onclick="overlayClick(event)">
-  <div class="cart">
-    <div class="cart-top">
-      <h2>YOUR BAG</h2>
-      <button class="close-button" onclick="closeCart()">×</button>
-    </div>
-    <div id="cart-items"></div>
-    <div class="cart-total">
-      <span>TOTAL</span>
-      <span id="cart-total">$0.00</span>
-    </div>
-    <p class="cart-note">This is a demo shopping bag. Online checkout and payments are not connected.</p>
-  </div>
+<div class="cart">
+<div class="cart-top">
+<h2>YOUR BAG</h2>
+<button class="close-button" onclick="closeCart()">×</button>
+</div>
+<div id="cart-items"></div>
+<div class="cart-total">
+<span>TOTAL</span>
+<span id="cart-total">$0.00</span>
+</div>
+<p class="cart-note">This is a demo shopping bag. Online checkout and payments are not connected.</p>
+</div>
 </div>
 
 <script>
@@ -118,110 +128,118 @@ const demoItems=[
 ];
 
 function getStoreItems(){
-  try{
-    const saved=JSON.parse(localStorage.getItem("velora_test_products")||"[]");
-    if(Array.isArray(saved)&&saved.length){
-      return saved.map(p=>({
-        name:p.name,
-        price:Number(p.price),
-        category:p.category||"Clothing",
-        image:p.image||""
-      })).filter(p=>p.name&&Number.isFinite(p.price));
-    }
-  }catch(e){
-    console.log("Could not load test products",e);
-  }
-  return demoItems;
+try{
+const saved=JSON.parse(localStorage.getItem("velora_test_products")||"[]");
+if(Array.isArray(saved)&&saved.length){
+return saved.map(p=>({
+name:p.name,
+price:Number(p.price),
+category:p.category||"Clothing",
+image:p.image||""
+})).filter(p=>p.name&&Number.isFinite(p.price));
+}
+}catch(e){console.log("Could not load test products",e)}
+return demoItems;
 }
 
 const items=getStoreItems();
 let cart=[];
+let currentFilter="All";
 
 function renderProducts(){
-  const container=document.getElementById("products");
-  container.innerHTML="";
+const container=document.getElementById("products");
+container.innerHTML="";
+const filtered=items.filter(p=>currentFilter==="All"||p.category===currentFilter);
 
-  if(!items.length){
-    container.innerHTML='<p class="empty-products">No products available yet.</p>';
-    return;
-  }
+if(!filtered.length){
+container.innerHTML='<p class="empty-products">No products in this category yet.</p>';
+return;
+}
 
-  items.forEach((p,i)=>{
-    const card=document.createElement("div");
-    card.className="product";
+filtered.forEach(p=>{
+const originalIndex=items.indexOf(p);
+const card=document.createElement("div");
+card.className="product";
 
-    const img=document.createElement("img");
-    img.src=p.image||"https://placehold.co/600x400?text=VELORA";
-    img.alt=p.name;
-    img.onerror=()=>{img.src="https://placehold.co/600x400?text=VELORA"};
+const img=document.createElement("img");
+img.src=p.image||"https://placehold.co/600x400?text=VELORA";
+img.alt=p.name;
+img.onerror=()=>{img.src="https://placehold.co/600x400?text=VELORA"};
 
-    const name=document.createElement("h3");
-    name.textContent=p.name;
+const name=document.createElement("h3");
+name.textContent=p.name;
 
-    const category=document.createElement("div");
-    category.className="category";
-    category.textContent=p.category;
+const category=document.createElement("div");
+category.className="category";
+category.textContent=p.category;
 
-    const price=document.createElement("div");
-    price.className="price";
-    price.textContent="$"+p.price.toFixed(2);
+const price=document.createElement("div");
+price.className="price";
+price.textContent="$"+p.price.toFixed(2);
 
-    const button=document.createElement("button");
-    button.className="add-button";
-    button.textContent="ADD TO BAG";
-    button.onclick=()=>add(i);
+const button=document.createElement("button");
+button.className="add-button";
+button.textContent="ADD TO BAG";
+button.onclick=()=>add(originalIndex);
 
-    card.append(img,name,category,price,button);
-    container.appendChild(card);
-  });
+card.append(img,name,category,price,button);
+container.appendChild(card);
+});
+}
+
+function filterProducts(category,button){
+currentFilter=category;
+document.querySelectorAll(".filter").forEach(b=>b.classList.remove("active"));
+button.classList.add("active");
+renderProducts();
 }
 
 function add(i){
-  cart.push(items[i]);
-  updateBag();
+cart.push(items[i]);
+updateBag();
 }
 
 function updateBag(){
-  document.getElementById("bag-count").textContent=cart.length;
-  const container=document.getElementById("cart-items");
-  container.innerHTML="";
-  let total=0;
+document.getElementById("bag-count").textContent=cart.length;
+const container=document.getElementById("cart-items");
+container.innerHTML="";
+let total=0;
 
-  cart.forEach((p,i)=>{
-    total+=p.price;
-    const item=document.createElement("div");
-    item.className="cart-item";
+cart.forEach((p,i)=>{
+total+=p.price;
+const item=document.createElement("div");
+item.className="cart-item";
 
-    const info=document.createElement("span");
-    info.textContent=p.name+" — $"+p.price.toFixed(2);
+const info=document.createElement("span");
+info.textContent=p.name+" — $"+p.price.toFixed(2);
 
-    const remove=document.createElement("button");
-    remove.className="remove-button";
-    remove.textContent="REMOVE";
-    remove.onclick=()=>removeItem(i);
+const remove=document.createElement("button");
+remove.className="remove-button";
+remove.textContent="REMOVE";
+remove.onclick=()=>removeItem(i);
 
-    item.append(info,remove);
-    container.appendChild(item);
-  });
+item.append(info,remove);
+container.appendChild(item);
+});
 
-  document.getElementById("cart-total").textContent="$"+total.toFixed(2);
+document.getElementById("cart-total").textContent="$"+total.toFixed(2);
 }
 
 function removeItem(i){
-  cart.splice(i,1);
-  updateBag();
+cart.splice(i,1);
+updateBag();
 }
 
 function showCart(){
-  document.getElementById("cart-overlay").classList.add("open");
+document.getElementById("cart-overlay").classList.add("open");
 }
 
 function closeCart(){
-  document.getElementById("cart-overlay").classList.remove("open");
+document.getElementById("cart-overlay").classList.remove("open");
 }
 
 function overlayClick(event){
-  if(event.target.id==="cart-overlay")closeCart();
+if(event.target.id==="cart-overlay")closeCart();
 }
 
 renderProducts();
