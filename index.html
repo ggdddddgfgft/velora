@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Velora | Everyday, Elevated</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:#f5f3ee;color:#20251f;font-family:Arial,sans-serif}
+header{padding:22px 7%;display:flex;justify-content:space-between;align-items:center;background:#f5f3ee;position:sticky;top:0}
+.logo{font-size:30px;font-weight:900;letter-spacing:-2px}
+.logo span{color:#819174}
+nav a{color:#20251f;text-decoration:none;margin:0 12px;font-size:14px}
+button{cursor:pointer;border:0;border-radius:25px;padding:12px 19px;background:#344332;color:white}
+.hero{margin:20px auto;background:#dce3d4;padding:85px 8%;border-radius:22px;max-width:1150px}
+.hero h1{font-size:clamp(48px,8vw,82px);line-height:1;margin:15px 0;letter-spacing:-4px}
+.hero p{line-height:1.7;max-width:400px}
+section{max-width:1150px;margin:75px auto;padding:0 22px}
+h2{font-size:34px;letter-spacing:-1px}
+.products{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+.product{background:white;border-radius:15px;overflow:hidden;padding-bottom:16px}
+.product img{width:100%;height:240px;object-fit:cover}
+.product h3,.product p{margin:12px}
+.product button{margin:0 12px}
+.price{font-weight:bold;color:#59694e}
+.about{background:#e5e8df;padding:45px;border-radius:20px;line-height:1.8}
+footer{text-align:center;background:#20251f;color:white;padding:35px}
+.cart{position:fixed;bottom:20px;right:20px;z-index:5;box-shadow:0 4px 15px #0003}
+@media(max-width:750px){.products{grid-template-columns:repeat(2,1fr)}nav a{margin:0 4px;font-size:11px}.hero{margin:12px}}
+@media(max-width:430px){header{padding:15px}.logo{font-size:23px}.products{gap:10px}.product img{height:170px}}
+</style>
+</head>
+<body>
+<header>
+<div class="logo">velora<span>.</span></div>
+<nav>
+<a href="#shop">Shop</a>
+<a href="#about">About</a>
+<a href="#contact">Contact</a>
+</nav>
+</header>
+
+<div class="hero">
+<p>THE NEW EVERYDAY COLLECTION</p>
+<h1>Everyday,<br>elevated.</h1>
+<p>Discover clothing and lifestyle essentials made for your everyday moments.</p>
+<button onclick="document.getElementById('shop').scrollIntoView({behavior:'smooth'})">Shop Now ↗</button>
+</div>
+
+<section id="shop">
+<h2>Shop the collection</h2>
+<p>Find your new favorites.</p>
+<div class="products" id="products"></div>
+</section>
+
+<section id="about">
+<div class="about">
+<h2>Welcome to Velora.</h2>
+We believe everyday essentials should feel special. Discover thoughtfully selected clothing and lifestyle products designed to bring a little inspiration to your day.
+</div>
+</section>
+
+<section id="contact">
+<h2>Stay connected.</h2>
+<p>Have questions? Contact us at hello@velora.example</p>
+</section>
+
+<footer>
+<h2>velora.</h2>
+<p>Everyday essentials, thoughtfully found.</p>
+<p>© 2026 Velora</p>
+</footer>
+
+<button class="cart" onclick="showCart()">Bag 🛍 <span id="count">0</span></button>
+
+<script>
+const items=[
+{name:"Everyday Hoodie",price:48,category:"Clothing",image:"https://images.unsplash.com/photo-1556821840-3a63f95609a7?w=600"},
+{name:"Classic T-Shirt",price:28,category:"Clothing",image:"https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=600"},
+{name:"Sunday Candle",price:24,category:"Lifestyle",image:"https://images.unsplash.com/photo-1603006905003-be475563bc59?w=600"},
+{name:"Ceramic Mug",price:18,category:"Lifestyle",image:"https://images.unsplash.com/photo-1514228742587-6b1558fcca3d?w=600"},
+{name:"Soft Sweater",price:55,category:"Clothing",image:"https://images.unsplash.com/photo-1576566588028-4147f3842f27?w=600"},
+{name:"Daily Tote",price:35,category:"Lifestyle",image:"https://images.unsplash.com/photo-1590873281214-7e7f4b8f2c4d?w=600"},
+{name:"Relaxed Shirt",price:42,category:"Clothing",image:"https://images.unsplash.com/photo-1598033129183-c4f50c736f10?w=600"},
+{name:"Home Decor",price:32,category:"Lifestyle",image:"https://images.unsplash.com/photo-1490312278390-ab64016e0aa9?w=600"}
+];
+let cart=[];
+const products=document.getElementById('products');
+items.forEach((p,i)=>{
+products.innerHTML+=`<div class="product"><img src="${p.image}" alt="${p.name}"><h3>${p.name}</h3><p>${p.category} · <span class="price">$${p.price}</span></p><button onclick="add(${i})">Add to bag +</button></div>`;
+});
+function add(i){cart.push(items[i]);document.getElementById('count').textContent=cart.length;alert(items[i].name+' added to your bag!')}
+function showCart(){if(!cart.length){alert('Your bag is empty!');return}alert('Your bag:\n'+cart.map(x=>x.name+' - $'+x.price).join('\n')+'\nTotal: $'+cart.reduce((s,x)=>s+x.price,0))}
+</script>
+</body>
+</html>
