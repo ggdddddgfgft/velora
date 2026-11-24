@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,7 +8,7 @@
 <style>
 *{box-sizing:border-box}
 body{margin:0;background:#f5f3ee;color:#20251f;font-family:Arial,sans-serif}
-header{padding:22px 7%;display:flex;justify-content:space-between;align-items:center;background:#f5f3ee;position:sticky;top:0}
+header{padding:22px 7%;display:flex;justify-content:space-between;align-items:center;background:#f5f3ee;position:sticky;top:0;z-index:2}
 .logo{font-size:30px;font-weight:900;letter-spacing:-2px}
 .logo span{color:#819174}
 nav a{color:#20251f;text-decoration:none;margin:0 12px;font-size:14px}
@@ -25,7 +26,21 @@ h2{font-size:34px;letter-spacing:-1px}
 .price{font-weight:bold;color:#59694e}
 .about{background:#e5e8df;padding:45px;border-radius:20px;line-height:1.8}
 footer{text-align:center;background:#20251f;color:white;padding:35px}
-.cart{position:fixed;bottom:20px;right:20px;z-index:5;box-shadow:0 4px 15px #0003}
+.cart-button{position:fixed;bottom:20px;right:20px;z-index:5;box-shadow:0 4px 15px #0003}
+.overlay{position:fixed;inset:0;background:#0007;z-index:9;opacity:0;visibility:hidden;transition:.3s}
+.overlay.open{opacity:1;visibility:visible}
+.drawer{position:fixed;top:0;right:0;width:min(420px,100%);height:100vh;background:#fff;z-index:10;padding:25px;transform:translateX(100%);transition:.3s;display:flex;flex-direction:column;box-shadow:-5px 0 20px #0002}
+.drawer.open{transform:translateX(0)}
+.drawer-header{display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid #ddd}
+.drawer-header h2{font-size:27px}
+.close{background:#e5e8df;color:#20251f;font-size:20px;padding:8px 14px}
+.cart-items{overflow-y:auto;flex:1;padding:15px 0}
+.cart-item{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:14px 0;border-bottom:1px solid #eee}
+.cart-item p{margin:5px 0;color:#687064}
+.remove{background:#eee;color:#333;padding:7px 12px}
+.cart-footer{border-top:1px solid #ddd;padding-top:18px}
+.total{display:flex;justify-content:space-between;font-size:20px;font-weight:bold}
+.empty{text-align:center;color:#777;padding:40px 0}
 @media(max-width:750px){.products{grid-template-columns:repeat(2,1fr)}nav a{margin:0 4px;font-size:11px}.hero{margin:12px}}
 @media(max-width:430px){header{padding:15px}.logo{font-size:23px}.products{gap:10px}.product img{height:170px}}
 </style>
@@ -71,7 +86,23 @@ We believe everyday essentials should feel special. Discover thoughtfully select
 <p>© 2026 Velora</p>
 </footer>
 
-<button class="cart" onclick="showCart()">Bag 🛍 <span id="count">0</span></button>
+<button class="cart-button" onclick="showCart()">Bag 🛍 <span id="count">0</span></button>
+
+<div class="overlay" id="overlay" onclick="closeCart()"></div>
+<aside class="drawer" id="drawer">
+<div class="drawer-header">
+<h2>Your shopping bag</h2>
+<button class="close" onclick="closeCart()">✕</button>
+</div>
+<div class="cart-items" id="cartItems"></div>
+<div class="cart-footer">
+<div class="total">
+<span>Total</span>
+<span id="total">$0</span>
+</div>
+<p style="font-size:12px;color:#777">Checkout is not available yet.</p>
+</div>
+</aside>
 
 <script>
 const items=[
@@ -84,13 +115,65 @@ const items=[
 {name:"Relaxed Shirt",price:42,category:"Clothing",image:"https://images.unsplash.com/photo-1598033129183-c4f50c736f10?w=600"},
 {name:"Home Decor",price:32,category:"Lifestyle",image:"https://images.unsplash.com/photo-1490312278390-ab64016e0aa9?w=600"}
 ];
+
 let cart=[];
-const products=document.getElementById('products');
+const products=document.getElementById("products");
+
 items.forEach((p,i)=>{
-products.innerHTML+=`<div class="product"><img src="${p.image}" alt="${p.name}"><h3>${p.name}</h3><p>${p.category} · <span class="price">$${p.price}</span></p><button onclick="add(${i})">Add to bag +</button></div>`;
+products.innerHTML+=`
+<div class="product">
+<img src="${p.image}" alt="${p.name}">
+<h3>${p.name}</h3>
+<p>${p.category} · <span class="price">$${p.price}</span></p>
+<button onclick="add(${i})">Add to bag +</button>
+</div>`;
 });
-function add(i){cart.push(items[i]);document.getElementById('count').textContent=cart.length;alert(items[i].name+' added to your bag!')}
-function showCart(){if(!cart.length){alert('Your bag is empty!');return}alert('Your bag:\n'+cart.map(x=>x.name+' - $'+x.price).join('\n')+'\nTotal: $'+cart.reduce((s,x)=>s+x.price,0))}
+
+function add(i){
+cart.push(items[i]);
+updateCart();
+showCart();
+}
+
+function updateCart(){
+document.getElementById("count").textContent=cart.length;
+
+const cartItems=document.getElementById("cartItems");
+
+if(cart.length===0){
+cartItems.innerHTML='<div class="empty">Your bag is empty.<br>Find something you love!</div>';
+}else{
+cartItems.innerHTML=cart.map((item,index)=>`
+<div class="cart-item">
+<div>
+<strong>${item.name}</strong>
+<p>$${item.price}</p>
+</div>
+<button class="remove" onclick="removeItem(${index})">Remove</button>
+</div>
+`).join("");
+}
+
+const total=cart.reduce((sum,item)=>sum+item.price,0);
+document.getElementById("total").textContent="$"+total;
+}
+
+function removeItem(index){
+cart.splice(index,1);
+updateCart();
+}
+
+function showCart(){
+document.getElementById("drawer").classList.add("open");
+document.getElementById("overlay").classList.add("open");
+}
+
+function closeCart(){
+document.getElementById("drawer").classList.remove("open");
+document.getElementById("overlay").classList.remove("open");
+}
+
+updateCart();
 </script>
 </body>
 </html>
