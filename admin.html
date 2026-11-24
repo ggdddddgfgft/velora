@@ -3,171 +3,227 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Velora Admin Dashboard</title>
 <style>
 *{box-sizing:border-box}
-body{margin:0;background:#f4f3ee;color:#252a23;font-family:Arial,sans-serif}
-header{background:#263326;color:white;padding:22px 7%;display:flex;justify-content:space-between;align-items:center}
-.logo{font-size:27px;font-weight:bold}
-.logo span{color:#a8bd99}
-header a{color:white;text-decoration:none}
-main{max-width:1000px;margin:40px auto;padding:20px}
-h1{font-size:34px}
-.note{background:#e4eadf;padding:15px;border-radius:10px;line-height:1.5}
-.panel{background:white;padding:25px;border-radius:14px;margin:25px 0}
-input,select{width:100%;padding:13px;margin:8px 0 16px;border:1px solid #ddd;border-radius:8px;font-size:15px}
-label{font-weight:bold;font-size:14px}
+body{margin:0;font-family:Arial,sans-serif;background:#f5f5f7;color:#222}
+.layout{display:flex;min-height:100vh}
+.sidebar{width:235px;background:#171717;color:white;padding:30px 20px}
+.logo{font-size:27px;letter-spacing:4px;font-weight:bold;margin-bottom:55px}
+.nav{padding:14px;margin:8px 0;border-radius:9px;background:#303030}
+.sidebar p{color:#aaa;font-size:12px;margin-top:45px}
+main{flex:1;padding:35px;min-width:0}
+.top{display:flex;justify-content:space-between;align-items:center;gap:15px;flex-wrap:wrap}
+h1{margin:0;font-size:29px}
+.muted{color:#888;font-size:14px;margin-top:8px}
+.mode{background:#e4f6e9;color:#23743b;padding:9px 14px;border-radius:20px;font-size:12px;font-weight:bold}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin:30px 0}
+.stat,.panel{background:white;border-radius:14px;padding:23px;box-shadow:0 3px 15px #00000008}
+.stat span{color:#888;font-size:13px}
+.stat h2{font-size:28px;margin:12px 0 0}
+.panel{margin-bottom:22px}
+h3{margin:0 0 20px}
+.fields{display:grid;grid-template-columns:2fr 1fr 1fr;gap:14px}
+label{font-size:13px;font-weight:bold}
+input,select{width:100%;padding:13px;margin-top:8px;border:1px solid #ddd;border-radius:8px;font-size:14px;background:white}
 button{border:0;border-radius:8px;padding:12px 17px;cursor:pointer;font-weight:bold}
-.primary{background:#344b35;color:white}
-.edit{background:#e6eadf;color:#283629}
-.delete{background:#f8e4e1;color:#923c32}
-.product{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:15px 0;border-bottom:1px solid #eee}
-.product p{margin:6px 0;color:#777}
-.actions{display:flex;gap:7px}
-@media(max-width:550px){.product{align-items:flex-start;flex-direction:column}.actions{width:100%}}
+.add{background:#171717;color:white;margin-top:17px}
+.search{max-width:320px;margin:0 0 18px}
+.products{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:17px}
+.product{border:1px solid #eee;border-radius:12px;overflow:hidden}
+.product img{width:100%;height:155px;object-fit:cover;background:#eee}
+.noimage{height:155px;background:#eee;display:grid;place-items:center;color:#888}
+.details{padding:15px}
+.details h4{margin:0 0 8px;font-size:16px}
+.price{font-weight:bold;margin-bottom:12px}
+.category{color:#888;font-size:12px}
+.actions{display:flex;gap:8px;margin-top:14px}
+.edit{background:#eee;color:#222}
+.delete{background:#fff0f0;color:#b32626}
+.empty{color:#888;text-align:center;padding:35px}
+@media(max-width:700px){
+.sidebar{width:75px;padding:22px 10px}
+.logo{font-size:15px;letter-spacing:1px}
+.nav{text-align:center;font-size:11px;padding:12px 3px}
+.sidebar p{display:none}
+main{padding:20px 13px}
+.stats{grid-template-columns:1fr}
+.fields{grid-template-columns:1fr}
+}
 </style>
 </head>
 <body>
-
-<header>
-<div class="logo">velora<span>.</span> Admin</div>
-<a href="index.html">View Store ↗</a>
-</header>
+<div class="layout">
+<aside class="sidebar">
+<div class="logo">VELORA</div>
+<div class="nav">▦ &nbsp; Dashboard</div>
+<div class="nav">□ &nbsp; Products</div>
+<p>ADMIN PANEL · TEST MODE</p>
+</aside>
 
 <main>
-<h1>Admin Dashboard</h1>
-<p>Manage your Velora test products.</p>
-
-<div class="note">
-<strong>TEST MODE</strong><br>
-Products saved here stay in this browser only. They do not change your public store.
+<div class="top">
+<div>
+<h1>Dashboard</h1>
+<div class="muted">Welcome to your Velora store manager.</div>
+</div>
+<div class="mode">● TEST MODE</div>
 </div>
 
-<div class="panel">
-<h2 id="formTitle">Add a Product</h2>
+<div class="stats">
+<div class="stat"><span>Total Products</span><h2 id="total">0</h2></div>
+<div class="stat"><span>Clothing</span><h2 id="clothing">0</h2></div>
+<div class="stat"><span>Lifestyle</span><h2 id="lifestyle">0</h2></div>
+</div>
 
+<section class="panel">
+<h3>Add a Product</h3>
 <form id="productForm">
-<label>Product Name</label>
+<div class="fields">
+<label>Product Name
 <input id="name" placeholder="Example: Classic Hoodie" required>
-
-<label>Price ($)</label>
-<input id="price" type="number" min="0" step="0.01" placeholder="48" required>
-
-<label>Category</label>
+</label>
+<label>Price ($)
+<input id="price" type="number" min="0" step="0.01" placeholder="48.00" required>
+</label>
+<label>Category
 <select id="category">
 <option>Clothing</option>
 <option>Lifestyle</option>
 </select>
-
-<label>Image URL (optional)</label>
+</label>
+</div>
+<label style="display:block;margin-top:16px">Image URL (optional)
 <input id="image" type="url" placeholder="https://example.com/image.jpg">
-
-<button class="primary" type="submit" id="saveButton">Add Product</button>
-<button type="button" class="edit" onclick="resetForm()">Clear</button>
+</label>
+<button class="add" type="submit">+ Add Product</button>
 </form>
-</div>
+</section>
 
-<div class="panel">
-<h2>Your Products</h2>
-<p id="count">0 products</p>
-<div id="productList"></div>
-</div>
+<section class="panel">
+<h3>Your Products</h3>
+<input class="search" id="search" placeholder="Search products...">
+<div class="products" id="products"></div>
+</section>
 </main>
+</div>
 
 <script>
-const storageKey="velora_test_products";
+const KEY="velora_test_products";
+let products=[];
+try {
+ products=JSON.parse(localStorage.getItem(KEY)||"[]");
+ if(!Array.isArray(products)) products=[];
+} catch(e) { products=[]; }
 
-let products=JSON.parse(localStorage.getItem(storageKey)||"[]");
-let editingIndex=-1;
-
-const form=document.getElementById("productForm");
-
+const $=id=>document.getElementById(id);
 function save(){
-localStorage.setItem(storageKey,JSON.stringify(products));
-render();
+ localStorage.setItem(KEY,JSON.stringify(products));
+ render();
 }
-
 function render(){
-const list=document.getElementById("productList");
-document.getElementById("count").textContent=products.length+" products";
+ $("total").textContent=products.length;
+ $("clothing").textContent=products.filter(p=>p.category==="Clothing").length;
+ $("lifestyle").textContent=products.filter(p=>p.category==="Lifestyle").length;
 
-if(products.length===0){
-list.innerHTML="<p>No products yet. Add your first product above!</p>";
-return;
+ const query=$("search").value.toLowerCase();
+ const shown=products.filter(p=>(p.name||"").toLowerCase().includes(query));
+ $("products").innerHTML="";
+
+ if(!shown.length){
+  $("products").innerHTML='<div class="empty">No products found. Add your first product above!</div>';
+  return;
+ }
+
+ shown.forEach(p=>{
+  const card=document.createElement("article");
+  card.className="product";
+  const img=p.image ? document.createElement("img") : null;
+  if(img){
+   img.src=p.image;
+   img.alt=p.name;
+   img.onerror=()=>{img.replaceWith(Object.assign(document.createElement("div"),{className:"noimage",textContent:"Image unavailable"}));};
+   card.appendChild(img);
+  } else {
+   const placeholder=document.createElement("div");
+   placeholder.className="noimage";
+   placeholder.textContent="No image";
+   card.appendChild(placeholder);
+  }
+
+  const details=document.createElement("div");
+  details.className="details";
+  const name=document.createElement("h4");
+  name.textContent=p.name;
+  const price=document.createElement("div");
+  price.className="price";
+  price.textContent="$"+Number(p.price).toFixed(2);
+  const category=document.createElement("div");
+  category.className="category";
+  category.textContent=p.category;
+  const actions=document.createElement("div");
+  actions.className="actions";
+
+  const edit=document.createElement("button");
+  edit.className="edit";
+  edit.textContent="Edit";
+  edit.onclick=()=>editProduct(p.id);
+
+  const del=document.createElement("button");
+  del.className="delete";
+  del.textContent="Delete";
+  del.onclick=()=>deleteProduct(p.id);
+
+  actions.append(edit,del);
+  details.append(name,price,category,actions);
+  card.appendChild(details);
+  $("products").appendChild(card);
+ });
 }
-
-list.innerHTML=products.map((p,i)=>`
-<div class="product">
-<div>
-<strong>${escapeHTML(p.name)}</strong>
-<p>$${Number(p.price).toFixed(2)} · ${escapeHTML(p.category)}</p>
-</div>
-<div class="actions">
-<button class="edit" onclick="editProduct(${i})">Edit</button>
-<button class="delete" onclick="deleteProduct(${i})">Delete</button>
-</div>
-</div>
-`).join("");
-}
-
-function escapeHTML(value){
-return String(value).replace(/[&<>"']/g,c=>({
-"&":"&amp;","<":"&lt;",">":"&gt;",
-'"':"&quot;","'":"&#39;"
-}[c]));
-}
-
-form.addEventListener("submit",function(e){
-e.preventDefault();
-
-const product={
-name:document.getElementById("name").value.trim(),
-price:Number(document.getElementById("price").value),
-category:document.getElementById("category").value,
-image:document.getElementById("image").value.trim()
-};
-
-if(!product.name||!Number.isFinite(product.price)||product.price<0)return;
-
-if(editingIndex===-1){
-products.push(product);
-}else{
-products[editingIndex]=product;
-}
-
-save();
-resetForm();
+$("productForm").addEventListener("submit",e=>{
+ e.preventDefault();
+ const product={
+  id:Date.now().toString(),
+  name:$("name").value.trim(),
+  price:Number($("price").value),
+  category:$("category").value,
+  image:$("image").value.trim()
+ };
+ if(!product.name||!Number.isFinite(product.price)||product.price<0)return;
+ products.push(product);
+ save();
+ e.target.reset();
 });
-
-function editProduct(i){
-const p=products[i];
-document.getElementById("name").value=p.name;
-document.getElementById("price").value=p.price;
-document.getElementById("category").value=p.category;
-document.getElementById("image").value=p.image||"";
-editingIndex=i;
-document.getElementById("formTitle").textContent="Edit Product";
-document.getElementById("saveButton").textContent="Save Changes";
-window.scrollTo({top:0,behavior:"smooth"});
+function editProduct(id){
+ const p=products.find(x=>String(x.id)===String(id));
+ if(!p)return;
+ const name=prompt("Product name:",p.name);
+ if(name===null)return;
+ const price=prompt("Price:",p.price);
+ if(price===null)return;
+ const category=prompt("Category: Clothing or Lifestyle",p.category);
+ if(category===null)return;
+ const image=prompt("Image URL (leave blank for none):",p.image||"");
+ if(image===null)return;
+ const amount=Number(price);
+ if(!name.trim()||price.trim()===""||!Number.isFinite(amount)||amount<0){
+  alert("Please enter a valid name and price.");
+  return;
+ }
+ p.name=name.trim();
+ p.price=amount;
+ p.category=category.toLowerCase()==="lifestyle"?"Lifestyle":"Clothing";
+ p.image=image.trim();
+ save();
 }
-
-function deleteProduct(i){
-if(!confirm("Delete "+products[i].name+"?"))return;
-products.splice(i,1);
-save();
-resetForm();
+function deleteProduct(id){
+ if(!confirm("Delete this product?"))return;
+ products=products.filter(p=>String(p.id)!==String(id));
+ save();
 }
-
-function resetForm(){
-form.reset();
-editingIndex=-1;
-document.getElementById("formTitle").textContent="Add a Product";
-document.getElementById("saveButton").textContent="Add Product";
-}
-
+$("search").addEventListener("input",render);
 render();
 </script>
-
 </body>
 </html>
