@@ -77,12 +77,15 @@ footer{background:#171717;color:white;text-align:center;padding:35px;font-size:1
 .checkout-button:disabled{opacity:.4;cursor:not-allowed}
 
 /* ORDER CONFIRMATION */
-.confirmation{position:fixed;inset:0;background:#0009;z-index:50;display:none;align-items:center;justify-content:center;padding:20px}
+.confirmation{position:fixed;inset:0;background:rgba(0,0,0,.75);backdrop-filter:blur(5px);z-index:50;display:none;align-items:center;justify-content:center;padding:20px}
 .confirmation.open{display:flex}
-.confirmation-card{background:white;width:min(480px,100%);padding:45px 30px;text-align:center}
-.confirmation-card h2{font-size:30px;letter-spacing:3px}
-.confirmation-card p{color:#777;line-height:1.7}
-.order-number{font-size:19px;font-weight:bold;color:#171717;margin:25px 0}
+.confirmation-card{background:#fff;width:min(500px,100%);padding:55px 35px;text-align:center;border:1px solid #e8e5df;animation:confirmationIn .45s ease}
+@keyframes confirmationIn{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+.confirmation-card h2{font-size:38px;letter-spacing:5px;margin:22px 0}
+.confirmation-card p{color:#777;line-height:1.8;font-size:13px}
+.confirmation-card .eyebrow{letter-spacing:4px;font-size:10px}
+.order-number{font-size:18px;font-weight:bold;color:#171717;margin:28px 0;padding:18px;background:#f5f4f2;letter-spacing:1px}
+.confirmation-card .detail-add{margin-top:25px;padding:18px;letter-spacing:3px}
 
 @media(max-width:850px){
 .products{grid-template-columns:repeat(2,1fr)}
@@ -102,6 +105,8 @@ nav a{font-size:10px}
 .details img{height:280px}
 .details-info h2{font-size:24px}
 .details-overlay{padding:12px}
+.confirmation-card{padding:40px 22px}
+.confirmation-card h2{font-size:30px}
 }
 </style>
 </head>
@@ -181,7 +186,7 @@ nav a{font-size:10px}
 
 <div class="confirmation" id="confirmation">
 <div class="confirmation-card">
-<div class="eyebrow">VELORA ORDER CONFIRMATION</div>
+<div class="eyebrow">V E L O R A</div>
 <h2>THANK YOU!</h2>
 <p>Your demo order has been placed successfully.</p>
 <div class="order-number" id="order-number"></div>
@@ -397,3 +402,405 @@ updateBag();
 </body>
 </html>
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>VELORA | Everyday, Elevated</title>
+<style>
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:#fff;color:#171717;font-family:Arial,sans-serif}
+header{height:78px;padding:0 7%;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid #eee;position:sticky;top:0;background:#fff;z-index:10}
+.logo{font-size:27px;font-weight:800;letter-spacing:5px}
+nav{display:flex;gap:28px}
+nav a{color:#171717;text-decoration:none;font-size:12px;letter-spacing:1px}
+.bag-button{border:1px solid #171717;background:#171717;color:white;padding:12px 20px;cursor:pointer;font-size:12px}
+.hero{min-height:510px;background:#f2f0ed;display:flex;align-items:center;padding:70px 10%;position:relative;overflow:hidden}
+.hero-content{max-width:510px;z-index:1}
+.eyebrow{font-size:11px;letter-spacing:3px}
+.hero h1{font-size:clamp(48px,7vw,82px);line-height:.98;margin:22px 0;font-weight:800;letter-spacing:-4px}
+.hero p{color:#666;line-height:1.7;max-width:390px}
+.shop-button{display:inline-block;margin-top:20px;background:#171717;color:white;padding:16px 28px;text-decoration:none;font-size:11px;letter-spacing:2px}
+.hero-shape{position:absolute;right:10%;width:330px;height:390px;background:#dedbd5;border-radius:170px 170px 10px 10px}
+.hero-shape:after{content:"V";position:absolute;font-size:220px;font-weight:800;color:#c9c5bd;top:75px;left:80px}
+.section{padding:75px 7%}
+.section-heading{text-align:center;margin-bottom:35px}
+.section-heading p{font-size:11px;letter-spacing:3px;color:#888}
+.section-heading h2{font-size:32px;letter-spacing:2px}
+.filters{display:flex;justify-content:center;gap:12px;margin-bottom:30px;flex-wrap:wrap}
+.filter{padding:12px 20px;border:1px solid #171717;background:white;cursor:pointer;font-size:11px;letter-spacing:1px}
+.filter.active,.filter:hover{background:#171717;color:white}
+.products{display:grid;grid-template-columns:repeat(4,1fr);gap:25px}
+.product{min-width:0}
+.product img{width:100%;height:290px;object-fit:cover;background:#f3f3f3;cursor:pointer}
+.product h3{font-size:14px;margin:15px 0 7px;cursor:pointer}
+.product .category{font-size:11px;color:#888}
+.product .price{font-size:14px;margin:10px 0}
+.add-button{width:100%;padding:13px;background:#171717;color:white;border:1px solid #171717;cursor:pointer;font-size:11px;letter-spacing:1px}
+.add-button:hover,.shop-button:hover{background:#444}
+.empty-products{text-align:center;grid-column:1/-1;color:#777;padding:45px}
+.about{background:#f5f4f2;text-align:center;padding:75px 15%}
+.about h2{letter-spacing:3px}
+.about p{line-height:1.8;color:#666;max-width:650px;margin:20px auto}
+footer{background:#171717;color:white;text-align:center;padding:35px;font-size:11px;letter-spacing:2px}
+
+/* PRODUCT DETAILS */
+.details-overlay{position:fixed;inset:0;background:#0009;z-index:30;display:none;overflow-y:auto;padding:25px}
+.details-overlay.open{display:flex;align-items:center;justify-content:center}
+.details{background:white;width:min(850px,100%);padding:25px;position:relative;display:grid;grid-template-columns:1fr 1fr;gap:35px;max-height:90vh;overflow-y:auto}
+.details img{width:100%;height:420px;object-fit:cover;background:#eee}
+.details-info{align-self:center}
+.details-info h2{font-size:30px;margin:15px 0}
+.details-info p{color:#777;line-height:1.8;font-size:14px}
+.details-price{font-size:20px;font-weight:bold;margin:20px 0}
+.back-button{border:0;background:white;text-decoration:underline;cursor:pointer;padding:10px 0;font-size:12px}
+.detail-add{width:100%;padding:16px;background:#171717;color:white;border:0;cursor:pointer;letter-spacing:2px;margin-top:15px}
+.detail-close{position:absolute;right:15px;top:10px;border:0;background:white;font-size:27px;cursor:pointer;z-index:2}
+
+/* SHOPPING BAG */
+.cart-overlay{position:fixed;inset:0;background:#0008;z-index:40;display:none}
+.cart-overlay.open{display:block}
+.cart{position:absolute;right:0;top:0;height:100%;width:min(440px,100%);background:white;padding:28px;overflow-y:auto}
+.cart-top{display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid #eee;padding-bottom:15px}
+.cart-top h2{font-size:18px;letter-spacing:2px}
+.close-button{border:0;background:none;font-size:25px;cursor:pointer}
+.cart-item{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:18px 0;border-bottom:1px solid #eee;font-size:13px}
+.cart-product-info{flex:1}
+.cart-product-info strong{font-size:13px}
+.cart-product-info p{margin:8px 0;font-size:13px}
+.quantity-controls{display:flex;align-items:center;gap:12px;margin-top:10px}
+.quantity-controls button{width:28px;height:28px;border:1px solid #ddd;background:white;cursor:pointer;font-size:16px}
+.quantity-controls span{font-size:13px;min-width:15px;text-align:center}
+.remove-button{border:0;background:none;text-decoration:underline;cursor:pointer;color:#777;font-size:11px}
+.cart-total{display:flex;justify-content:space-between;font-weight:bold;padding:22px 0;border-top:1px solid #eee;margin-top:15px}
+.cart-note{font-size:11px;color:#888;line-height:1.6}
+.checkout-button{width:100%;padding:16px;background:#171717;color:white;border:0;letter-spacing:2px;margin-top:15px;cursor:pointer}
+.checkout-button:disabled{opacity:.4;cursor:not-allowed}
+
+/* ORDER CONFIRMATION */
+.confirmation{position:fixed;inset:0;background:rgba(0,0,0,.75);backdrop-filter:blur(5px);z-index:50;display:none;align-items:center;justify-content:center;padding:20px}
+.confirmation.open{display:flex}
+.confirmation-card{background:#fff;width:min(500px,100%);padding:55px 35px;text-align:center;border:1px solid #e8e5df;animation:confirmationIn .45s ease}
+@keyframes confirmationIn{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+.confirmation-card h2{font-size:38px;letter-spacing:5px;margin:22px 0}
+.confirmation-card p{color:#777;line-height:1.8;font-size:13px}
+.confirmation-card .eyebrow{letter-spacing:4px;font-size:10px}
+.order-number{font-size:18px;font-weight:bold;color:#171717;margin:28px 0;padding:18px;background:#f5f4f2;letter-spacing:1px}
+.confirmation-card .detail-add{margin-top:25px;padding:18px;letter-spacing:3px}
+
+@media(max-width:850px){
+.products{grid-template-columns:repeat(2,1fr)}
+.hero-shape{right:-130px;opacity:.5}
+}
+@media(max-width:600px){
+header{padding:0 5%}
+.logo{font-size:21px}
+nav{gap:12px}
+nav a{font-size:10px}
+.hero{padding:60px 7%}
+.hero-shape{display:none}
+.section{padding:55px 5%}
+.product img{height:220px}
+.about{padding:55px 8%}
+.details{grid-template-columns:1fr;gap:15px}
+.details img{height:280px}
+.details-info h2{font-size:24px}
+.details-overlay{padding:12px}
+.confirmation-card{padding:40px 22px}
+.confirmation-card h2{font-size:30px}
+}
+</style>
+</head>
+<body>
+
+<header>
+<div class="logo">VELORA</div>
+<nav>
+<a href="#home">HOME</a>
+<a href="#shop">SHOP</a>
+<a href="#about">ABOUT</a>
+</nav>
+<button class="bag-button" onclick="showCart()">BAG (<span id="bag-count">0</span>)</button>
+</header>
+
+<section class="hero" id="home">
+<div class="hero-content">
+<div class="eyebrow">THE VELORA COLLECTION</div>
+<h1>EVERYDAY,<br>ELEVATED.</h1>
+<p>Discover everyday essentials designed with simplicity, comfort, and confidence in mind.</p>
+<a class="shop-button" href="#shop">EXPLORE COLLECTION</a>
+</div>
+<div class="hero-shape"></div>
+</section>
+
+<section class="section" id="shop">
+<div class="section-heading">
+<p>CURATED FOR YOU</p>
+<h2>THE COLLECTION</h2>
+</div>
+<div class="filters">
+<button class="filter active" onclick="filterProducts('All',this)">ALL PRODUCTS</button>
+<button class="filter" onclick="filterProducts('Clothing',this)">CLOTHING</button>
+<button class="filter" onclick="filterProducts('Lifestyle',this)">LIFESTYLE</button>
+</div>
+<div class="products" id="products"></div>
+</section>
+
+<section class="about" id="about">
+<h2>ABOUT VELORA</h2>
+<p>We believe everyday essentials should feel anything but ordinary. Velora is about timeless style, thoughtful simplicity, and making every day a little more elevated.</p>
+</section>
+
+<footer>VELORA | EVERYDAY, ELEVATED.</footer>
+
+<div class="details-overlay" id="details-overlay" onclick="detailsOverlayClick(event)">
+<div class="details">
+<button class="detail-close" onclick="closeDetails()">×</button>
+<img id="detail-image" src="" alt="Product image">
+<div class="details-info">
+<button class="back-button" onclick="closeDetails()">← BACK TO STORE</button>
+<div class="eyebrow" id="detail-category"></div>
+<h2 id="detail-name"></h2>
+<div class="details-price" id="detail-price"></div>
+<p id="detail-description"></p>
+<button class="detail-add" id="detail-add">ADD TO BAG</button>
+</div>
+</div>
+</div>
+
+<div class="cart-overlay" id="cart-overlay" onclick="overlayClick(event)">
+<div class="cart">
+<div class="cart-top">
+<h2>YOUR BAG</h2>
+<button class="close-button" onclick="closeCart()">×</button>
+</div>
+<div id="cart-items"></div>
+<div class="cart-total">
+<span>SUBTOTAL</span>
+<span id="cart-total">$0.00</span>
+</div>
+<p class="cart-note">Shipping and taxes are not included in this demo.</p>
+<button class="checkout-button" id="checkout-button" onclick="checkout()" disabled>PLACE DEMO ORDER</button>
+<p class="cart-note">No payment details are collected. This is a demonstration checkout.</p>
+</div>
+</div>
+
+<div class="confirmation" id="confirmation">
+<div class="confirmation-card">
+<div class="eyebrow">V E L O R A</div>
+<h2>THANK YOU!</h2>
+<p>Your demo order has been placed successfully.</p>
+<div class="order-number" id="order-number"></div>
+<p id="order-total"></p>
+<p>This is a demonstration only. No real purchase or payment was made.</p>
+<button class="detail-add" onclick="finishOrder()">CONTINUE SHOPPING</button>
+</div>
+</div>
+
+<script>
+const demoItems=[
+{name:"Everyday Hoodie",price:48,category:"Clothing",image:"https://images.unsplash.com/photo-1556821840-3a63f95609a7?w=600",description:"A comfortable everyday hoodie designed for effortless casual style."},
+{name:"Classic T-Shirt",price:28,category:"Clothing",image:"https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=600",description:"A timeless wardrobe essential with a simple, versatile look."},
+{name:"Sunday Candle",price:24,category:"Lifestyle",image:"https://images.unsplash.com/photo-1603006905003-be475563bc59?w=600",description:"A simple home accessory to make your space feel more inviting."},
+{name:"Ceramic Mug",price:18,category:"Lifestyle",image:"https://images.unsplash.com/photo-1514228742587-6b1558fcca3d?w=600",description:"An everyday ceramic mug with a clean and minimal design."},
+{name:"Soft Sweater",price:55,category:"Clothing",image:"https://images.unsplash.com/photo-1576566588028-4147f3842f27?w=600",description:"A versatile sweater for comfortable everyday outfits."},
+{name:"Daily Tote",price:35,category:"Lifestyle",image:"https://images.unsplash.com/photo-1590873281214-7e7f4b8f2c4d?w=600",description:"A practical tote for carrying your everyday essentials."},
+{name:"Relaxed Shirt",price:42,category:"Clothing",image:"https://images.unsplash.com/photo-1598033129183-c4f50c736f10?w=600",description:"A relaxed everyday shirt with an easy, timeless style."},
+{name:"Home Decor",price:32,category:"Lifestyle",image:"https://images.unsplash.com/photo-1490312278390-ab64016e0aa9?w=600",description:"A minimal decor piece to add character to your space."}
+];
+
+function getStoreItems(){
+try{
+const saved=JSON.parse(localStorage.getItem("velora_test_products")||"[]");
+if(Array.isArray(saved)&&saved.length){
+return saved.map(p=>({
+name:p.name,
+price:Number(p.price),
+category:p.category||"Clothing",
+image:p.image||"",
+description:p.description||"Discover this everyday essential from the Velora collection. Simple style, thoughtfully selected."
+})).filter(p=>p.name&&Number.isFinite(p.price));
+}
+}catch(e){console.log("Could not load products",e)}
+return demoItems;
+}
+
+const items=getStoreItems();
+let cart=[];
+let currentFilter="All";
+let selectedProduct=null;
+
+function renderProducts(){
+const container=document.getElementById("products");
+container.innerHTML="";
+const filtered=items.filter(p=>currentFilter==="All"||p.category===currentFilter);
+if(!filtered.length){
+container.innerHTML='<p class="empty-products">No products in this category yet.</p>';
+return;
+}
+filtered.forEach(p=>{
+const index=items.indexOf(p);
+const card=document.createElement("div");
+card.className="product";
+const img=document.createElement("img");
+img.src=p.image||"https://placehold.co/600x400?text=VELORA";
+img.alt=p.name;
+img.onerror=()=>{img.src="https://placehold.co/600x400?text=VELORA"};
+img.onclick=()=>openDetails(index);
+const name=document.createElement("h3");
+name.textContent=p.name;
+name.onclick=()=>openDetails(index);
+const category=document.createElement("div");
+category.className="category";
+category.textContent=p.category;
+const price=document.createElement("div");
+price.className="price";
+price.textContent="$"+p.price.toFixed(2);
+const button=document.createElement("button");
+button.className="add-button";
+button.textContent="ADD TO BAG";
+button.onclick=()=>add(index);
+card.append(img,name,category,price,button);
+container.appendChild(card);
+});
+}
+
+function filterProducts(category,button){
+currentFilter=category;
+document.querySelectorAll(".filter").forEach(b=>b.classList.remove("active"));
+button.classList.add("active");
+renderProducts();
+}
+
+function openDetails(index){
+selectedProduct=index;
+const p=items[index];
+const image=document.getElementById("detail-image");
+image.src=p.image||"https://placehold.co/600x400?text=VELORA";
+image.alt=p.name;
+image.onerror=()=>{image.src="https://placehold.co/600x400?text=VELORA"};
+document.getElementById("detail-name").textContent=p.name;
+document.getElementById("detail-category").textContent=p.category;
+document.getElementById("detail-price").textContent="$"+p.price.toFixed(2);
+document.getElementById("detail-description").textContent=p.description||"Discover this everyday essential from the Velora collection.";
+document.getElementById("detail-add").onclick=()=>{
+add(selectedProduct);
+closeDetails();
+showCart();
+};
+document.getElementById("details-overlay").classList.add("open");
+}
+
+function closeDetails(){
+document.getElementById("details-overlay").classList.remove("open");
+}
+
+function detailsOverlayClick(event){
+if(event.target.id==="details-overlay")closeDetails();
+}
+
+function add(i){
+const product=items[i];
+const existing=cart.find(item=>item.product===product);
+if(existing){
+existing.quantity++;
+}else{
+cart.push({product:product,quantity:1});
+}
+updateBag();
+}
+
+function updateBag(){
+const count=cart.reduce((sum,item)=>sum+item.quantity,0);
+document.getElementById("bag-count").textContent=count;
+const container=document.getElementById("cart-items");
+container.innerHTML="";
+let total=0;
+if(cart.length===0){
+container.innerHTML='<p class="cart-note">Your bag is currently empty.</p>';
+}
+cart.forEach((item,i)=>{
+const p=item.product;
+const subtotal=p.price*item.quantity;
+total+=subtotal;
+const row=document.createElement("div");
+row.className="cart-item";
+const info=document.createElement("div");
+info.className="cart-product-info";
+const name=document.createElement("strong");
+name.textContent=p.name;
+const price=document.createElement("p");
+price.textContent="$"+subtotal.toFixed(2);
+const controls=document.createElement("div");
+controls.className="quantity-controls";
+const minus=document.createElement("button");
+minus.textContent="−";
+minus.setAttribute("aria-label","Decrease quantity");
+minus.onclick=()=>changeQuantity(i,-1);
+const quantity=document.createElement("span");
+quantity.textContent=item.quantity;
+const plus=document.createElement("button");
+plus.textContent="+";
+plus.setAttribute("aria-label","Increase quantity");
+plus.onclick=()=>changeQuantity(i,1);
+const remove=document.createElement("button");
+remove.className="remove-button";
+remove.textContent="REMOVE";
+remove.onclick=()=>removeItem(i);
+controls.append(minus,quantity,plus);
+info.append(name,price,controls);
+row.append(info,remove);
+container.appendChild(row);
+});
+document.getElementById("cart-total").textContent="$"+total.toFixed(2);
+document.getElementById("checkout-button").disabled=cart.length===0;
+}
+
+function changeQuantity(i,amount){
+cart[i].quantity+=amount;
+if(cart[i].quantity<=0)cart.splice(i,1);
+updateBag();
+}
+
+function removeItem(i){
+cart.splice(i,1);
+updateBag();
+}
+
+function showCart(){
+document.getElementById("cart-overlay").classList.add("open");
+}
+
+function closeCart(){
+document.getElementById("cart-overlay").classList.remove("open");
+}
+
+function overlayClick(event){
+if(event.target.id==="cart-overlay")closeCart();
+}
+
+function checkout(){
+if(cart.length===0)return;
+const total=cart.reduce(
+(sum,item)=>sum+item.product.price*item.quantity,0
+);
+const orderNumber="VEL-"+Date.now().toString().slice(-6);
+document.getElementById("order-number").textContent="Order #"+orderNumber;
+document.getElementById("order-total").textContent="Order total: $"+total.toFixed(2);
+closeCart();
+document.getElementById("confirmation").classList.add("open");
+cart=[];
+updateBag();
+}
+
+function finishOrder(){
+document.getElementById("confirmation").classList.remove("open");
+}
+
+renderProducts();
+updateBag();
+</script>
+</body>
+</html>
