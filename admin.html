@@ -1,0 +1,173 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Velora Admin Dashboard</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:#f4f3ee;color:#252a23;font-family:Arial,sans-serif}
+header{background:#263326;color:white;padding:22px 7%;display:flex;justify-content:space-between;align-items:center}
+.logo{font-size:27px;font-weight:bold}
+.logo span{color:#a8bd99}
+header a{color:white;text-decoration:none}
+main{max-width:1000px;margin:40px auto;padding:20px}
+h1{font-size:34px}
+.note{background:#e4eadf;padding:15px;border-radius:10px;line-height:1.5}
+.panel{background:white;padding:25px;border-radius:14px;margin:25px 0}
+input,select{width:100%;padding:13px;margin:8px 0 16px;border:1px solid #ddd;border-radius:8px;font-size:15px}
+label{font-weight:bold;font-size:14px}
+button{border:0;border-radius:8px;padding:12px 17px;cursor:pointer;font-weight:bold}
+.primary{background:#344b35;color:white}
+.edit{background:#e6eadf;color:#283629}
+.delete{background:#f8e4e1;color:#923c32}
+.product{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:15px 0;border-bottom:1px solid #eee}
+.product p{margin:6px 0;color:#777}
+.actions{display:flex;gap:7px}
+@media(max-width:550px){.product{align-items:flex-start;flex-direction:column}.actions{width:100%}}
+</style>
+</head>
+<body>
+
+<header>
+<div class="logo">velora<span>.</span> Admin</div>
+<a href="index.html">View Store ↗</a>
+</header>
+
+<main>
+<h1>Admin Dashboard</h1>
+<p>Manage your Velora test products.</p>
+
+<div class="note">
+<strong>TEST MODE</strong><br>
+Products saved here stay in this browser only. They do not change your public store.
+</div>
+
+<div class="panel">
+<h2 id="formTitle">Add a Product</h2>
+
+<form id="productForm">
+<label>Product Name</label>
+<input id="name" placeholder="Example: Classic Hoodie" required>
+
+<label>Price ($)</label>
+<input id="price" type="number" min="0" step="0.01" placeholder="48" required>
+
+<label>Category</label>
+<select id="category">
+<option>Clothing</option>
+<option>Lifestyle</option>
+</select>
+
+<label>Image URL (optional)</label>
+<input id="image" type="url" placeholder="https://example.com/image.jpg">
+
+<button class="primary" type="submit" id="saveButton">Add Product</button>
+<button type="button" class="edit" onclick="resetForm()">Clear</button>
+</form>
+</div>
+
+<div class="panel">
+<h2>Your Products</h2>
+<p id="count">0 products</p>
+<div id="productList"></div>
+</div>
+</main>
+
+<script>
+const storageKey="velora_test_products";
+
+let products=JSON.parse(localStorage.getItem(storageKey)||"[]");
+let editingIndex=-1;
+
+const form=document.getElementById("productForm");
+
+function save(){
+localStorage.setItem(storageKey,JSON.stringify(products));
+render();
+}
+
+function render(){
+const list=document.getElementById("productList");
+document.getElementById("count").textContent=products.length+" products";
+
+if(products.length===0){
+list.innerHTML="<p>No products yet. Add your first product above!</p>";
+return;
+}
+
+list.innerHTML=products.map((p,i)=>`
+<div class="product">
+<div>
+<strong>${escapeHTML(p.name)}</strong>
+<p>$${Number(p.price).toFixed(2)} · ${escapeHTML(p.category)}</p>
+</div>
+<div class="actions">
+<button class="edit" onclick="editProduct(${i})">Edit</button>
+<button class="delete" onclick="deleteProduct(${i})">Delete</button>
+</div>
+</div>
+`).join("");
+}
+
+function escapeHTML(value){
+return String(value).replace(/[&<>"']/g,c=>({
+"&":"&amp;","<":"&lt;",">":"&gt;",
+'"':"&quot;","'":"&#39;"
+}[c]));
+}
+
+form.addEventListener("submit",function(e){
+e.preventDefault();
+
+const product={
+name:document.getElementById("name").value.trim(),
+price:Number(document.getElementById("price").value),
+category:document.getElementById("category").value,
+image:document.getElementById("image").value.trim()
+};
+
+if(!product.name||!Number.isFinite(product.price)||product.price<0)return;
+
+if(editingIndex===-1){
+products.push(product);
+}else{
+products[editingIndex]=product;
+}
+
+save();
+resetForm();
+});
+
+function editProduct(i){
+const p=products[i];
+document.getElementById("name").value=p.name;
+document.getElementById("price").value=p.price;
+document.getElementById("category").value=p.category;
+document.getElementById("image").value=p.image||"";
+editingIndex=i;
+document.getElementById("formTitle").textContent="Edit Product";
+document.getElementById("saveButton").textContent="Save Changes";
+window.scrollTo({top:0,behavior:"smooth"});
+}
+
+function deleteProduct(i){
+if(!confirm("Delete "+products[i].name+"?"))return;
+products.splice(i,1);
+save();
+resetForm();
+}
+
+function resetForm(){
+form.reset();
+editingIndex=-1;
+document.getElementById("formTitle").textContent="Add a Product";
+document.getElementById("saveButton").textContent="Add Product";
+}
+
+render();
+</script>
+
+</body>
+</html>
