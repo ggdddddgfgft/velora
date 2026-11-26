@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -253,21 +254,7 @@ description:"A practical tote for carrying your everyday essentials."
 ];
 
 function getStoreItems(){
-try{
-const saved=JSON.parse(localStorage.getItem("velora_test_products")||"[]");
-if(Array.isArray(saved)&&saved.length){
-return [...demoItems,...saved.map(p=>({
-name:p.name,
-price:Number(p.price),
-category:p.category||"Clothing",
-image:p.image||"",
-description:p.description||"Discover this item from the Velora collection."
-})).filter(p=>p.name&&Number.isFinite(p.price))];
-}
-}catch(e){
-console.log("Could not load products",e);
-}
-return demoItems;
+    return demoItems;
 }
 
 const items=getStoreItems();
