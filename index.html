@@ -10,40 +10,39 @@
 *{box-sizing:border-box}
 html{scroll-behavior:smooth}
 body{margin:0;background:#fff;color:#171717;font-family:Arial,sans-serif}
-header{height:78px;padding:0 7%;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid #eee;position:sticky;top:0;background:#fff;z-index:10}
-.logo{font-size:27px;font-weight:800;letter-spacing:5px}
-nav{display:flex;gap:25px}
-nav a{color:#171717;text-decoration:none;font-size:11px;letter-spacing:1px}
-.bag-button{border:1px solid #171717;background:#171717;color:white;padding:12px 20px;cursor:pointer;font-size:12px}
-.hero{min-height:500px;background:#f3eaf0;display:flex;align-items:center;padding:70px 10%;position:relative;overflow:hidden}
-.hero-content{max-width:530px;z-index:1}
-.eyebrow{font-size:11px;letter-spacing:3px}
-.hero h1{font-size:clamp(55px,8vw,90px);line-height:.95;margin:22px 0;font-weight:900;letter-spacing:-5px}
-.hero p{color:#666;line-height:1.7;max-width:390px}
-.shop-button{display:inline-block;margin-top:20px;background:#171717;color:white;padding:16px 28px;text-decoration:none;font-size:11px;letter-spacing:2px}
-.hero-shape{position:absolute;right:12%;width:320px;height:370px;background:#e2cbd9;border-radius:170px 170px 10px 10px}
-.hero-shape:after{content:"Y2K";position:absolute;font-size:75px;font-weight:900;color:#c7aabd;top:145px;left:65px;transform:rotate(-12deg)}
-.section{padding:75px 7%}
-.section-heading{text-align:center;margin-bottom:35px}
-.section-heading p{font-size:11px;letter-spacing:3px;color:#888}
-.section-heading h2{font-size:32px;letter-spacing:2px}
-.filters{display:flex;justify-content:center;gap:12px;margin-bottom:30px;flex-wrap:wrap}
-.filter{padding:12px 20px;border:1px solid #171717;background:white;cursor:pointer;font-size:11px;letter-spacing:1px}
-.filter.active,.filter:hover{background:#171717;color:white}
-.products{display:grid;grid-template-columns:repeat(4,1fr);gap:25px}
+header{height:76px;padding:0 6%;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid #e5e5e5;position:sticky;top:0;background:#fff;z-index:10}
+.logo{font-size:27px;font-weight:900;letter-spacing:7px}
+nav{display:flex;gap:28px}
+nav a{color:#171717;text-decoration:none;font-size:11px;letter-spacing:2px}
+.bag-button{border:0;background:#111;color:white;padding:13px 20px;cursor:pointer;font-size:11px;letter-spacing:1px}
+.hero{min-height:420px;background:linear-gradient(110deg,#d8d8d8,#f5f5f5 48%,#aeb0b4);display:flex;align-items:center;padding:65px 8%;position:relative;overflow:hidden}
+.hero-content{max-width:470px;z-index:2}
+.eyebrow{font-size:11px;letter-spacing:4px;font-weight:bold}
+.hero h1{font-size:clamp(58px,8vw,96px);line-height:.86;margin:25px 0;font-weight:900;letter-spacing:-5px}
+.hero p{color:#333;line-height:1.7;max-width:350px}
+.shop-button{display:inline-block;margin-top:18px;background:#111;color:white;padding:16px 28px;text-decoration:none;font-size:11px;letter-spacing:2px}
+.hero-shape{position:absolute;right:8%;width:38%;height:78%;border-radius:48%;background:linear-gradient(135deg,#888,#eee,#777);opacity:.55}
+.hero-shape:after{content:"VELORA ★";position:absolute;top:42%;left:18%;font-size:clamp(22px,4vw,48px);font-weight:900;letter-spacing:5px;transform:rotate(-12deg)}
+.section{padding:65px 6%}
+.section-heading{text-align:center;margin-bottom:30px}
+.section-heading p{font-size:10px;letter-spacing:4px;color:#777}
+.section-heading h2{font-size:32px;letter-spacing:6px;margin:10px 0}
+.filters{display:flex;justify-content:center;gap:12px;margin-bottom:28px;flex-wrap:wrap}
+.filter{padding:11px 20px;border:1px solid #222;background:white;cursor:pointer;font-size:10px;letter-spacing:1px}
+.filter.active,.filter:hover{background:#111;color:white}
+.products{display:grid;grid-template-columns:repeat(4,1fr);gap:22px}
 .product{min-width:0}
-.product img{width:100%;height:290px;object-fit:cover;background:#f3f3f3;cursor:pointer}
-.product h3{font-size:14px;margin:15px 0 7px;cursor:pointer}
-.category{font-size:11px;color:#888}
-.price{font-size:14px;margin:10px 0}
-.add-button{width:100%;padding:13px;background:#171717;color:white;border:1px solid #171717;cursor:pointer;font-size:11px;letter-spacing:1px}
+.product img{width:100%;height:270px;object-fit:cover;background:#eee;filter:saturate(.65);cursor:pointer}
+.product h3{font-size:13px;margin:12px 0 5px;cursor:pointer}
+.category{font-size:10px;color:#777;letter-spacing:1px;text-transform:uppercase}
+.price{font-size:13px;margin:8px 0}
+.add-button{width:100%;padding:12px;background:#111;color:white;border:1px solid #111;cursor:pointer;font-size:10px;letter-spacing:1px}
 .add-button:hover,.shop-button:hover{background:#444}
 .empty-products{text-align:center;grid-column:1/-1;color:#777;padding:45px}
-.about{background:#f5f4f2;text-align:center;padding:75px 15%}
-.about h2{letter-spacing:3px}
-.about p{line-height:1.8;color:#666;max-width:650px;margin:20px auto}
-footer{background:#171717;color:white;text-align:center;padding:35px;font-size:11px;letter-spacing:2px}
-
+.about{background:linear-gradient(110deg,#d2d3d5,#f4f4f4,#c5c7ca);text-align:center;padding:65px 15%}
+.about h2{letter-spacing:5px}
+.about p{line-height:1.8;color:#444;max-width:650px;margin:20px auto}
+footer{background:#111;color:white;text-align:center;padding:28px;font-size:10px;letter-spacing:4px}
 .details-overlay{position:fixed;inset:0;background:#0009;z-index:30;display:none;overflow-y:auto;padding:25px}
 .details-overlay.open{display:flex;align-items:center;justify-content:center}
 .details{background:white;width:min(850px,100%);padding:25px;position:relative;display:grid;grid-template-columns:1fr 1fr;gap:35px;max-height:90vh;overflow-y:auto}
@@ -53,9 +52,8 @@ footer{background:#171717;color:white;text-align:center;padding:35px;font-size:1
 .details-info p{color:#777;line-height:1.8;font-size:14px}
 .details-price{font-size:20px;font-weight:bold;margin:20px 0}
 .back-button{border:0;background:white;text-decoration:underline;cursor:pointer;padding:10px 0;font-size:12px}
-.detail-add{width:100%;padding:16px;background:#171717;color:white;border:0;cursor:pointer;letter-spacing:2px;margin-top:15px}
+.detail-add{width:100%;padding:16px;background:#111;color:white;border:0;cursor:pointer;letter-spacing:2px;margin-top:15px}
 .detail-close{position:absolute;right:15px;top:10px;border:0;background:white;font-size:27px;cursor:pointer;z-index:2}
-
 .cart-overlay{position:fixed;inset:0;background:#0008;z-index:40;display:none}
 .cart-overlay.open{display:block}
 .cart{position:absolute;right:0;top:0;height:100%;width:min(440px,100%);background:white;padding:28px;overflow-y:auto}
@@ -70,37 +68,16 @@ footer{background:#171717;color:white;text-align:center;padding:35px;font-size:1
 .remove-button{border:0;background:none;text-decoration:underline;cursor:pointer;color:#777;font-size:11px}
 .cart-total{display:flex;justify-content:space-between;font-weight:bold;padding:22px 0;border-top:1px solid #eee;margin-top:15px}
 .cart-note{font-size:11px;color:#888;line-height:1.6}
-.checkout-button{width:100%;padding:16px;background:#171717;color:white;border:0;letter-spacing:2px;margin-top:15px;cursor:pointer}
+.checkout-button{width:100%;padding:16px;background:#111;color:white;border:0;letter-spacing:2px;margin-top:15px;cursor:pointer}
 .checkout-button:disabled{opacity:.4;cursor:not-allowed}
-
 .confirmation{position:fixed;inset:0;background:rgba(0,0,0,.75);z-index:50;display:none;align-items:center;justify-content:center;padding:20px}
 .confirmation.open{display:flex}
 .confirmation-card{background:#fff;width:min(500px,100%);padding:55px 35px;text-align:center}
 .confirmation-card h2{font-size:38px;letter-spacing:5px;margin:22px 0}
 .confirmation-card p{color:#777;line-height:1.8;font-size:13px}
-.order-number{font-size:18px;font-weight:bold;color:#171717;margin:28px 0;padding:18px;background:#f5f4f2;letter-spacing:1px}
-
-@media(max-width:850px){
-.products{grid-template-columns:repeat(2,1fr)}
-.hero-shape{right:-130px;opacity:.5}
-}
-@media(max-width:600px){
-header{padding:0 5%}
-.logo{font-size:21px}
-nav{gap:10px}
-nav a{font-size:9px}
-.hero{padding:60px 7%}
-.hero-shape{display:none}
-.section{padding:55px 5%}
-.product img{height:220px}
-.about{padding:55px 8%}
-.details{grid-template-columns:1fr;gap:15px}
-.details img{height:280px}
-.details-info h2{font-size:24px}
-.details-overlay{padding:12px}
-.confirmation-card{padding:40px 22px}
-.confirmation-card h2{font-size:30px}
-}
+.order-number{font-size:18px;font-weight:bold;color:#171717;margin:28px 0;padding:18px;background:#f5f5f5;letter-spacing:1px}
+@media(max-width:850px){.products{grid-template-columns:repeat(2,1fr)}.hero-shape{right:-8%;opacity:.35}}
+@media(max-width:600px){header{padding:0 5%}.logo{font-size:20px;letter-spacing:4px}nav{gap:10px}nav a{font-size:9px}.hero{padding:55px 7%;min-height:380px}.hero-shape{right:-25%;width:70%;opacity:.2}.section{padding:50px 5%}.product img{height:210px}.about{padding:50px 8%}.details{grid-template-columns:1fr;gap:15px}.details img{height:280px}.details-info h2{font-size:24px}.details-overlay{padding:12px}.confirmation-card{padding:40px 22px}.confirmation-card h2{font-size:30px}}
 </style>
 </head>
 
@@ -120,7 +97,7 @@ nav a{font-size:9px}
 <div class="hero-content">
 <div class="eyebrow">THE NEW VELORA COLLECTION</div>
 <h1>Y2K<br>RELOADED.</h1>
-<p>Baby tees, baggy fits, cute accessories, and all the throwback looks you love.</p>
+<p>Timeless style. Modern attitude. Shop the latest Y2K looks for everyone.</p>
 <a class="shop-button" href="#shop">SHOP THE COLLECTION</a>
 </div>
 <div class="hero-shape"></div>
@@ -144,7 +121,7 @@ nav a{font-size:9px}
 
 <section class="about" id="about">
 <h2>ABOUT VELORA</h2>
-<p>Velora is your destination for fun, affordable fashion inspired by the Y2K era. Discover outfits and accessories that let you express your own style.</p>
+<p>Velora brings together Y2K fashion for everyone. From oversized fits and throwback tops to statement accessories, discover your next look and make it your own.</p>
 </section>
 
 <footer>VELORA | YOUR STYLE. YOUR ERA.</footer>
@@ -195,69 +172,17 @@ nav a{font-size:9px}
 
 <script>
 const demoItems=[
-{
-name:"Pink Baby Tee",
-price:22,
-category:"Clothing",
-image:"https://images.unsplash.com/photo-1503342217505-b0a15ec3261c?w=600",
-description:"A cute fitted tee for an easy Y2K-inspired outfit."
-},
-{
-name:"Graphic Star Top",
-price:26,
-category:"Clothing",
-image:"https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=600",
-description:"A graphic-inspired everyday top with a throwback feel."
-},
-{
-name:"Baggy Cargo Pants",
-price:42,
-category:"Clothing",
-image:"https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=600",
-description:"Relaxed cargo-inspired style for everyday outfits."
-},
-{
-name:"Oversized Graphic Tee",
-price:28,
-category:"Clothing",
-image:"https://images.unsplash.com/photo-1503341504253-dff4815485f1?w=600",
-description:"An oversized tee for a casual throwback look."
-},
-{
-name:"Mini Shoulder Bag",
-price:24,
-category:"Accessories",
-image:"https://images.unsplash.com/photo-1584917865442-de89df76afd3?w=600",
-description:"A small everyday bag to complete your outfit."
-},
-{
-name:"Silver Star Necklace",
-price:16,
-category:"Accessories",
-image:"https://images.unsplash.com/photo-1611591437281-460bfbe1220a?w=600",
-description:"A simple star-inspired accessory for your collection."
-},
-{
-name:"Retro Sunglasses",
-price:18,
-category:"Accessories",
-image:"https://images.unsplash.com/photo-1511499767150-a48a237f0083?w=600",
-description:"A fun finishing touch for a Y2K-inspired look."
-},
-{
-name:"Cute Everyday Tote",
-price:20,
-category:"Lifestyle",
-image:"https://images.unsplash.com/photo-1590873281214-7e7f4b8f2c4d?w=600",
-description:"A practical tote for carrying your everyday essentials."
-}
+{name:"Y2K Star Tee",price:28,category:"Clothing",image:"https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=700",description:"An oversized graphic tee with a throwback star-inspired look."},
+{name:"Butterfly Baby Tee",price:24,category:"Clothing",image:"https://images.unsplash.com/photo-1503342217505-b0a15ec3261c?w=700",description:"A fitted baby tee for a classic Y2K-inspired outfit."},
+{name:"Baggy Cargo Jeans",price:48,category:"Clothing",image:"https://images.unsplash.com/photo-1542272604-787c3835535d?w=700",description:"Relaxed baggy denim with an easy everyday fit."},
+{name:"Velora Zip Hoodie",price:52,category:"Clothing",image:"https://images.unsplash.com/photo-1556821840-3a63f95609a7?w=700",description:"A cozy zip hoodie with a clean streetwear look."},
+{name:"Star Pendant Necklace",price:18,category:"Accessories",image:"https://images.unsplash.com/photo-1611591437281-460bfbe1220a?w=700",description:"A silver-tone star pendant to finish your look."},
+{name:"Retro Sunglasses",price:20,category:"Accessories",image:"https://images.unsplash.com/photo-1511499767150-a48a237f0083?w=700",description:"Slim retro sunglasses with a 2000s-inspired feel."},
+{name:"Y2K Shoulder Bag",price:26,category:"Accessories",image:"https://images.unsplash.com/photo-1584917865442-de89df76afd3?w=700",description:"A compact shoulder bag for everyday essentials."},
+{name:"Retro Sneakers",price:70,category:"Lifestyle",image:"https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=700",description:"A retro-inspired sneaker to complete your outfit."}
 ];
 
-function getStoreItems(){
-    return demoItems;
-}
-
-const items=getStoreItems();
+const items=demoItems;
 let cart=[];
 let currentFilter="All";
 let selectedProduct=null;
