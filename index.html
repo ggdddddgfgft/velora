@@ -1,57 +1,170 @@
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>VELORA | Y2K Fashion</title>
+<style>
 *{box-sizing:border-box}
 html{scroll-behavior:smooth}
-body{margin:0;background:#F8F5EF;color:#756457;font-family:Arial,Helvetica,sans-serif}
-button{font:inherit;cursor:pointer}
-header{height:76px;padding:0 6%;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid #E8DED2;position:sticky;top:0;background:#F8F5EF;z-index:10}
-.logo{font-size:25px;font-weight:900;letter-spacing:7px;color:#927B68}
-nav{display:flex;gap:28px}
-nav a{color:#8A7767;text-decoration:none;font-size:11px;letter-spacing:2px}
-.bag-button{border:0;background:#B6A18D;color:white;padding:12px 18px;font-size:11px;letter-spacing:1px}
-.hero{min-height:540px;background:#EDE4D9;display:grid;grid-template-columns:1fr 1fr;align-items:center;padding:55px 8%;gap:35px}
-.hero h1{font-size:clamp(48px,7vw,92px);line-height:.9;letter-spacing:-5px;margin:15px 0;color:#927B68}
-.eyebrow{font-size:11px;letter-spacing:4px;color:#A38D79}
-.hero p{font-size:14px;line-height:1.8;color:#89796B;max-width:390px}
-.shop-button{display:inline-block;margin-top:18px;background:#B6A18D;color:#fff;padding:16px 25px;text-decoration:none;font-size:11px;letter-spacing:2px}
-.hero img{width:100%;height:420px;object-fit:cover;filter:sepia(.12) saturate(.75)}
+body{margin:0;background:#F8F3EB;color:#806D5D;font-family:Arial,sans-serif}
+header{background:#EFE4D6;padding:22px 6%;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid #D8C7B4;position:sticky;top:0;z-index:5}
+.logo{font-size:27px;font-weight:900;letter-spacing:7px;color:#92765D}
+nav{display:flex;gap:24px}
+nav a{font-size:11px;letter-spacing:2px;text-decoration:none;color:#806D5D}
+button{cursor:pointer;font-family:inherit}
+.bag-button,.shop-button,.checkout{background:#A88E75;color:white;border:0;padding:14px 22px;letter-spacing:2px;font-size:11px}
+.hero{background:linear-gradient(120deg,#E8D8C7,#F6EDE2);padding:65px 8%;display:grid;grid-template-columns:1fr 1fr;gap:35px;align-items:center}
+.hero h1{font-size:clamp(55px,8vw,95px);line-height:.9;letter-spacing:-5px;color:#92765D;margin:20px 0}
+.hero p{line-height:1.9;color:#806D5D;max-width:400px;font-size:14px}
+.hero img{width:100%;height:400px;object-fit:cover;filter:sepia(.15)}
+.eyebrow{letter-spacing:4px;font-size:11px;color:#A88E75}
 .section{padding:75px 6%}
-.section-heading{display:flex;justify-content:space-between;align-items:end;margin-bottom:30px}
-.section-heading h2{font-size:32px;letter-spacing:2px;margin:0;color:#927B68}
-.section-heading p{font-size:11px;letter-spacing:2px;color:#A89583}
-.filters{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:28px}
-.filters button{background:#F8F5EF;border:1px solid #DCCFC1;color:#927B68;padding:10px 17px;font-size:10px;letter-spacing:1px}
-.filters button.active,.filters button:hover{background:#B6A18D;color:white;border-color:#B6A18D}
-.products{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:28px 16px}
+.heading{display:flex;justify-content:space-between;align-items:end;margin-bottom:30px}
+.heading h2{font-size:32px;letter-spacing:3px;color:#92765D}
+.heading p{font-size:11px;letter-spacing:2px}
+.filters{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:30px}
+.filters button{background:#EFE4D6;color:#806D5D;border:1px solid #D8C7B4;padding:12px 18px;font-size:10px;letter-spacing:1px}
+.filters button.active,.filters button:hover{background:#A88E75;color:white}
+.products{display:grid;grid-template-columns:repeat(4,1fr);gap:30px 17px}
 .product{cursor:pointer}
-.product img{width:100%;height:310px;object-fit:cover;background:#EDE4D9;filter:sepia(.10) saturate(.8);transition:.3s}
-.product:hover img{filter:sepia(0) saturate(1)}
-.product h3{font-size:12px;letter-spacing:1px;margin:13px 0 7px;color:#806D5D}
-.product p{font-size:12px;color:#A89583;margin:0}
-.about{background:#E8DED2;color:#806D5D;padding:75px 8%;text-align:center}
-.about h2{font-size:34px;letter-spacing:5px;color:#927B68}
-.about p{max-width:550px;margin:15px auto;color:#89796B;line-height:1.8;font-size:13px}
-footer{padding:28px 6%;display:flex;justify-content:space-between;font-size:10px;letter-spacing:2px;color:#A18E7D;background:#F8F5EF}
-.overlay{display:none;position:fixed;inset:0;background:#75645766;z-index:20;justify-content:flex-end}
+.product img{width:100%;height:300px;object-fit:cover;background:#E8D8C7;filter:sepia(.12);transition:.3s}
+.product:hover img{filter:none}
+.product h3{font-size:12px;letter-spacing:1px;margin:14px 0 7px;color:#806D5D}
+.product p{font-size:13px;color:#A88E75}
+.about{background:#E6D7C7;text-align:center;padding:75px 8%;color:#806D5D}
+.about h2{font-size:36px;letter-spacing:5px;color:#92765D}
+.about p{max-width:550px;margin:auto;line-height:1.9;font-size:13px}
+footer{background:#EFE4D6;padding:30px 6%;display:flex;justify-content:space-between;color:#92765D;font-size:10px;letter-spacing:2px}
+.overlay{display:none;position:fixed;inset:0;background:#66534488;z-index:20;justify-content:flex-end}
 .overlay.show{display:flex}
-.panel{background:#F8F5EF;width:min(440px,100%);height:100%;padding:28px;overflow:auto}
-.panel-top{display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid #E8DED2;padding-bottom:18px}
-.panel-top h2{font-size:17px;letter-spacing:3px;color:#927B68}
-.close{border:0;background:none;color:#927B68;font-size:26px}
-.cart-line{display:grid;grid-template-columns:75px 1fr auto;gap:13px;padding:18px 0;border-bottom:1px solid #E8DED2}
+.panel{background:#F8F3EB;width:min(440px,100%);height:100%;padding:25px;overflow:auto}
+.panel-top{display:flex;justify-content:space-between;border-bottom:1px solid #D8C7B4;align-items:center}
+.panel-top h2{font-size:17px;letter-spacing:3px}
+.close{border:0;background:none;font-size:26px;color:#92765D}
+.cart-line{display:grid;grid-template-columns:75px 1fr auto;gap:12px;padding:18px 0;border-bottom:1px solid #D8C7B4}
 .cart-line img{width:75px;height:85px;object-fit:cover}
-.cart-line h4{font-size:11px;margin:5px 0;color:#806D5D}
-.cart-line p{font-size:12px;color:#A18E7D}
-.quantity{display:flex;align-items:center;gap:12px;margin-top:10px}
-.quantity button{border:1px solid #DCCFC1;background:#F8F5EF;color:#806D5D;padding:4px 9px}
-.remove{border:0;background:none;color:#A18E7D;font-size:11px}
-.total{display:flex;justify-content:space-between;margin:25px 0;font-weight:bold;color:#806D5D}
-.checkout{width:100%;padding:17px;background:#B6A18D;color:white;border:0;letter-spacing:2px;font-size:11px}
-.note{font-size:11px;line-height:1.6;color:#A18E7D;text-align:center}
+.cart-line h4{font-size:12px}
+.cart-line p{font-size:12px}
+.quantity{display:flex;gap:12px;align-items:center}
+.quantity button{background:#EFE4D6;border:1px solid #D8C7B4;padding:5px 10px;color:#806D5D}
+.remove{background:none;border:0;color:#92765D;font-size:10px}
+.total{display:flex;justify-content:space-between;margin:25px 0}
+.checkout{width:100%}
+.note{text-align:center;font-size:11px;line-height:1.7;color:#92765D}
 .detail-image{width:100%;height:300px;object-fit:cover;margin-top:20px}
-.detail-title{font-size:20px;letter-spacing:2px;color:#806D5D}
-.detail-price{color:#A18E7D}
-.detail-description{font-size:13px;line-height:1.7;color:#89796B}
-.confirmation{text-align:center;padding:75px 15px;color:#806D5D}
-.confirmation h2{font-size:30px;letter-spacing:4px;color:#927B68}
-@media(max-width:850px){.products{grid-template-columns:repeat(2,minmax(0,1fr))}.hero{grid-template-columns:1fr}.hero img{height:300px}}
-@media(max-width:500px){header{padding:0 4%;height:65px}.logo{font-size:19px;letter-spacing:4px}nav{gap:12px}nav a{font-size:9px}.bag-button{padding:10px;font-size:9px}.section{padding:50px 4%}.product img{height:220px}.section-heading h2{font-size:24px}footer{gap:15px;flex-wrap:wrap}}
+.detail-title{font-size:22px;color:#806D5D}
+.detail-price{color:#A88E75}
+.detail-description{line-height:1.8;font-size:13px}
+.confirmation{text-align:center;padding:65px 10px}
+.confirmation h2{font-size:32px;letter-spacing:4px;color:#92765D}
+@media(max-width:800px){.hero{grid-template-columns:1fr}.products{grid-template-columns:repeat(2,1fr)}.hero img{height:300px}}
+@media(max-width:500px){header{padding:16px 4%}.logo{font-size:19px;letter-spacing:4px}nav{gap:10px}nav a{font-size:9px}.bag-button{padding:10px;font-size:9px}.products{gap:22px 12px}.product img{height:220px}.section{padding:45px 4%}footer{gap:12px;flex-wrap:wrap}}
+</style>
+</head>
+<body>
+<header>
+<div class="logo">VELORA</div>
+<nav><a href="#">HOME</a><a href="#shop">SHOP</a><a href="#about">ABOUT</a></nav>
+<button class="bag-button" onclick="showCart()">BAG (<span id="bagCount">0</span>)</button>
+</header>
+
+<section class="hero">
+<div>
+<div class="eyebrow">THE NEW GENERATION</div>
+<h1>Y2K<br>RELOADED.</h1>
+<p>Old-school energy. New-school style. Discover the VELORA collection, made for everyone.</p>
+<a href="#shop" class="shop-button" style="display:inline-block;text-decoration:none">SHOP THE COLLECTION</a>
+</div>
+<img src="https://images.unsplash.com/photo-1523398002811-999ca8dec234?auto=format&fit=crop&w=1000&q=85" alt="Streetwear fashion">
+</section>
+
+<section class="section" id="shop">
+<div class="heading"><div><p>FRESH FINDS / NEW ERA</p><h2>THE COLLECTION</h2></div><p>STYLE WITHOUT RULES.</p></div>
+<div class="filters">
+<button class="active" onclick="filterProducts('All',this)">ALL ITEMS</button>
+<button onclick="filterProducts('Clothing',this)">CLOTHING</button>
+<button onclick="filterProducts('Accessories',this)">ACCESSORIES</button>
+<button onclick="filterProducts('Lifestyle',this)">LIFESTYLE</button>
+</div>
+<div class="products" id="products"></div>
+</section>
+
+<section class="about" id="about">
+<div class="eyebrow">WELCOME TO THE NEW ERA</div>
+<h2>THIS IS VELORA.</h2>
+<p>A style destination inspired by Y2K fashion, vintage energy and everyday streetwear. Find your look. Make it yours.</p>
+</section>
+<footer><span>© 2026 VELORA</span><span>Y2K RELOADED</span><span>MADE FOR EVERYONE.</span></footer>
+
+<div class="overlay" id="cartOverlay" onclick="if(event.target===this)closeCart()">
+<div class="panel">
+<div class="panel-top"><h2>YOUR BAG</h2><button class="close" onclick="closeCart()">×</button></div>
+<div id="cartItems"></div>
+<div class="total"><b>SUBTOTAL</b><b id="subtotal">$0.00</b></div>
+<button class="checkout" onclick="checkout()">PLACE DEMO ORDER</button>
+<p class="note">Demonstration checkout only. No payment details are collected and no real purchase is made.</p>
+</div>
+</div>
+
+<div class="overlay" id="detailOverlay" onclick="if(event.target===this)closeDetails()">
+<div class="panel">
+<div class="panel-top"><h2>PRODUCT DETAILS</h2><button class="close" onclick="closeDetails()">×</button></div>
+<div id="detailContent"></div>
+</div>
+</div>
+
+<div class="overlay" id="successOverlay">
+<div class="panel">
+<div class="panel-top"><h2>VELORA</h2><button class="close" onclick="closeSuccess()">×</button></div>
+<div class="confirmation"><div class="eyebrow">VELORA ORDER CONFIRMATION</div><h2>THANK YOU!</h2><p>Your demo order has been placed successfully.</p><p id="orderNumber"></p><p id="orderTotal"></p><p class="note">This is a demonstration only. No real purchase or payment was made.</p><button class="checkout" onclick="closeSuccess()">CONTINUE SHOPPING</button></div>
+</div>
+</div>
+
+<script>
+const demoItems=[
+{id:1,name:"Y2K Star Tee",price:28,category:"Clothing",image:"https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?auto=format&fit=crop&w=700&q=85",description:"A classic graphic tee with a throwback Y2K feel."},
+{id:2,name:"Butterfly Baby Tee",price:24,category:"Clothing",image:"https://images.unsplash.com/photo-1503342217505-b0a15ec3261c?auto=format&fit=crop&w=700&q=85",description:"A fitted everyday tee inspired by early-2000s style."},
+{id:3,name:"Baggy Cargo Jeans",price:48,category:"Clothing",image:"https://images.unsplash.com/photo-1542272604-787c3835535d?auto=format&fit=crop&w=700&q=85",description:"Relaxed denim with a laid-back streetwear look."},
+{id:4,name:"Velora Zip Hoodie",price:52,category:"Clothing",image:"https://images.unsplash.com/photo-1556821840-3a63f95609a7?auto=format&fit=crop&w=700&q=85",description:"A comfortable zip hoodie for everyday outfits."},
+{id:5,name:"Star Pendant Necklace",price:18,category:"Accessories",image:"https://images.unsplash.com/photo-1611591437281-460bfbe1220a?auto=format&fit=crop&w=700&q=85",description:"A simple statement accessory with a retro-inspired look."},
+{id:6,name:"Retro Sunglasses",price:20,category:"Accessories",image:"https://images.unsplash.com/photo-1511499767150-a48a237f0083?auto=format&fit=crop&w=700&q=85",description:"A bold finishing touch for a Y2K-inspired outfit."},
+{id:7,name:"Y2K Shoulder Bag",price:26,category:"Lifestyle",image:"https://images.unsplash.com/photo-1584917865442-de89df76afd3?auto=format&fit=crop&w=700&q=85",description:"A compact everyday bag with a vintage-inspired feel."},
+{id:8,name:"Retro Sneakers",price:70,category:"Lifestyle",image:"https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&w=700&q=85",description:"Sporty retro-inspired sneakers for casual looks."}
+];
+let cart=[],currentFilter="All";
+function renderProducts(){
+const list=document.getElementById("products");
+list.innerHTML=demoItems.filter(x=>currentFilter==="All"||x.category===currentFilter).map(x=>`<article class="product" onclick="openDetails(${x.id})"><img src="${x.image}" alt="${x.name}"><h3>${x.name.toUpperCase()}</h3><p>$${x.price.toFixed(2)}</p></article>`).join("");
+}
+function filterProducts(c,b){currentFilter=c;document.querySelectorAll(".filters button").forEach(x=>x.classList.remove("active"));b.classList.add("active");renderProducts()}
+function openDetails(id){
+const x=demoItems.find(p=>p.id===id);
+document.getElementById("detailContent").innerHTML=`<img class="detail-image" src="${x.image}" alt="${x.name}"><h2 class="detail-title">${x.name}</h2><p class="detail-price">$${x.price.toFixed(2)}</p><p class="detail-description">${x.description}</p><button class="checkout" onclick="addToBag(${x.id});closeDetails()">ADD TO BAG</button>`;
+document.getElementById("detailOverlay").classList.add("show");
+}
+function closeDetails(){document.getElementById("detailOverlay").classList.remove("show")}
+function addToBag(id){let x=cart.find(p=>p.id===id);if(x)x.quantity++;else cart.push({id,quantity:1});updateBag()}
+function updateBag(){
+document.getElementById("bagCount").textContent=cart.reduce((s,x)=>s+x.quantity,0);
+document.getElementById("cartItems").innerHTML=cart.length?cart.map(line=>{let x=demoItems.find(p=>p.id===line.id);return `<div class="cart-line"><img src="${x.image}" alt="${x.name}"><div><h4>${x.name}</h4><p>$${x.price.toFixed(2)}</p><div class="quantity"><button onclick="changeQuantity(${x.id},-1)">−</button>${line.quantity}<button onclick="changeQuantity(${x.id},1)">+</button></div></div><button class="remove" onclick="removeItem(${x.id})">REMOVE</button></div>`}).join(""):'<p class="note">YOUR BAG IS EMPTY.</p>';
+let total=cart.reduce((s,line)=>s+demoItems.find(x=>x.id===line.id).price*line.quantity,0);
+document.getElementById("subtotal").textContent="$"+total.toFixed(2);
+}
+function changeQuantity(id,n){let x=cart.find(p=>p.id===id);if(!x)return;x.quantity+=n;if(x.quantity<=0)removeItem(id);else updateBag()}
+function removeItem(id){cart=cart.filter(x=>x.id!==id);updateBag()}
+function showCart(){updateBag();document.getElementById("cartOverlay").classList.add("show")}
+function closeCart(){document.getElementById("cartOverlay").classList.remove("show")}
+function checkout(){
+if(!cart.length){alert("Your bag is empty.");return}
+let total=cart.reduce((s,line)=>s+demoItems.find(x=>x.id===line.id).price*line.quantity,0);
+document.getElementById("orderNumber").textContent="Order #VEL-"+Math.floor(100000+Math.random()*900000);
+document.getElementById("orderTotal").textContent="Order total: $"+total.toFixed(2);
+cart=[];updateBag();closeCart();document.getElementById("successOverlay").classList.add("show");
+}
+function closeSuccess(){document.getElementById("successOverlay").classList.remove("show")}
+renderProducts();updateBag();
+</script>
+</body>
+</html>
