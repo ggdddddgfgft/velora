@@ -3,71 +3,46 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>VELORA — Y2K RELOADED</title>
-
 <style>
 *{box-sizing:border-box}
-body{margin:0;font-family:Arial,sans-serif;color:#111;background:white}
+body{margin:0;font-family:Arial,sans-serif;color:#111;background:#fff}
 button{cursor:pointer;font-family:Arial,sans-serif}
-
-header{
-height:55px;background:#f5f5f5;
-display:flex;align-items:center;justify-content:space-between;
-padding:0 4%;position:sticky;top:0;z-index:5
-}
+header{height:55px;background:#f5f5f5;display:flex;align-items:center;justify-content:space-between;padding:0 4%;position:sticky;top:0;z-index:5}
 .logo{font-size:24px;font-weight:900;letter-spacing:8px}
 nav{display:flex;gap:35px}
 nav a{color:#111;text-decoration:none;font-size:11px;font-weight:bold}
-.bag,.add,.checkout,.continue{
-background:#050505;color:white;border:0;font-weight:bold
-}
+.bag,.add,.checkout,.continue{background:#050505;color:white;border:0;font-weight:bold}
 .bag{padding:10px 17px;font-size:10px}
 
-/* BANNER: uses the uploaded reference picture */
+/* BANNER: no extra text over the picture */
 .hero{
 height:16.6vw;
 min-height:170px;
-position:relative;
 background-image:url('49aa2c62-6c88-4ad7-a07c-ccce2c8daf7d.png');
 background-size:100vw auto;
 background-position:0 -2.39vw;
 background-repeat:no-repeat;
 }
-.hero-content{display:none!important}
+.hero h1,.hero p,.hero .eyebrow,.hero .black,.hero-content{
+display:none!important;
+}
 
-/* SHOP */
 .shop-title{text-align:center;padding:18px 10px}
 .eyebrow-small{font-size:9px;letter-spacing:4px;font-weight:bold}
 .shop-title h2{font-size:25px;letter-spacing:3px;margin:5px 0 12px}
+.filters{display:flex;justify-content:center;gap:10px;flex-wrap:wrap}
+.filters button{background:white;border:1px solid black;padding:8px 16px;font-size:10px;font-weight:bold}
+.filters button.active,.filters button:hover{background:black;color:white}
 
-.filters{
-display:flex;justify-content:center;gap:10px;flex-wrap:wrap
-}
-.filters button{
-background:white;border:1px solid black;
-padding:8px 16px;font-size:10px;font-weight:bold
-}
-.filters button.active,.filters button:hover{
-background:black;color:white
-}
-
-.products{
-display:grid;
-grid-template-columns:repeat(4,minmax(0,1fr));
-gap:20px 12px;
-padding:10px 3% 30px
-}
+.products{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:20px 12px;padding:10px 3% 30px}
 .product{min-width:0}
 .photo{
-height:8vw;
-min-height:90px;
+height:8vw;min-height:90px;
 background-image:url('49aa2c62-6c88-4ad7-a07c-ccce2c8daf7d.png');
-background-size:100vw auto;
-background-repeat:no-repeat
+background-size:100vw auto;background-repeat:no-repeat
 }
-
-/* PRODUCT PICTURE POSITIONS */
 .p1{background-position:-2.15vw -23.92vw}
 .p2{background-position:-26.02vw -23.92vw}
 .p3{background-position:-49.64vw -23.92vw}
@@ -77,16 +52,12 @@ background-repeat:no-repeat
 .p7{background-position:-49.64vw -35.05vw}
 .p8{background-position:-73.27vw -35.05vw}
 
-.details{
-display:flex;justify-content:space-between;
-align-items:center;gap:5px;padding-top:8px
-}
+.details{display:flex;justify-content:space-between;align-items:center;gap:5px;padding-top:8px}
 .name{font-size:11px;font-weight:bold}
 .category,.price{font-size:10px;margin-top:3px}
 .add{padding:8px 12px;font-size:9px}
-.add:hover,.bag:hover,.checkout:hover,.continue:hover{background:#555}
+.add:hover,.bag:hover{background:#555}
 
-/* ABOUT BANNER */
 .about{
 height:8vw;min-height:100px;
 background-image:url('49aa2c62-6c88-4ad7-a07c-ccce2c8daf7d.png');
@@ -94,97 +65,40 @@ background-size:100vw auto;
 background-position:0 -45.16vw;
 background-repeat:no-repeat
 }
+footer{background:#050505;color:white;text-align:center;padding:20px;font-size:10px;letter-spacing:4px}
 
-footer{
-background:black;color:white;text-align:center;
-padding:20px;font-size:10px;letter-spacing:4px
-}
-
-/* SHOPPING BAG */
-.overlay{
-display:none;position:fixed;inset:0;
-background:rgba(0,0,0,.55);
-z-index:10;justify-content:flex-end
-}
+/* BAG */
+.overlay{display:none;position:fixed;inset:0;background:#0009;z-index:10;justify-content:flex-end}
 .overlay.open{display:flex}
-.cart{
-background:white;width:min(400px,100%);
-height:100%;padding:23px;overflow:auto
-}
-.carttop{
-display:flex;justify-content:space-between;align-items:center
-}
+.cart{background:white;width:min(400px,100%);height:100%;padding:23px;overflow:auto}
+.carttop{display:flex;justify-content:space-between;align-items:center}
 .carttop h2{font-size:21px;letter-spacing:3px}
-.carttop button{
-border:0;background:none;font-size:28px
-}
-.cartitem{
-padding:14px 0;border-bottom:1px solid #ddd;
-display:flex;justify-content:space-between;
-align-items:center;font-size:13px
-}
-.qty button{
-border:1px solid #ddd;background:white;padding:6px 10px
-}
+.carttop button{border:0;background:none;font-size:28px}
+.cartitem{padding:14px 0;border-bottom:1px solid #ddd;display:flex;justify-content:space-between;align-items:center;font-size:13px}
+.qty button{border:1px solid #ddd;background:white;padding:6px 10px}
 .total{margin:22px 0;font-weight:bold;font-size:15px}
-.checkout{
-width:100%;padding:15px;font-size:11px;letter-spacing:2px
-}
+.checkout{width:100%;padding:15px;font-size:11px;letter-spacing:2px}
 .note{font-size:10px;color:#777;line-height:1.6}
 
 /* ORDER CONFIRMATION */
-.order-overlay{
-display:none;position:fixed;inset:0;
-background:rgba(0,0,0,.60);
-z-index:30;align-items:center;
-justify-content:center;padding:20px
-}
+.order-overlay{display:none;position:fixed;inset:0;background:#0009;z-index:30;align-items:center;justify-content:center;padding:20px}
 .order-overlay.show{display:flex}
-.order-box{
-background:white;width:100%;max-width:550px;
-padding:40px 28px;text-align:center
-}
-.order-label{
-font-size:10px;letter-spacing:4px;margin-bottom:22px
-}
-.order-box h2{
-font-size:28px;letter-spacing:3px;margin:0 0 22px
-}
-.order-box p{
-color:#777;font-size:14px;line-height:1.7
-}
-.order-number{
-font-size:16px;font-weight:bold;margin:24px 0;color:#222
-}
-.continue{
-width:100%;padding:16px;letter-spacing:2px;
-font-size:11px;margin-top:15px
-}
+.order-box{background:white;width:100%;max-width:550px;padding:40px 28px;text-align:center}
+.order-label{font-size:10px;letter-spacing:4px;margin-bottom:22px}
+.order-box h2{font-size:28px;letter-spacing:3px;margin:0 0 22px}
+.order-box p{color:#777;font-size:14px;line-height:1.7}
+.order-number{font-size:16px;font-weight:bold;margin:24px 0;color:#222}
+.continue{width:100%;padding:16px;letter-spacing:2px;font-size:11px;margin-top:15px}
 
-/* MOBILE */
 @media(max-width:700px){
 header{height:55px;padding:0 10px}
 .logo{font-size:17px;letter-spacing:4px}
 nav{gap:12px}
 nav a{font-size:9px}
 .bag{padding:8px;font-size:9px}
-
-.hero{
-height:42vw;
-min-height:150px;
-background-size:200vw auto;
-background-position:0 -4.78vw
-}
-
-.products{
-grid-template-columns:repeat(2,minmax(0,1fr));
-padding:10px;gap:20px 10px
-}
-.photo{
-height:30vw;
-min-height:85px;
-background-size:200vw auto
-}
+.hero{height:42vw;min-height:150px;background-size:200vw auto;background-position:0 -4.78vw}
+.products{grid-template-columns:repeat(2,minmax(0,1fr));padding:10px;gap:20px 10px}
+.photo{height:30vw;min-height:85px;background-size:200vw auto}
 .p1{background-position:-4.31vw -47.85vw}
 .p2{background-position:-52.03vw -47.85vw}
 .p3{background-position:-99.28vw -47.85vw}
@@ -193,20 +107,14 @@ background-size:200vw auto
 .p6{background-position:-52.03vw -70.10vw}
 .p7{background-position:-99.28vw -70.10vw}
 .p8{background-position:-146.53vw -70.10vw}
-
 .name{font-size:10px}
 .add{padding:7px;font-size:8px}
-.about{
-height:16vw;
-background-size:200vw auto;
-background-position:0 -90.31vw
-}
+.about{height:16vw;background-size:200vw auto;background-position:0 -90.31vw}
 .order-box{padding:35px 20px}
 .order-box h2{font-size:25px}
 }
 </style>
 </head>
-
 <body>
 
 <header>
@@ -216,21 +124,11 @@ background-position:0 -90.31vw
 <a href="#shop">SHOP</a>
 <a href="#about">ABOUT</a>
 </nav>
-<button class="bag" onclick="openCart()">
-BAG (<span id="count">0</span>)
-</button>
+<button class="bag" onclick="openCart()">BAG (<span id="count">0</span>)</button>
 </header>
 
-<!-- BANNER -->
-<section class="hero">
-<div class="hero-content">
-<div class="eyebrow">THE NEW VELORA COLLECTION</div>
-<h1>Y2K<br>RELOADED.</h1>
-<p>Timeless style. Modern attitude.</p>
-</div>
-</section>
+<section class="hero"></section>
 
-<!-- SHOP -->
 <section id="shop">
 <div class="shop-title">
 <div class="eyebrow-small">THE LATEST FINDS</div>
@@ -244,117 +142,54 @@ BAG (<span id="count">0</span>)
 </div>
 
 <div class="products">
-
 <div class="product" data-category="Clothing">
 <div class="photo p1"></div>
-<div class="details">
-<div>
-<div class="name">Y2K Star Tee</div>
-<div class="category">Clothing</div>
-<div class="price">$28.00</div>
-</div>
-<button class="add" onclick="addItem('Y2K Star Tee',28)">ADD TO BAG</button>
-</div>
+<div class="details"><div><div class="name">Y2K Star Tee</div><div class="category">Clothing</div><div class="price">$28.00</div></div><button class="add" onclick="addItem('Y2K Star Tee',28)">ADD TO BAG</button></div>
 </div>
 
 <div class="product" data-category="Clothing">
 <div class="photo p2"></div>
-<div class="details">
-<div>
-<div class="name">Butterfly Baby Tee</div>
-<div class="category">Clothing</div>
-<div class="price">$24.00</div>
-</div>
-<button class="add" onclick="addItem('Butterfly Baby Tee',24)">ADD TO BAG</button>
-</div>
+<div class="details"><div><div class="name">Butterfly Baby Tee</div><div class="category">Clothing</div><div class="price">$24.00</div></div><button class="add" onclick="addItem('Butterfly Baby Tee',24)">ADD TO BAG</button></div>
 </div>
 
 <div class="product" data-category="Clothing">
 <div class="photo p3"></div>
-<div class="details">
-<div>
-<div class="name">Baggy Cargo Jeans</div>
-<div class="category">Clothing</div>
-<div class="price">$48.00</div>
-</div>
-<button class="add" onclick="addItem('Baggy Cargo Jeans',48)">ADD TO BAG</button>
-</div>
+<div class="details"><div><div class="name">Baggy Cargo Jeans</div><div class="category">Clothing</div><div class="price">$48.00</div></div><button class="add" onclick="addItem('Baggy Cargo Jeans',48)">ADD TO BAG</button></div>
 </div>
 
 <div class="product" data-category="Clothing">
 <div class="photo p4"></div>
-<div class="details">
-<div>
-<div class="name">Velora Zip Hoodie</div>
-<div class="category">Clothing</div>
-<div class="price">$52.00</div>
-</div>
-<button class="add" onclick="addItem('Velora Zip Hoodie',52)">ADD TO BAG</button>
-</div>
+<div class="details"><div><div class="name">Velora Zip Hoodie</div><div class="category">Clothing</div><div class="price">$52.00</div></div><button class="add" onclick="addItem('Velora Zip Hoodie',52)">ADD TO BAG</button></div>
 </div>
 
 <div class="product" data-category="Accessories">
 <div class="photo p5"></div>
-<div class="details">
-<div>
-<div class="name">Star Pendant Necklace</div>
-<div class="category">Accessories</div>
-<div class="price">$18.00</div>
-</div>
-<button class="add" onclick="addItem('Star Pendant Necklace',18)">ADD TO BAG</button>
-</div>
+<div class="details"><div><div class="name">Star Pendant Necklace</div><div class="category">Accessories</div><div class="price">$18.00</div></div><button class="add" onclick="addItem('Star Pendant Necklace',18)">ADD TO BAG</button></div>
 </div>
 
 <div class="product" data-category="Accessories">
 <div class="photo p6"></div>
-<div class="details">
-<div>
-<div class="name">Retro Sunglasses</div>
-<div class="category">Accessories</div>
-<div class="price">$20.00</div>
-</div>
-<button class="add" onclick="addItem('Retro Sunglasses',20)">ADD TO BAG</button>
-</div>
+<div class="details"><div><div class="name">Retro Sunglasses</div><div class="category">Accessories</div><div class="price">$20.00</div></div><button class="add" onclick="addItem('Retro Sunglasses',20)">ADD TO BAG</button></div>
 </div>
 
 <div class="product" data-category="Accessories">
 <div class="photo p7"></div>
-<div class="details">
-<div>
-<div class="name">Y2K Shoulder Bag</div>
-<div class="category">Accessories</div>
-<div class="price">$26.00</div>
-</div>
-<button class="add" onclick="addItem('Y2K Shoulder Bag',26)">ADD TO BAG</button>
-</div>
+<div class="details"><div><div class="name">Y2K Shoulder Bag</div><div class="category">Accessories</div><div class="price">$26.00</div></div><button class="add" onclick="addItem('Y2K Shoulder Bag',26)">ADD TO BAG</button></div>
 </div>
 
 <div class="product" data-category="Lifestyle">
 <div class="photo p8"></div>
-<div class="details">
-<div>
-<div class="name">Retro Sneakers</div>
-<div class="category">Lifestyle</div>
-<div class="price">$70.00</div>
+<div class="details"><div><div class="name">Retro Sneakers</div><div class="category">Lifestyle</div><div class="price">$70.00</div></div><button class="add" onclick="addItem('Retro Sneakers',70)">ADD TO BAG</button></div>
 </div>
-<button class="add" onclick="addItem('Retro Sneakers',70)">ADD TO BAG</button>
-</div>
-</div>
-
 </div>
 </section>
 
 <section class="about" id="about"></section>
-
 <footer>V E L O R A &nbsp; | &nbsp; Y2K RELOADED.</footer>
 
-<!-- SHOPPING BAG -->
 <div class="overlay" id="overlay">
 <div class="cart">
-<div class="carttop">
-<h2>YOUR BAG</h2>
-<button onclick="closeCart()">×</button>
-</div>
+<div class="carttop"><h2>YOUR BAG</h2><button onclick="closeCart()">×</button></div>
 <div id="cartItems">Your bag is empty.</div>
 <div class="total" id="total">TOTAL: $0.00</div>
 <button class="checkout" onclick="demoCheckout()">CHECKOUT</button>
@@ -362,7 +197,6 @@ BAG (<span id="count">0</span>)
 </div>
 </div>
 
-<!-- ORDER CONFIRMATION -->
 <div class="order-overlay" id="orderOverlay">
 <div class="order-box">
 <div class="order-label">VELORA ORDER CONFIRMATION</div>
@@ -379,34 +213,24 @@ BAG (<span id="count">0</span>)
 let cart=[];
 
 function filterItems(category,button){
-document.querySelectorAll('.filters button').forEach(b=>{
-b.classList.remove('active');
-});
+document.querySelectorAll('.filters button').forEach(b=>b.classList.remove('active'));
 button.classList.add('active');
-
 document.querySelectorAll('.product').forEach(p=>{
-p.style.display=
-category==='All'||p.dataset.category===category?'':'none';
+p.style.display=category==='All'||p.dataset.category===category?'':'none';
 });
 }
 
 function addItem(name,price){
 let item=cart.find(x=>x.name===name);
-if(item){
-item.qty++;
-}else{
-cart.push({name,price,qty:1});
-}
+if(item)item.qty++;
+else cart.push({name,price,qty:1});
 renderCart();
 openCart();
 }
 
 function renderCart(){
-document.getElementById('count').textContent=
-cart.reduce((n,x)=>n+x.qty,0);
-
-document.getElementById('cartItems').innerHTML=
-cart.map((x,i)=>`
+document.getElementById('count').textContent=cart.reduce((n,x)=>n+x.qty,0);
+document.getElementById('cartItems').innerHTML=cart.map((x,i)=>`
 <div class="cartitem">
 <span>${x.name}<br>$${x.price.toFixed(2)}</span>
 <span class="qty">
@@ -414,41 +238,25 @@ cart.map((x,i)=>`
 ${x.qty}
 <button onclick="changeQty(${i},1)">+</button>
 </span>
-</div>
-`).join('')||'Your bag is empty.';
-
-document.getElementById('total').textContent=
-'TOTAL: $'+cart.reduce((n,x)=>n+x.price*x.qty,0).toFixed(2);
+</div>`).join('')||'Your bag is empty.';
+document.getElementById('total').textContent='TOTAL: $'+cart.reduce((n,x)=>n+x.price*x.qty,0).toFixed(2);
 }
 
 function changeQty(i,d){
 cart[i].qty+=d;
-if(cart[i].qty<=0){
-cart.splice(i,1);
-}
+if(cart[i].qty<=0)cart.splice(i,1);
 renderCart();
 }
 
-function openCart(){
-document.getElementById('overlay').classList.add('open');
-}
-
-function closeCart(){
-document.getElementById('overlay').classList.remove('open');
-}
+function openCart(){document.getElementById('overlay').classList.add('open')}
+function closeCart(){document.getElementById('overlay').classList.remove('open')}
 
 function demoCheckout(){
 if(cart.length===0)return;
-
-const total=cart.reduce((n,x)=>n+x.price*x.qty,0);
-const orderNumber=Math.floor(100000+Math.random()*900000);
-
-document.getElementById('orderNumber').textContent=
-'Order #VEL-'+orderNumber;
-
-document.getElementById('orderTotal').textContent=
-'Order total: $'+total.toFixed(2);
-
+let total=cart.reduce((n,x)=>n+x.price*x.qty,0);
+let number=Math.floor(100000+Math.random()*900000);
+document.getElementById('orderNumber').textContent='Order #VEL-'+number;
+document.getElementById('orderTotal').textContent='Order total: $'+total.toFixed(2);
 closeCart();
 document.getElementById('orderOverlay').classList.add('show');
 }
@@ -459,9 +267,7 @@ renderCart();
 document.getElementById('orderOverlay').classList.remove('show');
 document.getElementById('shop').scrollIntoView({behavior:'smooth'});
 }
-
 renderCart();
 </script>
-
 </body>
 </html>
