@@ -8,141 +8,201 @@
 
 <style>
 *{box-sizing:border-box}
-body{margin:0;font-family:Arial,sans-serif;color:#111;background:#fff}
-button{cursor:pointer;font-family:inherit}
+body{margin:0;font-family:Arial,sans-serif;color:#111;background:white}
+button{cursor:pointer;font-family:Arial,sans-serif}
+
 header{
-  height:65px;background:#f5f5f5;display:flex;
-  align-items:center;justify-content:space-between;
-  padding:0 5%;position:sticky;top:0;z-index:5
+height:55px;background:#f5f5f5;
+display:flex;align-items:center;justify-content:space-between;
+padding:0 4%;position:sticky;top:0;z-index:5
 }
-.logo{font-size:25px;font-weight:900;letter-spacing:8px}
+.logo{font-size:24px;font-weight:900;letter-spacing:8px}
 nav{display:flex;gap:35px}
 nav a{color:#111;text-decoration:none;font-size:11px;font-weight:bold}
-.bag,.black,.add,.checkout,.continue{
-  background:#080808;color:white;border:0;font-weight:bold
+.bag,.add,.checkout,.continue{
+background:#050505;color:white;border:0;font-weight:bold
 }
-.bag{padding:12px 18px;font-size:11px}
+.bag{padding:10px 17px;font-size:10px}
 
-/* HERO */
+/* BANNER: uses the uploaded reference picture */
 .hero{
-  min-height:390px;
-  display:flex;align-items:center;
-  padding:45px 8%;
-  color:white;
-  background:
-  linear-gradient(90deg,rgba(0,0,0,.75),rgba(0,0,0,.12)),
-  url('https://images.unsplash.com/photo-1523398002811-999ca8dec234?auto=format&fit=crop&w=1800&q=90') center 45%/cover;
+height:16.6vw;
+min-height:170px;
+position:relative;
+background-image:url('49aa2c62-6c88-4ad7-a07c-ccce2c8daf7d.png');
+background-size:100vw auto;
+background-position:0 -2.39vw;
+background-repeat:no-repeat;
 }
-.hero-content{max-width:520px}
-.eyebrow{font-size:10px;letter-spacing:5px;font-weight:bold}
-.hero h1{font-size:clamp(55px,9vw,105px);line-height:.82;margin:22px 0;letter-spacing:-5px}
-.hero p{font-size:14px;line-height:1.7}
-.black{padding:14px 24px;margin-top:15px;font-size:10px;letter-spacing:2px}
+.hero-content{display:none!important}
 
 /* SHOP */
-.shop-title{text-align:center;padding:45px 12px 25px}
-.eyebrow-small{font-size:9px;letter-spacing:5px;font-weight:bold}
-.shop-title h2{font-size:30px;letter-spacing:4px;margin:10px 0 20px}
-.filters{display:flex;justify-content:center;gap:10px;flex-wrap:wrap}
-.filters button{
-  background:white;border:1px solid #111;
-  padding:10px 19px;font-size:10px;font-weight:bold
+.shop-title{text-align:center;padding:18px 10px}
+.eyebrow-small{font-size:9px;letter-spacing:4px;font-weight:bold}
+.shop-title h2{font-size:25px;letter-spacing:3px;margin:5px 0 12px}
+
+.filters{
+display:flex;justify-content:center;gap:10px;flex-wrap:wrap
 }
-.filters button.active,.filters button:hover{background:#111;color:white}
+.filters button{
+background:white;border:1px solid black;
+padding:8px 16px;font-size:10px;font-weight:bold
+}
+.filters button.active,.filters button:hover{
+background:black;color:white
+}
 
 .products{
-  display:grid;grid-template-columns:repeat(4,minmax(0,1fr));
-  gap:30px 15px;padding:10px 4% 55px
+display:grid;
+grid-template-columns:repeat(4,minmax(0,1fr));
+gap:20px 12px;
+padding:10px 3% 30px
 }
 .product{min-width:0}
 .photo{
-  width:100%;height:300px;object-fit:cover;
-  display:block;background:#eee
+height:8vw;
+min-height:90px;
+background-image:url('49aa2c62-6c88-4ad7-a07c-ccce2c8daf7d.png');
+background-size:100vw auto;
+background-repeat:no-repeat
 }
-.details{
-  display:flex;justify-content:space-between;
-  align-items:center;gap:8px;padding-top:12px
-}
-.name{font-size:12px;font-weight:bold}
-.category,.price{font-size:11px;margin-top:5px;color:#666}
-.add{padding:10px 12px;font-size:9px;letter-spacing:1px}
-.add:hover,.bag:hover,.checkout:hover,.continue:hover,.black:hover{background:#555}
 
-/* ABOUT */
-.about{
-  min-height:220px;background:#e9e9e9;
-  display:flex;align-items:center;justify-content:center;
-  text-align:center;padding:35px
+/* PRODUCT PICTURE POSITIONS */
+.p1{background-position:-2.15vw -23.92vw}
+.p2{background-position:-26.02vw -23.92vw}
+.p3{background-position:-49.64vw -23.92vw}
+.p4{background-position:-73.27vw -23.92vw}
+.p5{background-position:-2.15vw -35.05vw}
+.p6{background-position:-26.02vw -35.05vw}
+.p7{background-position:-49.64vw -35.05vw}
+.p8{background-position:-73.27vw -35.05vw}
+
+.details{
+display:flex;justify-content:space-between;
+align-items:center;gap:5px;padding-top:8px
 }
-.about h2{font-size:32px;letter-spacing:5px}
-.about p{font-size:13px;color:#555;line-height:1.7;max-width:500px}
+.name{font-size:11px;font-weight:bold}
+.category,.price{font-size:10px;margin-top:3px}
+.add{padding:8px 12px;font-size:9px}
+.add:hover,.bag:hover,.checkout:hover,.continue:hover{background:#555}
+
+/* ABOUT BANNER */
+.about{
+height:8vw;min-height:100px;
+background-image:url('49aa2c62-6c88-4ad7-a07c-ccce2c8daf7d.png');
+background-size:100vw auto;
+background-position:0 -45.16vw;
+background-repeat:no-repeat
+}
+
 footer{
-  background:#050505;color:white;text-align:center;
-  padding:25px;font-size:10px;letter-spacing:5px
+background:black;color:white;text-align:center;
+padding:20px;font-size:10px;letter-spacing:4px
 }
 
 /* SHOPPING BAG */
 .overlay{
-  display:none;position:fixed;inset:0;
-  background:rgba(0,0,0,.55);z-index:10;
-  justify-content:flex-end
+display:none;position:fixed;inset:0;
+background:rgba(0,0,0,.55);
+z-index:10;justify-content:flex-end
 }
 .overlay.open{display:flex}
 .cart{
-  background:white;width:min(410px,100%);
-  height:100%;padding:25px;overflow:auto
+background:white;width:min(400px,100%);
+height:100%;padding:23px;overflow:auto
 }
-.carttop{display:flex;justify-content:space-between;align-items:center}
+.carttop{
+display:flex;justify-content:space-between;align-items:center
+}
 .carttop h2{font-size:21px;letter-spacing:3px}
-.carttop button{border:0;background:none;font-size:28px}
-.cartitem{
-  padding:15px 0;border-bottom:1px solid #ddd;
-  display:flex;justify-content:space-between;
-  align-items:center;font-size:13px
+.carttop button{
+border:0;background:none;font-size:28px
 }
-.qty button{border:1px solid #ddd;background:white;padding:6px 10px}
-.total{margin:25px 0;font-weight:bold;font-size:15px}
-.checkout{width:100%;padding:16px;font-size:11px;letter-spacing:2px}
+.cartitem{
+padding:14px 0;border-bottom:1px solid #ddd;
+display:flex;justify-content:space-between;
+align-items:center;font-size:13px
+}
+.qty button{
+border:1px solid #ddd;background:white;padding:6px 10px
+}
+.total{margin:22px 0;font-weight:bold;font-size:15px}
+.checkout{
+width:100%;padding:15px;font-size:11px;letter-spacing:2px
+}
 .note{font-size:10px;color:#777;line-height:1.6}
 
 /* ORDER CONFIRMATION */
 .order-overlay{
-  display:none;position:fixed;inset:0;
-  background:rgba(0,0,0,.60);z-index:30;
-  align-items:center;justify-content:center;padding:20px
+display:none;position:fixed;inset:0;
+background:rgba(0,0,0,.60);
+z-index:30;align-items:center;
+justify-content:center;padding:20px
 }
 .order-overlay.show{display:flex}
 .order-box{
-  background:white;width:100%;max-width:550px;
-  padding:40px 28px;text-align:center
+background:white;width:100%;max-width:550px;
+padding:40px 28px;text-align:center
 }
-.order-label{font-size:10px;letter-spacing:4px;margin-bottom:22px}
-.order-box h2{font-size:28px;letter-spacing:3px;margin:0 0 22px}
-.order-box p{color:#777;font-size:14px;line-height:1.7}
-.order-number{font-size:16px;font-weight:bold;margin:24px 0;color:#222}
+.order-label{
+font-size:10px;letter-spacing:4px;margin-bottom:22px
+}
+.order-box h2{
+font-size:28px;letter-spacing:3px;margin:0 0 22px
+}
+.order-box p{
+color:#777;font-size:14px;line-height:1.7
+}
+.order-number{
+font-size:16px;font-weight:bold;margin:24px 0;color:#222
+}
 .continue{
-  width:100%;padding:16px;letter-spacing:2px;
-  font-size:11px;margin-top:15px
+width:100%;padding:16px;letter-spacing:2px;
+font-size:11px;margin-top:15px
 }
 
+/* MOBILE */
 @media(max-width:700px){
-  header{height:58px;padding:0 12px}
-  .logo{font-size:17px;letter-spacing:4px}
-  nav{gap:12px}
-  nav a{font-size:9px}
-  .bag{padding:9px;font-size:9px}
-  .hero{min-height:340px;padding:30px 7%}
-  .hero h1{font-size:16vw}
-  .hero p{font-size:12px}
-  .products{grid-template-columns:repeat(2,minmax(0,1fr));padding:10px 12px 35px;gap:22px 10px}
-  .photo{height:48vw}
-  .details{align-items:flex-start}
-  .name{font-size:10px}
-  .add{padding:8px 7px;font-size:8px}
-  .shop-title h2{font-size:24px}
-  .about h2{font-size:25px}
-  .order-box{padding:35px 20px}
-  .order-box h2{font-size:25px}
+header{height:55px;padding:0 10px}
+.logo{font-size:17px;letter-spacing:4px}
+nav{gap:12px}
+nav a{font-size:9px}
+.bag{padding:8px;font-size:9px}
+
+.hero{
+height:42vw;
+min-height:150px;
+background-size:200vw auto;
+background-position:0 -4.78vw
+}
+
+.products{
+grid-template-columns:repeat(2,minmax(0,1fr));
+padding:10px;gap:20px 10px
+}
+.photo{
+height:30vw;
+min-height:85px;
+background-size:200vw auto
+}
+.p1{background-position:-4.31vw -47.85vw}
+.p2{background-position:-52.03vw -47.85vw}
+.p3{background-position:-99.28vw -47.85vw}
+.p4{background-position:-146.53vw -47.85vw}
+.p5{background-position:-4.31vw -70.10vw}
+.p6{background-position:-52.03vw -70.10vw}
+.p7{background-position:-99.28vw -70.10vw}
+.p8{background-position:-146.53vw -70.10vw}
+
+.name{font-size:10px}
+.add{padding:7px;font-size:8px}
+.about{
+height:16vw;
+background-size:200vw auto;
+background-position:0 -90.31vw
+}
+.order-box{padding:35px 20px}
+.order-box h2{font-size:25px}
 }
 </style>
 </head>
@@ -150,226 +210,254 @@ footer{
 <body>
 
 <header>
-  <div class="logo">VELORA</div>
-  <nav>
-    <a href="#">HOME</a>
-    <a href="#shop">SHOP</a>
-    <a href="#about">ABOUT</a>
-  </nav>
-  <button class="bag" onclick="openCart()">BAG (<span id="count">0</span>)</button>
+<div class="logo">VELORA</div>
+<nav>
+<a href="#">HOME</a>
+<a href="#shop">SHOP</a>
+<a href="#about">ABOUT</a>
+</nav>
+<button class="bag" onclick="openCart()">
+BAG (<span id="count">0</span>)
+</button>
 </header>
 
+<!-- BANNER -->
 <section class="hero">
-  <div class="hero-content">
-    <div class="eyebrow">THE NEW VELORA COLLECTION</div>
-    <h1>Y2K<br>RELOADED.</h1>
-    <p>Timeless style. Modern attitude.<br>Discover the latest Y2K-inspired looks.</p>
-    <button class="black" onclick="document.getElementById('shop').scrollIntoView({behavior:'smooth'})">
-      SHOP THE COLLECTION
-    </button>
-  </div>
+<div class="hero-content">
+<div class="eyebrow">THE NEW VELORA COLLECTION</div>
+<h1>Y2K<br>RELOADED.</h1>
+<p>Timeless style. Modern attitude.</p>
+</div>
 </section>
 
+<!-- SHOP -->
 <section id="shop">
-  <div class="shop-title">
-    <div class="eyebrow-small">THE LATEST FINDS</div>
-    <h2>SHOP VELORA</h2>
-    <div class="filters">
-      <button class="active" onclick="filterItems('All',this)">ALL ITEMS</button>
-      <button onclick="filterItems('Clothing',this)">CLOTHING</button>
-      <button onclick="filterItems('Accessories',this)">ACCESSORIES</button>
-      <button onclick="filterItems('Lifestyle',this)">LIFESTYLE</button>
-    </div>
-  </div>
+<div class="shop-title">
+<div class="eyebrow-small">THE LATEST FINDS</div>
+<h2>SHOP VELORA</h2>
+<div class="filters">
+<button class="active" onclick="filterItems('All',this)">ALL ITEMS</button>
+<button onclick="filterItems('Clothing',this)">CLOTHING</button>
+<button onclick="filterItems('Accessories',this)">ACCESSORIES</button>
+<button onclick="filterItems('Lifestyle',this)">LIFESTYLE</button>
+</div>
+</div>
 
-  <div class="products">
+<div class="products">
 
-    <div class="product" data-category="Clothing">
-      <img class="photo" src="https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?auto=format&fit=crop&w=800&q=85" alt="Graphic T-shirt">
-      <div class="details"><div>
-        <div class="name">Y2K Graphic Tee</div>
-        <div class="category">Clothing</div>
-        <div class="price">$28.00</div>
-      </div><button class="add" onclick="addItem('Y2K Graphic Tee',28)">ADD TO BAG</button></div>
-    </div>
+<div class="product" data-category="Clothing">
+<div class="photo p1"></div>
+<div class="details">
+<div>
+<div class="name">Y2K Star Tee</div>
+<div class="category">Clothing</div>
+<div class="price">$28.00</div>
+</div>
+<button class="add" onclick="addItem('Y2K Star Tee',28)">ADD TO BAG</button>
+</div>
+</div>
 
-    <div class="product" data-category="Clothing">
-      <img class="photo" src="https://images.unsplash.com/photo-1503342217505-b0a15ec3261c?auto=format&fit=crop&w=800&q=85" alt="Fashion top">
-      <div class="details"><div>
-        <div class="name">Vintage Streetwear Tee</div>
-        <div class="category">Clothing</div>
-        <div class="price">$24.00</div>
-      </div><button class="add" onclick="addItem('Vintage Streetwear Tee',24)">ADD TO BAG</button></div>
-    </div>
+<div class="product" data-category="Clothing">
+<div class="photo p2"></div>
+<div class="details">
+<div>
+<div class="name">Butterfly Baby Tee</div>
+<div class="category">Clothing</div>
+<div class="price">$24.00</div>
+</div>
+<button class="add" onclick="addItem('Butterfly Baby Tee',24)">ADD TO BAG</button>
+</div>
+</div>
 
-    <div class="product" data-category="Clothing">
-      <img class="photo" src="https://images.unsplash.com/photo-1542272604-787c3835535d?auto=format&fit=crop&w=800&q=85" alt="Denim jeans">
-      <div class="details"><div>
-        <div class="name">Baggy Denim Jeans</div>
-        <div class="category">Clothing</div>
-        <div class="price">$48.00</div>
-      </div><button class="add" onclick="addItem('Baggy Denim Jeans',48)">ADD TO BAG</button></div>
-    </div>
+<div class="product" data-category="Clothing">
+<div class="photo p3"></div>
+<div class="details">
+<div>
+<div class="name">Baggy Cargo Jeans</div>
+<div class="category">Clothing</div>
+<div class="price">$48.00</div>
+</div>
+<button class="add" onclick="addItem('Baggy Cargo Jeans',48)">ADD TO BAG</button>
+</div>
+</div>
 
-    <div class="product" data-category="Clothing">
-      <img class="photo" src="https://images.unsplash.com/photo-1556821840-3a63f95609a7?auto=format&fit=crop&w=800&q=85" alt="Hoodie">
-      <div class="details"><div>
-        <div class="name">Oversized Zip Hoodie</div>
-        <div class="category">Clothing</div>
-        <div class="price">$52.00</div>
-      </div><button class="add" onclick="addItem('Oversized Zip Hoodie',52)">ADD TO BAG</button></div>
-    </div>
+<div class="product" data-category="Clothing">
+<div class="photo p4"></div>
+<div class="details">
+<div>
+<div class="name">Velora Zip Hoodie</div>
+<div class="category">Clothing</div>
+<div class="price">$52.00</div>
+</div>
+<button class="add" onclick="addItem('Velora Zip Hoodie',52)">ADD TO BAG</button>
+</div>
+</div>
 
-    <div class="product" data-category="Accessories">
-      <img class="photo" src="https://images.unsplash.com/photo-1611652022419-a9419f74343d?auto=format&fit=crop&w=800&q=85" alt="Silver jewelry">
-      <div class="details"><div>
-        <div class="name">Silver Star Necklace</div>
-        <div class="category">Accessories</div>
-        <div class="price">$18.00</div>
-      </div><button class="add" onclick="addItem('Silver Star Necklace',18)">ADD TO BAG</button></div>
-    </div>
+<div class="product" data-category="Accessories">
+<div class="photo p5"></div>
+<div class="details">
+<div>
+<div class="name">Star Pendant Necklace</div>
+<div class="category">Accessories</div>
+<div class="price">$18.00</div>
+</div>
+<button class="add" onclick="addItem('Star Pendant Necklace',18)">ADD TO BAG</button>
+</div>
+</div>
 
-    <div class="product" data-category="Accessories">
-      <img class="photo" src="https://images.unsplash.com/photo-1511499767150-a48a237f0083?auto=format&fit=crop&w=800&q=85" alt="Sunglasses">
-      <div class="details"><div>
-        <div class="name">Retro Sunglasses</div>
-        <div class="category">Accessories</div>
-        <div class="price">$20.00</div>
-      </div><button class="add" onclick="addItem('Retro Sunglasses',20)">ADD TO BAG</button></div>
-    </div>
+<div class="product" data-category="Accessories">
+<div class="photo p6"></div>
+<div class="details">
+<div>
+<div class="name">Retro Sunglasses</div>
+<div class="category">Accessories</div>
+<div class="price">$20.00</div>
+</div>
+<button class="add" onclick="addItem('Retro Sunglasses',20)">ADD TO BAG</button>
+</div>
+</div>
 
-    <div class="product" data-category="Accessories">
-      <img class="photo" src="https://images.unsplash.com/photo-1584917865442-de89df76afd3?auto=format&fit=crop&w=800&q=85" alt="Shoulder bag">
-      <div class="details"><div>
-        <div class="name">Y2K Shoulder Bag</div>
-        <div class="category">Accessories</div>
-        <div class="price">$26.00</div>
-      </div><button class="add" onclick="addItem('Y2K Shoulder Bag',26)">ADD TO BAG</button></div>
-    </div>
+<div class="product" data-category="Accessories">
+<div class="photo p7"></div>
+<div class="details">
+<div>
+<div class="name">Y2K Shoulder Bag</div>
+<div class="category">Accessories</div>
+<div class="price">$26.00</div>
+</div>
+<button class="add" onclick="addItem('Y2K Shoulder Bag',26)">ADD TO BAG</button>
+</div>
+</div>
 
-    <div class="product" data-category="Lifestyle">
-      <img class="photo" src="https://images.unsplash.com/photo-1600185365483-26d7a4cc7519?auto=format&fit=crop&w=800&q=85" alt="Sneakers">
-      <div class="details"><div>
-        <div class="name">Retro Sneakers</div>
-        <div class="category">Lifestyle</div>
-        <div class="price">$70.00</div>
-      </div><button class="add" onclick="addItem('Retro Sneakers',70)">ADD TO BAG</button></div>
-    </div>
+<div class="product" data-category="Lifestyle">
+<div class="photo p8"></div>
+<div class="details">
+<div>
+<div class="name">Retro Sneakers</div>
+<div class="category">Lifestyle</div>
+<div class="price">$70.00</div>
+</div>
+<button class="add" onclick="addItem('Retro Sneakers',70)">ADD TO BAG</button>
+</div>
+</div>
 
-  </div>
+</div>
 </section>
 
-<section class="about" id="about">
-  <div>
-    <div class="eyebrow-small">ABOUT THE BRAND</div>
-    <h2>THE VELORA ERA.</h2>
-    <p>Y2K inspiration. Everyday streetwear. A fresh take on fashion and personal style.</p>
-  </div>
-</section>
+<section class="about" id="about"></section>
 
 <footer>V E L O R A &nbsp; | &nbsp; Y2K RELOADED.</footer>
 
 <!-- SHOPPING BAG -->
 <div class="overlay" id="overlay">
-  <div class="cart">
-    <div class="carttop">
-      <h2>YOUR BAG</h2>
-      <button onclick="closeCart()">×</button>
-    </div>
-    <div id="cartItems">Your bag is empty.</div>
-    <div class="total" id="total">TOTAL: $0.00</div>
-    <button class="checkout" onclick="demoCheckout()">CHECKOUT</button>
-    <p class="note">Demo checkout only. No real payment is taken.</p>
-  </div>
+<div class="cart">
+<div class="carttop">
+<h2>YOUR BAG</h2>
+<button onclick="closeCart()">×</button>
+</div>
+<div id="cartItems">Your bag is empty.</div>
+<div class="total" id="total">TOTAL: $0.00</div>
+<button class="checkout" onclick="demoCheckout()">CHECKOUT</button>
+<p class="note">Demo checkout only. No real payment is taken.</p>
+</div>
 </div>
 
 <!-- ORDER CONFIRMATION -->
 <div class="order-overlay" id="orderOverlay">
-  <div class="order-box">
-    <div class="order-label">VELORA ORDER CONFIRMATION</div>
-    <h2>THANK YOU!</h2>
-    <p>Your demo order has been placed successfully.</p>
-    <div class="order-number" id="orderNumber"></div>
-    <p id="orderTotal"></p>
-    <p>This is a demonstration only. No real purchase or payment was made.</p>
-    <button class="continue" onclick="finishOrder()">CONTINUE SHOPPING</button>
-  </div>
+<div class="order-box">
+<div class="order-label">VELORA ORDER CONFIRMATION</div>
+<h2>THANK YOU!</h2>
+<p>Your demo order has been placed successfully.</p>
+<div class="order-number" id="orderNumber"></div>
+<p id="orderTotal"></p>
+<p>This is a demonstration only. No real purchase or payment was made.</p>
+<button class="continue" onclick="finishOrder()">CONTINUE SHOPPING</button>
+</div>
 </div>
 
 <script>
 let cart=[];
 
 function filterItems(category,button){
-  document.querySelectorAll('.filters button').forEach(b=>b.classList.remove('active'));
-  button.classList.add('active');
-  document.querySelectorAll('.product').forEach(p=>{
-    p.style.display=(category==='All'||p.dataset.category===category)?'':'none';
-  });
+document.querySelectorAll('.filters button').forEach(b=>{
+b.classList.remove('active');
+});
+button.classList.add('active');
+
+document.querySelectorAll('.product').forEach(p=>{
+p.style.display=
+category==='All'||p.dataset.category===category?'':'none';
+});
 }
 
 function addItem(name,price){
-  let item=cart.find(x=>x.name===name);
-  if(item){item.qty++;}
-  else{cart.push({name,price,qty:1});}
-  renderCart();
-  openCart();
+let item=cart.find(x=>x.name===name);
+if(item){
+item.qty++;
+}else{
+cart.push({name,price,qty:1});
+}
+renderCart();
+openCart();
 }
 
 function renderCart(){
-  document.getElementById('count').textContent=
-    cart.reduce((n,x)=>n+x.qty,0);
+document.getElementById('count').textContent=
+cart.reduce((n,x)=>n+x.qty,0);
 
-  document.getElementById('cartItems').innerHTML=
-    cart.map((x,i)=>`
-      <div class="cartitem">
-        <span>${x.name}<br>$${x.price.toFixed(2)}</span>
-        <span class="qty">
-          <button onclick="changeQty(${i},-1)">−</button>
-          ${x.qty}
-          <button onclick="changeQty(${i},1)">+</button>
-        </span>
-      </div>
-    `).join('')||'Your bag is empty.';
+document.getElementById('cartItems').innerHTML=
+cart.map((x,i)=>`
+<div class="cartitem">
+<span>${x.name}<br>$${x.price.toFixed(2)}</span>
+<span class="qty">
+<button onclick="changeQty(${i},-1)">−</button>
+${x.qty}
+<button onclick="changeQty(${i},1)">+</button>
+</span>
+</div>
+`).join('')||'Your bag is empty.';
 
-  document.getElementById('total').textContent=
-    'TOTAL: $'+cart.reduce((n,x)=>n+x.price*x.qty,0).toFixed(2);
+document.getElementById('total').textContent=
+'TOTAL: $'+cart.reduce((n,x)=>n+x.price*x.qty,0).toFixed(2);
 }
 
 function changeQty(i,d){
-  cart[i].qty+=d;
-  if(cart[i].qty<=0)cart.splice(i,1);
-  renderCart();
+cart[i].qty+=d;
+if(cart[i].qty<=0){
+cart.splice(i,1);
+}
+renderCart();
 }
 
 function openCart(){
-  document.getElementById('overlay').classList.add('open');
+document.getElementById('overlay').classList.add('open');
 }
 
 function closeCart(){
-  document.getElementById('overlay').classList.remove('open');
+document.getElementById('overlay').classList.remove('open');
 }
 
 function demoCheckout(){
-  if(cart.length===0)return;
+if(cart.length===0)return;
 
-  const total=cart.reduce((n,x)=>n+x.price*x.qty,0);
-  const orderNumber=Math.floor(100000+Math.random()*900000);
+const total=cart.reduce((n,x)=>n+x.price*x.qty,0);
+const orderNumber=Math.floor(100000+Math.random()*900000);
 
-  document.getElementById('orderNumber').textContent=
-    'Order #VEL-'+orderNumber;
+document.getElementById('orderNumber').textContent=
+'Order #VEL-'+orderNumber;
 
-  document.getElementById('orderTotal').textContent=
-    'Order total: $'+total.toFixed(2);
+document.getElementById('orderTotal').textContent=
+'Order total: $'+total.toFixed(2);
 
-  closeCart();
-  document.getElementById('orderOverlay').classList.add('show');
+closeCart();
+document.getElementById('orderOverlay').classList.add('show');
 }
 
 function finishOrder(){
-  cart=[];
-  renderCart();
-  document.getElementById('orderOverlay').classList.remove('show');
-  document.getElementById('shop').scrollIntoView({behavior:'smooth'});
+cart=[];
+renderCart();
+document.getElementById('orderOverlay').classList.remove('show');
+document.getElementById('shop').scrollIntoView({behavior:'smooth'});
 }
 
 renderCart();
