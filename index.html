@@ -3,778 +3,196 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>VELORA | Y2K RELOADED</title>
-
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>VELORA — Y2K Reloaded</title>
 <style>
-* {
-  box-sizing: border-box;
-}
-
-html {
-  scroll-behavior: smooth;
-}
-
-body {
-  margin: 0;
-  font-family: Arial, sans-serif;
-  background: #fff;
-  color: #111;
-}
-
-button {
-  cursor: pointer;
-  font-family: Arial, sans-serif;
-}
-
-/* HEADER */
-
-header {
-  height: 65px;
-  background: #080808;
-  color: white;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 0 4%;
-  position: sticky;
-  top: 0;
-  z-index: 10;
-}
-
-.logo {
-  font-size: 25px;
-  font-weight: 900;
-  letter-spacing: 8px;
-}
-
-nav {
-  display: flex;
-  gap: 28px;
-}
-
-nav a {
-  color: white;
-  text-decoration: none;
-  font-size: 10px;
-  font-weight: bold;
-  letter-spacing: 2px;
-}
-
-.bag {
-  background: white;
-  color: black;
-  border: none;
-  padding: 11px 16px;
-  font-size: 10px;
-  font-weight: bold;
-}
-
-/* HERO */
-
-.hero {
-  min-height: 350px;
-  background:
-    linear-gradient(90deg, #0009, #0001),
-    url("https://images.unsplash.com/photo-1523398002811-999ca8dec234?auto=format&fit=crop&w=1800&q=90")
-    center 45% / cover no-repeat;
-  display: flex;
-  align-items: center;
-  padding: 7%;
-  color: white;
-}
-
-.hero-content {
-  max-width: 500px;
-}
-
-.hero small {
-  letter-spacing: 5px;
-  font-size: 10px;
-}
-
-.hero h1 {
-  font-size: clamp(40px, 7vw, 76px);
-  line-height: .95;
-  margin: 15px 0;
-  letter-spacing: -3px;
-}
-
-.hero p {
-  font-size: 12px;
-  letter-spacing: 3px;
-}
-
-.hero a {
-  display: inline-block;
-  background: white;
-  color: black;
-  text-decoration: none;
-  padding: 14px 25px;
-  margin-top: 15px;
-  font-size: 10px;
-  font-weight: bold;
-  letter-spacing: 2px;
-}
-
-/* SHOP */
-
-.shop-title {
-  text-align: center;
-  padding: 45px 10px 25px;
-}
-
-.eyebrow {
-  font-size: 9px;
-  letter-spacing: 5px;
-  color: #777;
-  font-weight: bold;
-}
-
-.shop-title h2 {
-  font-size: 29px;
-  letter-spacing: 5px;
-  margin: 12px 0 20px;
-}
-
-.filters {
-  display: flex;
-  justify-content: center;
-  gap: 9px;
-  flex-wrap: wrap;
-}
-
-.filters button {
-  background: white;
-  border: 1px solid #111;
-  padding: 10px 18px;
-  font-size: 9px;
-  font-weight: bold;
-  letter-spacing: 1px;
-}
-
-.filters button.active,
-.filters button:hover {
-  background: black;
-  color: white;
-}
-
-/* PRODUCTS */
-
-.products {
-  display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 30px 15px;
-  padding: 10px 4% 60px;
-}
-
-.product {
-  min-width: 0;
-}
-
-.photo {
-  width: 100%;
-  aspect-ratio: 3 / 4;
-  object-fit: cover;
-  display: block;
-  background: #eee;
-  transition: .3s;
-}
-
-.product:hover .photo {
-  filter: brightness(.88);
-}
-
-.details {
-  padding-top: 12px;
-}
-
-.name {
-  font-size: 12px;
-  font-weight: bold;
-  line-height: 1.5;
-}
-
-.category {
-  color: #777;
-  font-size: 10px;
-  margin-top: 3px;
-}
-
-.price {
-  font-size: 12px;
-  font-weight: bold;
-  margin-top: 8px;
-}
-
-.store-name {
-  font-size: 10px;
-  color: #777;
-  margin-top: 5px;
-}
-
-.actions {
-  display: flex;
-  gap: 7px;
-  margin-top: 12px;
-}
-
-.save-button,
-.store-button {
-  flex: 1;
-  text-align: center;
-  padding: 11px 5px;
-  font-size: 9px;
-  font-weight: bold;
-  letter-spacing: 1px;
-}
-
-.save-button {
-  border: 1px solid black;
-  background: black;
-  color: white;
-}
-
-.store-button {
-  border: 1px solid black;
-  background: white;
-  color: black;
-  text-decoration: none;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.save-button:hover {
-  background: #555;
-}
-
-.store-button:hover {
-  background: #eee;
-}
-
-/* ABOUT */
-
-.about {
-  background: #080808;
-  color: white;
-  text-align: center;
-  padding: 65px 20px;
-}
-
-.about h2 {
-  font-size: 29px;
-  letter-spacing: 7px;
-  margin: 0 0 18px;
-}
-
-.about p {
-  color: #aaa;
-  font-size: 12px;
-  line-height: 2;
-  max-width: 500px;
-  margin: auto;
-}
-
-/* FOOTER */
-
-footer {
-  background: #080808;
-  color: #777;
-  text-align: center;
-  padding: 25px;
-  font-size: 9px;
-  letter-spacing: 3px;
-  border-top: 1px solid #333;
-}
-
-/* SAVED BAG */
-
-.overlay {
-  display: none;
-  position: fixed;
-  inset: 0;
-  background: #0009;
-  z-index: 20;
-  justify-content: flex-end;
-}
-
-.overlay.open {
-  display: flex;
-}
-
-.cart {
-  background: white;
-  width: min(420px, 100%);
-  height: 100%;
-  padding: 23px;
-  overflow-y: auto;
-}
-
-.cart-top {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.cart-top h2 {
-  font-size: 20px;
-  letter-spacing: 3px;
-}
-
-.cart-top button {
-  border: none;
-  background: none;
-  font-size: 28px;
-}
-
-.cart-item {
-  display: flex;
-  gap: 12px;
-  align-items: center;
-  padding: 15px 0;
-  border-bottom: 1px solid #ddd;
-}
-
-.cart-item img {
-  width: 65px;
-  height: 80px;
-  object-fit: cover;
-}
-
-.cart-info {
-  flex: 1;
-  font-size: 12px;
-  line-height: 1.8;
-}
-
-.cart-info a {
-  color: black;
-  font-weight: bold;
-  font-size: 10px;
-}
-
-.remove {
-  border: none;
-  background: white;
-  text-decoration: underline;
-  font-size: 10px;
-}
-
-.empty {
-  padding: 25px 0;
-  color: #777;
-  font-size: 13px;
-}
-
-.cart-note {
-  font-size: 10px;
-  line-height: 1.8;
-  color: #777;
-  margin-top: 25px;
-}
-
-/* MOBILE */
-
-@media(max-width:700px) {
-  header {
-    height: 56px;
-    padding: 0 10px;
-  }
-
-  .logo {
-    font-size: 17px;
-    letter-spacing: 4px;
-  }
-
-  nav {
-    gap: 11px;
-  }
-
-  nav a {
-    font-size: 8px;
-    letter-spacing: 1px;
-  }
-
-  .bag {
-    padding: 9px;
-    font-size: 9px;
-  }
-
-  .hero {
-    min-height: 230px;
-    padding: 7%;
-  }
-
-  .hero h1 {
-    font-size: 43px;
-  }
-
-  .products {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    padding: 10px;
-    gap: 25px 10px;
-  }
-
-  .name {
-    font-size: 11px;
-  }
-
-  .actions {
-    gap: 5px;
-  }
-
-  .save-button,
-  .store-button {
-    font-size: 8px;
-    padding: 10px 3px;
-  }
-
-  .shop-title {
-    padding: 30px 8px 20px;
-  }
-
-  .shop-title h2 {
-    font-size: 23px;
-  }
-
-  .about {
-    padding: 45px 18px;
-  }
-
-  .about h2 {
-    font-size: 23px;
-  }
+*{box-sizing:border-box}
+body{margin:0;background:#fff;color:#111;font-family:Arial,Helvetica,sans-serif}
+header{height:40px;padding:0 4%;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid #eee;background:#fff}
+.logo{font-size:17px;font-weight:800;letter-spacing:5px}
+nav{display:flex;gap:30px}
+nav a{font-size:9px;font-weight:bold;color:#111;text-decoration:none}
+.bag-button,.shop-button,.add-button{background:#050505;color:#fff;border:0;cursor:pointer}
+.bag-button{padding:10px 16px;font-size:10px}
+.hero{height:190px;background-image:linear-gradient(90deg,#eee 0%,rgba(238,238,238,.94) 25%,rgba(238,238,238,.3) 43%,transparent 58%),url("velora-assets/hero.jpg");background-size:cover;background-position:center;display:flex;align-items:center;padding:0 6%}
+.hero-copy{max-width:340px}
+.eyebrow{font-size:8px;letter-spacing:3px;font-weight:bold}
+.hero h1{font-size:43px;line-height:.85;letter-spacing:-2px;margin:8px 0}
+.hero p{font-size:11px;margin:10px 0}
+.shop-button{padding:10px 18px;font-size:9px;font-weight:bold}
+.shop{padding:22px 3% 40px;text-align:center}
+.kicker{font-size:8px;letter-spacing:3px;font-weight:bold}
+h2{font-size:17px;letter-spacing:3px;margin:5px 0 12px}
+.filters{display:flex;justify-content:center;gap:6px;margin-bottom:24px;flex-wrap:wrap}
+.filter{background:#fff;border:1px solid #111;padding:8px 14px;font-size:9px;font-weight:bold;cursor:pointer}
+.filter.active{background:#050505;color:#fff}
+.grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:22px 13px;text-align:left}
+.product{min-width:0}
+.product img{width:100%;height:145px;object-fit:cover;display:block;background:#eee}
+.product-info{padding:7px 0}
+.product-name{font-size:11px;font-weight:bold;margin:0 0 4px}
+.category{font-size:9px;color:#777;margin-bottom:5px}
+.price{font-size:10px}
+.product-bottom{display:flex;align-items:center;justify-content:space-between;gap:5px}
+.add-button{padding:8px 10px;font-size:8px;font-weight:bold;white-space:nowrap}
+.about{background:#111;color:white;text-align:center;padding:35px 15px}
+.about h2{font-size:19px}
+.about p{font-size:11px;line-height:1.7;max-width:500px;margin:10px auto}
+footer{padding:18px;text-align:center;font-size:9px;letter-spacing:2px}
+.overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:5}
+.overlay.show{display:block}
+.drawer{position:absolute;right:0;top:0;height:100%;width:min(390px,92vw);background:#fff;padding:22px;overflow:auto}
+.drawer-head{display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid #ddd;padding-bottom:15px}
+.drawer h3{letter-spacing:3px}
+.close{border:0;background:none;font-size:24px;cursor:pointer}
+.cart-item{display:flex;justify-content:space-between;gap:12px;padding:15px 0;border-bottom:1px solid #eee;font-size:12px}
+.cart-item button{border:0;background:none;text-decoration:underline;cursor:pointer;font-size:10px}
+.total{display:flex;justify-content:space-between;margin:20px 0;font-weight:bold}
+.note{font-size:10px;color:#777;line-height:1.5}
+.empty{text-align:center;padding:35px 0;font-size:12px;color:#777}
+@media(max-width:700px){
+ header{padding:0 4%;height:52px}
+ nav{gap:12px}
+ nav a{font-size:8px}
+ .logo{font-size:14px;letter-spacing:3px}
+ .hero{height:180px;padding:0 5%;background-position:center}
+ .hero h1{font-size:34px}
+ .grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:18px 10px}
+ .product img{height:155px}
+ .shop{padding-left:4%;padding-right:4%}
 }
 </style>
 </head>
-
 <body>
 
 <header>
-  <div class="logo">VELORA</div>
-
+  <div class="logo">V E L O R A</div>
   <nav>
     <a href="#">HOME</a>
     <a href="#shop">SHOP</a>
     <a href="#about">ABOUT</a>
   </nav>
-
-  <button class="bag" onclick="openCart()">
-    SAVED (<span id="count">0</span>)
-  </button>
+  <button class="bag-button" onclick="openBag()">BAG (<span id="bagCount">0</span>)</button>
 </header>
 
 <section class="hero">
-  <div class="hero-content">
-    <small>THE NEW GENERATION</small>
+  <div class="hero-copy">
+    <div class="eyebrow">THE NEW VELORA COLLECTION</div>
     <h1>Y2K<br>RELOADED.</h1>
-    <p>YOUR NEXT ERA STARTS HERE.</p>
-    <a href="#shop">SHOP THE COLLECTION</a>
+    <p>Streetwear. Modern attitude.</p>
+    <button class="shop-button" onclick="document.getElementById('shop').scrollIntoView({behavior:'smooth'})">SHOP THE COLLECTION</button>
   </div>
 </section>
 
-<section id="shop">
-
-  <div class="shop-title">
-    <div class="eyebrow">BLACK. SILVER. STREETWEAR.</div>
-    <h2>SHOP VELORA</h2>
-
-    <div class="filters">
-      <button class="active" onclick="filterItems('All',this)">ALL ITEMS</button>
-      <button onclick="filterItems('T-Shirts',this)">TEES</button>
-      <button onclick="filterItems('Hoodies',this)">HOODIES</button>
-      <button onclick="filterItems('Jeans',this)">JEANS</button>
-      <button onclick="filterItems('Accessories',this)">ACCESSORIES</button>
-    </div>
+<section class="shop" id="shop">
+  <div class="kicker">THE LATEST FINDS</div>
+  <h2>SHOP VELORA</h2>
+  <div class="filters">
+    <button class="filter active" onclick="filterProducts('All',this)">ALL ITEMS</button>
+    <button class="filter" onclick="filterProducts('Clothing',this)">CLOTHING</button>
+    <button class="filter" onclick="filterProducts('Accessories',this)">ACCESSORIES</button>
+    <button class="filter" onclick="filterProducts('Lifestyle',this)">LIFESTYLE</button>
   </div>
-
-  <div class="products" id="products"></div>
-
+  <div class="grid" id="productGrid"></div>
 </section>
 
 <section class="about" id="about">
-  <h2>ABOUT VELORA</h2>
-  <p>
-    A new take on Y2K streetwear.
-    Dark graphics, oversized fits, silver details,
-    and timeless street style.
-    Welcome to VELORA.
-  </p>
+  <div class="kicker">ABOUT VELORA</div>
+  <h2>YOUR ERA. YOUR STYLE.</h2>
+  <p>VELORA brings together Y2K inspiration, streetwear energy and everyday statement pieces. Discover the latest collection and find your next look.</p>
 </section>
 
-<footer>
-  V E L O R A &nbsp; | &nbsp; Y2K RELOADED.
-  <br><br>
-  PRODUCTS SOLD BY THEIR RESPECTIVE RETAILERS.
-</footer>
+<footer>V E L O R A · Y2K RELOADED</footer>
 
-<div class="overlay" id="overlay">
-  <div class="cart">
-
-    <div class="cart-top">
-      <h2>YOUR SAVED PICKS</h2>
-      <button onclick="closeCart()">×</button>
+<div class="overlay" id="bagOverlay" onclick="closeBag(event)">
+  <div class="drawer">
+    <div class="drawer-head">
+      <h3>YOUR BAG</h3>
+      <button class="close" onclick="closeBag()">×</button>
     </div>
-
-    <div id="cartItems"></div>
-
-    <p class="cart-note">
-      Your saved picks are product links, not purchases.
-      Select VIEW AT STORE to check current prices,
-      sizes, shipping and availability with the retailer.
-    </p>
-
+    <div id="bagItems"></div>
+    <div class="total"><span>SUBTOTAL</span><span id="bagTotal">$0.00</span></div>
+    <p class="note">This is a website demo. No real payment or purchase will be made.</p>
   </div>
 </div>
 
 <script>
-
 const products = [
-
-{
-  id:1,
-  name:"Black Graphic Oversized Tee",
-  category:"T-Shirts",
-  price:"$9.99",
-  store:"Rockstar Original",
-  image:"https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?auto=format&fit=crop&w=700&q=85",
-  url:"https://www.rockstaroriginal.com/products/rsm-tee-20962-reign-oversized-graphic-t-shirt-black-black"
-},
-
-{
-  id:2,
-  name:"Y2K Graphic Street Tee",
-  category:"T-Shirts",
-  price:"$34.95",
-  store:"PacSun",
-  image:"https://images.unsplash.com/photo-1503342217505-b0a15ec3261c?auto=format&fit=crop&w=700&q=85",
-  url:"https://www.pacsun.com/6777643.html"
-},
-
-{
-  id:3,
-  name:"Oversized Zip Hoodie",
-  category:"Hoodies",
-  price:"$48.00",
-  store:"LEWKIN",
-  image:"https://images.unsplash.com/photo-1556821840-3a63f95609a7?auto=format&fit=crop&w=700&q=85",
-  url:"https://lewkin.com/products/men-s-oversized-typography-graphic-zip-up-hoodie-is630"
-},
-
-{
-  id:4,
-  name:"Black Graphic Hoodie",
-  category:"Hoodies",
-  price:"$20.88",
-  store:"Walmart Marketplace",
-  image:"https://images.unsplash.com/photo-1578681994506-b8f463449011?auto=format&fit=crop&w=700&q=85",
-  url:"https://www.walmart.com/ip/21001801138"
-},
-
-{
-  id:5,
-  name:"Black Baggy Jeans",
-  category:"Jeans",
-  price:"$39.99",
-  store:"H&M",
-  image:"https://images.unsplash.com/photo-1542272604-787c3835535d?auto=format&fit=crop&w=700&q=85",
-  url:"https://www2.hm.com/en_us/productpage.1336394005.html"
-},
-
-{
-  id:6,
-  name:"Super Baggy Jeans",
-  category:"Jeans",
-  price:"$59.95",
-  store:"Hollister",
-  image:"https://images.unsplash.com/photo-1541099649105-f69ad21f3246?auto=format&fit=crop&w=700&q=85",
-  url:"https://www.hollisterco.com/shop/us/p/black-super-baggy-jeans-61999388"
-},
-
-{
-  id:7,
-  name:"Ultra Baggy Denim",
-  category:"Jeans",
-  price:"$54.99",
-  store:"H&M",
-  image:"https://images.unsplash.com/photo-1548883354-7622d03aca27?auto=format&fit=crop&w=700&q=85",
-  url:"https://www2.hm.com/en_us/productpage.1344244002.html"
-},
-
-{
-  id:8,
-  name:"Silver Chain Bracelet",
-  category:"Accessories",
-  price:"$18.00",
-  store:"Retailer listing",
-  image:"https://images.unsplash.com/photo-1611591437281-460bfbe1220a?auto=format&fit=crop&w=700&q=85",
-  url:"https://www.google.com/search?q=silver+chain+bracelet+shopping"
-}
-
+ {id:1,name:"Y2K Star Tee",category:"Clothing",price:28,image:"velora-assets/product-1.jpg"},
+ {id:2,name:"Butterfly Baby Tee",category:"Clothing",price:24,image:"velora-assets/product-2.jpg"},
+ {id:3,name:"Baggy Cargo Jeans",category:"Clothing",price:48,image:"velora-assets/product-3.jpg"},
+ {id:4,name:"Velora Zip Hoodie",category:"Clothing",price:52,image:"velora-assets/product-4.jpg"},
+ {id:5,name:"Star Pendant Necklace",category:"Accessories",price:18,image:"velora-assets/product-5.jpg"},
+ {id:6,name:"Retro Sunglasses",category:"Accessories",price:20,image:"velora-assets/product-6.jpg"},
+ {id:7,name:"Y2K Shoulder Bag",category:"Accessories",price:26,image:"velora-assets/product-7.jpg"},
+ {id:8,name:"Retro Sneakers",category:"Lifestyle",price:70,image:"velora-assets/product-8.jpg"}
 ];
 
-let saved = [];
+let bag = [];
 
-function displayProducts(category="All") {
-
-  const area = document.getElementById("products");
-
-  area.innerHTML = "";
-
-  products
-    .filter(p => category === "All" || p.category === category)
-    .forEach(p => {
-
-      const card = document.createElement("div");
-
-      card.className = "product";
-
-      const image = document.createElement("img");
-      image.className = "photo";
-      image.src = p.image;
-      image.alt = p.name;
-      image.loading = "lazy";
-
-      const details = document.createElement("div");
-      details.className = "details";
-
-      const name = document.createElement("div");
-      name.className = "name";
-      name.textContent = p.name;
-
-      const categoryText = document.createElement("div");
-      categoryText.className = "category";
-      categoryText.textContent = p.category;
-
-      const price = document.createElement("div");
-      price.className = "price";
-      price.textContent = p.price;
-
-      const store = document.createElement("div");
-      store.className = "store-name";
-      store.textContent = "Sold by " + p.store;
-
-      const actions = document.createElement("div");
-      actions.className = "actions";
-
-      const save = document.createElement("button");
-      save.className = "save-button";
-      save.textContent = "SAVE PICK";
-      save.addEventListener("click", () => saveItem(p.id));
-
-      const link = document.createElement("a");
-      link.className = "store-button";
-      link.textContent = "VIEW STORE";
-      link.href = p.url;
-      link.target = "_blank";
-      link.rel = "noopener noreferrer";
-
-      actions.append(save, link);
-      details.append(name, categoryText, price, store, actions);
-      card.append(image, details);
-
-      area.appendChild(card);
-
-    });
-
+function showProducts(list){
+ const grid=document.getElementById("productGrid");
+ grid.innerHTML=list.map(p=>`
+  <article class="product">
+   <img src="${p.image}" alt="${p.name}">
+   <div class="product-info">
+    <p class="product-name">${p.name}</p>
+    <div class="category">${p.category}</div>
+    <div class="product-bottom">
+     <span class="price">$${p.price.toFixed(2)}</span>
+     <button class="add-button" onclick="addToBag(${p.id})">ADD TO BAG</button>
+    </div>
+   </div>
+  </article>
+ `).join("");
 }
 
-function filterItems(category, button) {
-
-  document.querySelectorAll(".filters button")
-    .forEach(b => b.classList.remove("active"));
-
-  button.classList.add("active");
-
-  displayProducts(category);
-
+function filterProducts(category,button){
+ document.querySelectorAll(".filter").forEach(b=>b.classList.remove("active"));
+ button.classList.add("active");
+ showProducts(category==="All"?products:products.filter(p=>p.category===category));
 }
 
-function saveItem(id) {
-
-  if (!saved.includes(id)) {
-    saved.push(id);
-  }
-
-  renderSaved();
-  openCart();
-
+function addToBag(id){
+ const item=bag.find(p=>p.id===id);
+ if(item)item.quantity++;
+ else bag.push({...products.find(p=>p.id===id),quantity:1});
+ updateBag();
 }
 
-function removeItem(id) {
-
-  saved = saved.filter(item => item !== id);
-
-  renderSaved();
-
+function updateBag(){
+ const count=bag.reduce((sum,p)=>sum+p.quantity,0);
+ document.getElementById("bagCount").textContent=count;
+ document.getElementById("bagItems").innerHTML=bag.length
+ ? bag.map(p=>`
+  <div class="cart-item">
+   <div><strong>${p.name}</strong><br>$${p.price.toFixed(2)} × ${p.quantity}</div>
+   <button onclick="removeItem(${p.id})">REMOVE</button>
+  </div>
+ `).join("")
+ : '<div class="empty">YOUR BAG IS EMPTY</div>';
+ const total=bag.reduce((sum,p)=>sum+p.price*p.quantity,0);
+ document.getElementById("bagTotal").textContent="$"+total.toFixed(2);
 }
 
-function renderSaved() {
-
-  document.getElementById("count").textContent = saved.length;
-
-  const area = document.getElementById("cartItems");
-
-  if (saved.length === 0) {
-    area.innerHTML = '<div class="empty">You have no saved picks yet.</div>';
-    return;
-  }
-
-  area.innerHTML = "";
-
-  saved.forEach(id => {
-
-    const p = products.find(item => item.id === id);
-
-    const item = document.createElement("div");
-    item.className = "cart-item";
-
-    const img = document.createElement("img");
-    img.src = p.image;
-    img.alt = p.name;
-
-    const info = document.createElement("div");
-    info.className = "cart-info";
-
-    const title = document.createElement("strong");
-    title.textContent = p.name;
-
-    const cost = document.createElement("div");
-    cost.textContent = p.price;
-
-    const link = document.createElement("a");
-    link.href = p.url;
-    link.target = "_blank";
-    link.rel = "noopener noreferrer";
-    link.textContent = "VIEW AT STORE";
-
-    info.append(title, cost, link);
-
-    const remove = document.createElement("button");
-    remove.className = "remove";
-    remove.textContent = "REMOVE";
-    remove.addEventListener("click", () => removeItem(id));
-
-    item.append(img, info, remove);
-    area.appendChild(item);
-
-  });
-
+function removeItem(id){
+ bag=bag.filter(p=>p.id!==id);
+ updateBag();
 }
 
-function openCart() {
-  document.getElementById("overlay").classList.add("open");
+function openBag(){
+ updateBag();
+ document.getElementById("bagOverlay").classList.add("show");
 }
 
-function closeCart() {
-  document.getElementById("overlay").classList.remove("open");
+function closeBag(event){
+ if(!event || event.target.id==="bagOverlay" || event.target.className==="close"){
+  document.getElementById("bagOverlay").classList.remove("show");
+ }
 }
 
-displayProducts();
-renderSaved();
-
+showProducts(products);
+updateBag();
 </script>
-
 </body>
 </html>
