@@ -4,270 +4,777 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>VELORA — Y2K RELOADED</title>
+<title>VELORA | Y2K RELOADED</title>
+
 <style>
-*{box-sizing:border-box}
-body{margin:0;font-family:Arial,sans-serif;color:#111;background:#fff}
-button{cursor:pointer;font-family:Arial,sans-serif}
-header{height:55px;background:#f5f5f5;display:flex;align-items:center;justify-content:space-between;padding:0 4%;position:sticky;top:0;z-index:5}
-.logo{font-size:24px;font-weight:900;letter-spacing:8px}
-nav{display:flex;gap:35px}
-nav a{color:#111;text-decoration:none;font-size:11px;font-weight:bold}
-.bag,.add,.checkout,.continue{background:#050505;color:white;border:0;font-weight:bold}
-.bag{padding:10px 17px;font-size:10px}
-
-/* BANNER: no extra text over the picture */
-.hero{
-height:16.6vw;
-min-height:170px;
-background-image:url('49aa2c62-6c88-4ad7-a07c-ccce2c8daf7d.png');
-background-size:100vw auto;
-background-position:0 -2.39vw;
-background-repeat:no-repeat;
-}
-.hero h1,.hero p,.hero .eyebrow,.hero .black,.hero-content{
-display:none!important;
+* {
+  box-sizing: border-box;
 }
 
-.shop-title{text-align:center;padding:18px 10px}
-.eyebrow-small{font-size:9px;letter-spacing:4px;font-weight:bold}
-.shop-title h2{font-size:25px;letter-spacing:3px;margin:5px 0 12px}
-.filters{display:flex;justify-content:center;gap:10px;flex-wrap:wrap}
-.filters button{background:white;border:1px solid black;padding:8px 16px;font-size:10px;font-weight:bold}
-.filters button.active,.filters button:hover{background:black;color:white}
-
-.products{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:20px 12px;padding:10px 3% 30px}
-.product{min-width:0}
-.photo{
-height:8vw;min-height:90px;
-background-image:url('49aa2c62-6c88-4ad7-a07c-ccce2c8daf7d.png');
-background-size:100vw auto;background-repeat:no-repeat
+html {
+  scroll-behavior: smooth;
 }
-.p1{background-position:-2.15vw -23.92vw}
-.p2{background-position:-26.02vw -23.92vw}
-.p3{background-position:-49.64vw -23.92vw}
-.p4{background-position:-73.27vw -23.92vw}
-.p5{background-position:-2.15vw -35.05vw}
-.p6{background-position:-26.02vw -35.05vw}
-.p7{background-position:-49.64vw -35.05vw}
-.p8{background-position:-73.27vw -35.05vw}
 
-.details{display:flex;justify-content:space-between;align-items:center;gap:5px;padding-top:8px}
-.name{font-size:11px;font-weight:bold}
-.category,.price{font-size:10px;margin-top:3px}
-.add{padding:8px 12px;font-size:9px}
-.add:hover,.bag:hover{background:#555}
-
-.about{
-height:8vw;min-height:100px;
-background-image:url('49aa2c62-6c88-4ad7-a07c-ccce2c8daf7d.png');
-background-size:100vw auto;
-background-position:0 -45.16vw;
-background-repeat:no-repeat
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #fff;
+  color: #111;
 }
-footer{background:#050505;color:white;text-align:center;padding:20px;font-size:10px;letter-spacing:4px}
 
-/* BAG */
-.overlay{display:none;position:fixed;inset:0;background:#0009;z-index:10;justify-content:flex-end}
-.overlay.open{display:flex}
-.cart{background:white;width:min(400px,100%);height:100%;padding:23px;overflow:auto}
-.carttop{display:flex;justify-content:space-between;align-items:center}
-.carttop h2{font-size:21px;letter-spacing:3px}
-.carttop button{border:0;background:none;font-size:28px}
-.cartitem{padding:14px 0;border-bottom:1px solid #ddd;display:flex;justify-content:space-between;align-items:center;font-size:13px}
-.qty button{border:1px solid #ddd;background:white;padding:6px 10px}
-.total{margin:22px 0;font-weight:bold;font-size:15px}
-.checkout{width:100%;padding:15px;font-size:11px;letter-spacing:2px}
-.note{font-size:10px;color:#777;line-height:1.6}
+button {
+  cursor: pointer;
+  font-family: Arial, sans-serif;
+}
 
-/* ORDER CONFIRMATION */
-.order-overlay{display:none;position:fixed;inset:0;background:#0009;z-index:30;align-items:center;justify-content:center;padding:20px}
-.order-overlay.show{display:flex}
-.order-box{background:white;width:100%;max-width:550px;padding:40px 28px;text-align:center}
-.order-label{font-size:10px;letter-spacing:4px;margin-bottom:22px}
-.order-box h2{font-size:28px;letter-spacing:3px;margin:0 0 22px}
-.order-box p{color:#777;font-size:14px;line-height:1.7}
-.order-number{font-size:16px;font-weight:bold;margin:24px 0;color:#222}
-.continue{width:100%;padding:16px;letter-spacing:2px;font-size:11px;margin-top:15px}
+/* HEADER */
 
-@media(max-width:700px){
-header{height:55px;padding:0 10px}
-.logo{font-size:17px;letter-spacing:4px}
-nav{gap:12px}
-nav a{font-size:9px}
-.bag{padding:8px;font-size:9px}
-.hero{height:42vw;min-height:150px;background-size:200vw auto;background-position:0 -4.78vw}
-.products{grid-template-columns:repeat(2,minmax(0,1fr));padding:10px;gap:20px 10px}
-.photo{height:30vw;min-height:85px;background-size:200vw auto}
-.p1{background-position:-4.31vw -47.85vw}
-.p2{background-position:-52.03vw -47.85vw}
-.p3{background-position:-99.28vw -47.85vw}
-.p4{background-position:-146.53vw -47.85vw}
-.p5{background-position:-4.31vw -70.10vw}
-.p6{background-position:-52.03vw -70.10vw}
-.p7{background-position:-99.28vw -70.10vw}
-.p8{background-position:-146.53vw -70.10vw}
-.name{font-size:10px}
-.add{padding:7px;font-size:8px}
-.about{height:16vw;background-size:200vw auto;background-position:0 -90.31vw}
-.order-box{padding:35px 20px}
-.order-box h2{font-size:25px}
+header {
+  height: 65px;
+  background: #080808;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 4%;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.logo {
+  font-size: 25px;
+  font-weight: 900;
+  letter-spacing: 8px;
+}
+
+nav {
+  display: flex;
+  gap: 28px;
+}
+
+nav a {
+  color: white;
+  text-decoration: none;
+  font-size: 10px;
+  font-weight: bold;
+  letter-spacing: 2px;
+}
+
+.bag {
+  background: white;
+  color: black;
+  border: none;
+  padding: 11px 16px;
+  font-size: 10px;
+  font-weight: bold;
+}
+
+/* HERO */
+
+.hero {
+  min-height: 350px;
+  background:
+    linear-gradient(90deg, #0009, #0001),
+    url("https://images.unsplash.com/photo-1523398002811-999ca8dec234?auto=format&fit=crop&w=1800&q=90")
+    center 45% / cover no-repeat;
+  display: flex;
+  align-items: center;
+  padding: 7%;
+  color: white;
+}
+
+.hero-content {
+  max-width: 500px;
+}
+
+.hero small {
+  letter-spacing: 5px;
+  font-size: 10px;
+}
+
+.hero h1 {
+  font-size: clamp(40px, 7vw, 76px);
+  line-height: .95;
+  margin: 15px 0;
+  letter-spacing: -3px;
+}
+
+.hero p {
+  font-size: 12px;
+  letter-spacing: 3px;
+}
+
+.hero a {
+  display: inline-block;
+  background: white;
+  color: black;
+  text-decoration: none;
+  padding: 14px 25px;
+  margin-top: 15px;
+  font-size: 10px;
+  font-weight: bold;
+  letter-spacing: 2px;
+}
+
+/* SHOP */
+
+.shop-title {
+  text-align: center;
+  padding: 45px 10px 25px;
+}
+
+.eyebrow {
+  font-size: 9px;
+  letter-spacing: 5px;
+  color: #777;
+  font-weight: bold;
+}
+
+.shop-title h2 {
+  font-size: 29px;
+  letter-spacing: 5px;
+  margin: 12px 0 20px;
+}
+
+.filters {
+  display: flex;
+  justify-content: center;
+  gap: 9px;
+  flex-wrap: wrap;
+}
+
+.filters button {
+  background: white;
+  border: 1px solid #111;
+  padding: 10px 18px;
+  font-size: 9px;
+  font-weight: bold;
+  letter-spacing: 1px;
+}
+
+.filters button.active,
+.filters button:hover {
+  background: black;
+  color: white;
+}
+
+/* PRODUCTS */
+
+.products {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 30px 15px;
+  padding: 10px 4% 60px;
+}
+
+.product {
+  min-width: 0;
+}
+
+.photo {
+  width: 100%;
+  aspect-ratio: 3 / 4;
+  object-fit: cover;
+  display: block;
+  background: #eee;
+  transition: .3s;
+}
+
+.product:hover .photo {
+  filter: brightness(.88);
+}
+
+.details {
+  padding-top: 12px;
+}
+
+.name {
+  font-size: 12px;
+  font-weight: bold;
+  line-height: 1.5;
+}
+
+.category {
+  color: #777;
+  font-size: 10px;
+  margin-top: 3px;
+}
+
+.price {
+  font-size: 12px;
+  font-weight: bold;
+  margin-top: 8px;
+}
+
+.store-name {
+  font-size: 10px;
+  color: #777;
+  margin-top: 5px;
+}
+
+.actions {
+  display: flex;
+  gap: 7px;
+  margin-top: 12px;
+}
+
+.save-button,
+.store-button {
+  flex: 1;
+  text-align: center;
+  padding: 11px 5px;
+  font-size: 9px;
+  font-weight: bold;
+  letter-spacing: 1px;
+}
+
+.save-button {
+  border: 1px solid black;
+  background: black;
+  color: white;
+}
+
+.store-button {
+  border: 1px solid black;
+  background: white;
+  color: black;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.save-button:hover {
+  background: #555;
+}
+
+.store-button:hover {
+  background: #eee;
+}
+
+/* ABOUT */
+
+.about {
+  background: #080808;
+  color: white;
+  text-align: center;
+  padding: 65px 20px;
+}
+
+.about h2 {
+  font-size: 29px;
+  letter-spacing: 7px;
+  margin: 0 0 18px;
+}
+
+.about p {
+  color: #aaa;
+  font-size: 12px;
+  line-height: 2;
+  max-width: 500px;
+  margin: auto;
+}
+
+/* FOOTER */
+
+footer {
+  background: #080808;
+  color: #777;
+  text-align: center;
+  padding: 25px;
+  font-size: 9px;
+  letter-spacing: 3px;
+  border-top: 1px solid #333;
+}
+
+/* SAVED BAG */
+
+.overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: #0009;
+  z-index: 20;
+  justify-content: flex-end;
+}
+
+.overlay.open {
+  display: flex;
+}
+
+.cart {
+  background: white;
+  width: min(420px, 100%);
+  height: 100%;
+  padding: 23px;
+  overflow-y: auto;
+}
+
+.cart-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.cart-top h2 {
+  font-size: 20px;
+  letter-spacing: 3px;
+}
+
+.cart-top button {
+  border: none;
+  background: none;
+  font-size: 28px;
+}
+
+.cart-item {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  padding: 15px 0;
+  border-bottom: 1px solid #ddd;
+}
+
+.cart-item img {
+  width: 65px;
+  height: 80px;
+  object-fit: cover;
+}
+
+.cart-info {
+  flex: 1;
+  font-size: 12px;
+  line-height: 1.8;
+}
+
+.cart-info a {
+  color: black;
+  font-weight: bold;
+  font-size: 10px;
+}
+
+.remove {
+  border: none;
+  background: white;
+  text-decoration: underline;
+  font-size: 10px;
+}
+
+.empty {
+  padding: 25px 0;
+  color: #777;
+  font-size: 13px;
+}
+
+.cart-note {
+  font-size: 10px;
+  line-height: 1.8;
+  color: #777;
+  margin-top: 25px;
+}
+
+/* MOBILE */
+
+@media(max-width:700px) {
+  header {
+    height: 56px;
+    padding: 0 10px;
+  }
+
+  .logo {
+    font-size: 17px;
+    letter-spacing: 4px;
+  }
+
+  nav {
+    gap: 11px;
+  }
+
+  nav a {
+    font-size: 8px;
+    letter-spacing: 1px;
+  }
+
+  .bag {
+    padding: 9px;
+    font-size: 9px;
+  }
+
+  .hero {
+    min-height: 230px;
+    padding: 7%;
+  }
+
+  .hero h1 {
+    font-size: 43px;
+  }
+
+  .products {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    padding: 10px;
+    gap: 25px 10px;
+  }
+
+  .name {
+    font-size: 11px;
+  }
+
+  .actions {
+    gap: 5px;
+  }
+
+  .save-button,
+  .store-button {
+    font-size: 8px;
+    padding: 10px 3px;
+  }
+
+  .shop-title {
+    padding: 30px 8px 20px;
+  }
+
+  .shop-title h2 {
+    font-size: 23px;
+  }
+
+  .about {
+    padding: 45px 18px;
+  }
+
+  .about h2 {
+    font-size: 23px;
+  }
 }
 </style>
 </head>
+
 <body>
 
 <header>
-<div class="logo">VELORA</div>
-<nav>
-<a href="#">HOME</a>
-<a href="#shop">SHOP</a>
-<a href="#about">ABOUT</a>
-</nav>
-<button class="bag" onclick="openCart()">BAG (<span id="count">0</span>)</button>
+  <div class="logo">VELORA</div>
+
+  <nav>
+    <a href="#">HOME</a>
+    <a href="#shop">SHOP</a>
+    <a href="#about">ABOUT</a>
+  </nav>
+
+  <button class="bag" onclick="openCart()">
+    SAVED (<span id="count">0</span>)
+  </button>
 </header>
 
-<section class="hero"></section>
-
-<section id="shop">
-<div class="shop-title">
-<div class="eyebrow-small">THE LATEST FINDS</div>
-<h2>SHOP VELORA</h2>
-<div class="filters">
-<button class="active" onclick="filterItems('All',this)">ALL ITEMS</button>
-<button onclick="filterItems('Clothing',this)">CLOTHING</button>
-<button onclick="filterItems('Accessories',this)">ACCESSORIES</button>
-<button onclick="filterItems('Lifestyle',this)">LIFESTYLE</button>
-</div>
-</div>
-
-<div class="products">
-<div class="product" data-category="Clothing">
-<div class="photo p1"></div>
-<div class="details"><div><div class="name">Y2K Star Tee</div><div class="category">Clothing</div><div class="price">$28.00</div></div><button class="add" onclick="addItem('Y2K Star Tee',28)">ADD TO BAG</button></div>
-</div>
-
-<div class="product" data-category="Clothing">
-<div class="photo p2"></div>
-<div class="details"><div><div class="name">Butterfly Baby Tee</div><div class="category">Clothing</div><div class="price">$24.00</div></div><button class="add" onclick="addItem('Butterfly Baby Tee',24)">ADD TO BAG</button></div>
-</div>
-
-<div class="product" data-category="Clothing">
-<div class="photo p3"></div>
-<div class="details"><div><div class="name">Baggy Cargo Jeans</div><div class="category">Clothing</div><div class="price">$48.00</div></div><button class="add" onclick="addItem('Baggy Cargo Jeans',48)">ADD TO BAG</button></div>
-</div>
-
-<div class="product" data-category="Clothing">
-<div class="photo p4"></div>
-<div class="details"><div><div class="name">Velora Zip Hoodie</div><div class="category">Clothing</div><div class="price">$52.00</div></div><button class="add" onclick="addItem('Velora Zip Hoodie',52)">ADD TO BAG</button></div>
-</div>
-
-<div class="product" data-category="Accessories">
-<div class="photo p5"></div>
-<div class="details"><div><div class="name">Star Pendant Necklace</div><div class="category">Accessories</div><div class="price">$18.00</div></div><button class="add" onclick="addItem('Star Pendant Necklace',18)">ADD TO BAG</button></div>
-</div>
-
-<div class="product" data-category="Accessories">
-<div class="photo p6"></div>
-<div class="details"><div><div class="name">Retro Sunglasses</div><div class="category">Accessories</div><div class="price">$20.00</div></div><button class="add" onclick="addItem('Retro Sunglasses',20)">ADD TO BAG</button></div>
-</div>
-
-<div class="product" data-category="Accessories">
-<div class="photo p7"></div>
-<div class="details"><div><div class="name">Y2K Shoulder Bag</div><div class="category">Accessories</div><div class="price">$26.00</div></div><button class="add" onclick="addItem('Y2K Shoulder Bag',26)">ADD TO BAG</button></div>
-</div>
-
-<div class="product" data-category="Lifestyle">
-<div class="photo p8"></div>
-<div class="details"><div><div class="name">Retro Sneakers</div><div class="category">Lifestyle</div><div class="price">$70.00</div></div><button class="add" onclick="addItem('Retro Sneakers',70)">ADD TO BAG</button></div>
-</div>
-</div>
+<section class="hero">
+  <div class="hero-content">
+    <small>THE NEW GENERATION</small>
+    <h1>Y2K<br>RELOADED.</h1>
+    <p>YOUR NEXT ERA STARTS HERE.</p>
+    <a href="#shop">SHOP THE COLLECTION</a>
+  </div>
 </section>
 
-<section class="about" id="about"></section>
-<footer>V E L O R A &nbsp; | &nbsp; Y2K RELOADED.</footer>
+<section id="shop">
+
+  <div class="shop-title">
+    <div class="eyebrow">BLACK. SILVER. STREETWEAR.</div>
+    <h2>SHOP VELORA</h2>
+
+    <div class="filters">
+      <button class="active" onclick="filterItems('All',this)">ALL ITEMS</button>
+      <button onclick="filterItems('T-Shirts',this)">TEES</button>
+      <button onclick="filterItems('Hoodies',this)">HOODIES</button>
+      <button onclick="filterItems('Jeans',this)">JEANS</button>
+      <button onclick="filterItems('Accessories',this)">ACCESSORIES</button>
+    </div>
+  </div>
+
+  <div class="products" id="products"></div>
+
+</section>
+
+<section class="about" id="about">
+  <h2>ABOUT VELORA</h2>
+  <p>
+    A new take on Y2K streetwear.
+    Dark graphics, oversized fits, silver details,
+    and timeless street style.
+    Welcome to VELORA.
+  </p>
+</section>
+
+<footer>
+  V E L O R A &nbsp; | &nbsp; Y2K RELOADED.
+  <br><br>
+  PRODUCTS SOLD BY THEIR RESPECTIVE RETAILERS.
+</footer>
 
 <div class="overlay" id="overlay">
-<div class="cart">
-<div class="carttop"><h2>YOUR BAG</h2><button onclick="closeCart()">×</button></div>
-<div id="cartItems">Your bag is empty.</div>
-<div class="total" id="total">TOTAL: $0.00</div>
-<button class="checkout" onclick="demoCheckout()">CHECKOUT</button>
-<p class="note">Demo checkout only. No real payment is taken.</p>
-</div>
-</div>
+  <div class="cart">
 
-<div class="order-overlay" id="orderOverlay">
-<div class="order-box">
-<div class="order-label">VELORA ORDER CONFIRMATION</div>
-<h2>THANK YOU!</h2>
-<p>Your demo order has been placed successfully.</p>
-<div class="order-number" id="orderNumber"></div>
-<p id="orderTotal"></p>
-<p>This is a demonstration only. No real purchase or payment was made.</p>
-<button class="continue" onclick="finishOrder()">CONTINUE SHOPPING</button>
-</div>
+    <div class="cart-top">
+      <h2>YOUR SAVED PICKS</h2>
+      <button onclick="closeCart()">×</button>
+    </div>
+
+    <div id="cartItems"></div>
+
+    <p class="cart-note">
+      Your saved picks are product links, not purchases.
+      Select VIEW AT STORE to check current prices,
+      sizes, shipping and availability with the retailer.
+    </p>
+
+  </div>
 </div>
 
 <script>
-let cart=[];
 
-function filterItems(category,button){
-document.querySelectorAll('.filters button').forEach(b=>b.classList.remove('active'));
-button.classList.add('active');
-document.querySelectorAll('.product').forEach(p=>{
-p.style.display=category==='All'||p.dataset.category===category?'':'none';
-});
+const products = [
+
+{
+  id:1,
+  name:"Black Graphic Oversized Tee",
+  category:"T-Shirts",
+  price:"$9.99",
+  store:"Rockstar Original",
+  image:"https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?auto=format&fit=crop&w=700&q=85",
+  url:"https://www.rockstaroriginal.com/products/rsm-tee-20962-reign-oversized-graphic-t-shirt-black-black"
+},
+
+{
+  id:2,
+  name:"Y2K Graphic Street Tee",
+  category:"T-Shirts",
+  price:"$34.95",
+  store:"PacSun",
+  image:"https://images.unsplash.com/photo-1503342217505-b0a15ec3261c?auto=format&fit=crop&w=700&q=85",
+  url:"https://www.pacsun.com/6777643.html"
+},
+
+{
+  id:3,
+  name:"Oversized Zip Hoodie",
+  category:"Hoodies",
+  price:"$48.00",
+  store:"LEWKIN",
+  image:"https://images.unsplash.com/photo-1556821840-3a63f95609a7?auto=format&fit=crop&w=700&q=85",
+  url:"https://lewkin.com/products/men-s-oversized-typography-graphic-zip-up-hoodie-is630"
+},
+
+{
+  id:4,
+  name:"Black Graphic Hoodie",
+  category:"Hoodies",
+  price:"$20.88",
+  store:"Walmart Marketplace",
+  image:"https://images.unsplash.com/photo-1578681994506-b8f463449011?auto=format&fit=crop&w=700&q=85",
+  url:"https://www.walmart.com/ip/21001801138"
+},
+
+{
+  id:5,
+  name:"Black Baggy Jeans",
+  category:"Jeans",
+  price:"$39.99",
+  store:"H&M",
+  image:"https://images.unsplash.com/photo-1542272604-787c3835535d?auto=format&fit=crop&w=700&q=85",
+  url:"https://www2.hm.com/en_us/productpage.1336394005.html"
+},
+
+{
+  id:6,
+  name:"Super Baggy Jeans",
+  category:"Jeans",
+  price:"$59.95",
+  store:"Hollister",
+  image:"https://images.unsplash.com/photo-1541099649105-f69ad21f3246?auto=format&fit=crop&w=700&q=85",
+  url:"https://www.hollisterco.com/shop/us/p/black-super-baggy-jeans-61999388"
+},
+
+{
+  id:7,
+  name:"Ultra Baggy Denim",
+  category:"Jeans",
+  price:"$54.99",
+  store:"H&M",
+  image:"https://images.unsplash.com/photo-1548883354-7622d03aca27?auto=format&fit=crop&w=700&q=85",
+  url:"https://www2.hm.com/en_us/productpage.1344244002.html"
+},
+
+{
+  id:8,
+  name:"Silver Chain Bracelet",
+  category:"Accessories",
+  price:"$18.00",
+  store:"Retailer listing",
+  image:"https://images.unsplash.com/photo-1611591437281-460bfbe1220a?auto=format&fit=crop&w=700&q=85",
+  url:"https://www.google.com/search?q=silver+chain+bracelet+shopping"
 }
 
-function addItem(name,price){
-let item=cart.find(x=>x.name===name);
-if(item)item.qty++;
-else cart.push({name,price,qty:1});
-renderCart();
-openCart();
+];
+
+let saved = [];
+
+function displayProducts(category="All") {
+
+  const area = document.getElementById("products");
+
+  area.innerHTML = "";
+
+  products
+    .filter(p => category === "All" || p.category === category)
+    .forEach(p => {
+
+      const card = document.createElement("div");
+
+      card.className = "product";
+
+      const image = document.createElement("img");
+      image.className = "photo";
+      image.src = p.image;
+      image.alt = p.name;
+      image.loading = "lazy";
+
+      const details = document.createElement("div");
+      details.className = "details";
+
+      const name = document.createElement("div");
+      name.className = "name";
+      name.textContent = p.name;
+
+      const categoryText = document.createElement("div");
+      categoryText.className = "category";
+      categoryText.textContent = p.category;
+
+      const price = document.createElement("div");
+      price.className = "price";
+      price.textContent = p.price;
+
+      const store = document.createElement("div");
+      store.className = "store-name";
+      store.textContent = "Sold by " + p.store;
+
+      const actions = document.createElement("div");
+      actions.className = "actions";
+
+      const save = document.createElement("button");
+      save.className = "save-button";
+      save.textContent = "SAVE PICK";
+      save.addEventListener("click", () => saveItem(p.id));
+
+      const link = document.createElement("a");
+      link.className = "store-button";
+      link.textContent = "VIEW STORE";
+      link.href = p.url;
+      link.target = "_blank";
+      link.rel = "noopener noreferrer";
+
+      actions.append(save, link);
+      details.append(name, categoryText, price, store, actions);
+      card.append(image, details);
+
+      area.appendChild(card);
+
+    });
+
 }
 
-function renderCart(){
-document.getElementById('count').textContent=cart.reduce((n,x)=>n+x.qty,0);
-document.getElementById('cartItems').innerHTML=cart.map((x,i)=>`
-<div class="cartitem">
-<span>${x.name}<br>$${x.price.toFixed(2)}</span>
-<span class="qty">
-<button onclick="changeQty(${i},-1)">−</button>
-${x.qty}
-<button onclick="changeQty(${i},1)">+</button>
-</span>
-</div>`).join('')||'Your bag is empty.';
-document.getElementById('total').textContent='TOTAL: $'+cart.reduce((n,x)=>n+x.price*x.qty,0).toFixed(2);
+function filterItems(category, button) {
+
+  document.querySelectorAll(".filters button")
+    .forEach(b => b.classList.remove("active"));
+
+  button.classList.add("active");
+
+  displayProducts(category);
+
 }
 
-function changeQty(i,d){
-cart[i].qty+=d;
-if(cart[i].qty<=0)cart.splice(i,1);
-renderCart();
+function saveItem(id) {
+
+  if (!saved.includes(id)) {
+    saved.push(id);
+  }
+
+  renderSaved();
+  openCart();
+
 }
 
-function openCart(){document.getElementById('overlay').classList.add('open')}
-function closeCart(){document.getElementById('overlay').classList.remove('open')}
+function removeItem(id) {
 
-function demoCheckout(){
-if(cart.length===0)return;
-let total=cart.reduce((n,x)=>n+x.price*x.qty,0);
-let number=Math.floor(100000+Math.random()*900000);
-document.getElementById('orderNumber').textContent='Order #VEL-'+number;
-document.getElementById('orderTotal').textContent='Order total: $'+total.toFixed(2);
-closeCart();
-document.getElementById('orderOverlay').classList.add('show');
+  saved = saved.filter(item => item !== id);
+
+  renderSaved();
+
 }
 
-function finishOrder(){
-cart=[];
-renderCart();
-document.getElementById('orderOverlay').classList.remove('show');
-document.getElementById('shop').scrollIntoView({behavior:'smooth'});
+function renderSaved() {
+
+  document.getElementById("count").textContent = saved.length;
+
+  const area = document.getElementById("cartItems");
+
+  if (saved.length === 0) {
+    area.innerHTML = '<div class="empty">You have no saved picks yet.</div>';
+    return;
+  }
+
+  area.innerHTML = "";
+
+  saved.forEach(id => {
+
+    const p = products.find(item => item.id === id);
+
+    const item = document.createElement("div");
+    item.className = "cart-item";
+
+    const img = document.createElement("img");
+    img.src = p.image;
+    img.alt = p.name;
+
+    const info = document.createElement("div");
+    info.className = "cart-info";
+
+    const title = document.createElement("strong");
+    title.textContent = p.name;
+
+    const cost = document.createElement("div");
+    cost.textContent = p.price;
+
+    const link = document.createElement("a");
+    link.href = p.url;
+    link.target = "_blank";
+    link.rel = "noopener noreferrer";
+    link.textContent = "VIEW AT STORE";
+
+    info.append(title, cost, link);
+
+    const remove = document.createElement("button");
+    remove.className = "remove";
+    remove.textContent = "REMOVE";
+    remove.addEventListener("click", () => removeItem(id));
+
+    item.append(img, info, remove);
+    area.appendChild(item);
+
+  });
+
 }
-renderCart();
+
+function openCart() {
+  document.getElementById("overlay").classList.add("open");
+}
+
+function closeCart() {
+  document.getElementById("overlay").classList.remove("open");
+}
+
+displayProducts();
+renderSaved();
+
 </script>
+
 </body>
 </html>
